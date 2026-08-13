@@ -28,8 +28,7 @@ const SHELL_ASSETS = [
   '/latihan/pola',
   '/skenario',
   '/manifest.webmanifest',
-  '/icons/icon.svg',
-  '/icons/icon-maskable.svg',
+  '/icons/logo.jpg',
 ];
 
 self.addEventListener('install', (event) => {

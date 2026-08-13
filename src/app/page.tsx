@@ -1,6 +1,8 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import logo from '@/assets/logo.jpg';
 import { Icon } from '@/components/ui/icon';
 import { Notice } from '@/components/ui/notice';
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
@@ -18,7 +20,17 @@ export default function HomePage() {
     <div className="pb-8">
       <div className="flex items-center justify-between gap-2 px-4 pt-3 pb-2">
         <div className="flex items-center gap-2">
-          <Icon name="shield-check" size={26} className="text-brand-primary" />
+          {/* Brand mark. The `shield-check` icon elsewhere is a functional success icon,
+              not the logo, so it stays as it is. */}
+          <Image
+            src={logo}
+            alt=""
+            aria-hidden="true"
+            width={32}
+            height={32}
+            priority
+            className="size-8 shrink-0 rounded-lg"
+          />
           <span className="text-xl font-extrabold tracking-tight text-text-primary">
             {t('app.name')}
           </span>
