@@ -1,0 +1,238 @@
+import { expect, test, type Page } from '@playwright/test';
+import { clickToRoute, clickUntil, switchLanguage } from './helpers';
+
+/** Drives the demo journey from home to the result screen. */
+async function runDemoJourney(page: Page) {
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Periksa Tawaran' }).click();
+  await expect(page).toHaveURL(/\/periksa$/);
+  await clickToRoute(
+    page,
+    page.getByRole('button', { name: /Gunakan contoh tawaran/ }),
+    /\/konfirmasi$/,
+  );
+  await clickToRoute(
+    page,
+    page.getByRole('button', { name: 'Lanjutkan pemeriksaan' }),
+    /\/hasil$/,
+  );
+}
+
+test.describe('core journey', () => {
+  test('runs demo → confirmation → result → evidence → action → exercise', async ({
+    page,
+  }) => {
+    await runDemoJourney(page);
+
+    await expect(page.getByText('Tunda pembayaran dulu')).toBeVisible();
+    await expect(page.getByText('4 indikator risiko ditemukan')).toBeVisible();
+    await expect(page.getByText('Ditemukan di sumber resmi')).toBeVisible();
+
+    // Evidence map opens and shows the full contract for a category.
+    const contactAccordion = page.getByRole('button', {
+      name: /Identitas & kanal penghubung/,
+    });
+    await clickUntil(contactAccordion, () =>
+      expect(contactAccordion).toHaveAttribute('aria-expanded', 'true', {
+        timeout: 1500,
+      }),
+    );
+    const region = page.getByRole('region', { name: /Identitas & kanal penghubung/ });
+    await expect(region.getByText(/Alasan/)).toBeVisible();
+    await expect(region.getByText(/Batas pemeriksaan ini/)).toBeVisible();
+    await expect(region.getByText(/Berikutnya/)).toBeVisible();
+
+    // Action pack → verification message → copy feedback.
+    await page.getByRole('link', { name: 'Buat pesan verifikasi' }).click();
+    await expect(page).toHaveURL(/\/pesan$/);
+    await clickUntil(page.getByRole('button', { name: 'Salin pesan' }), () =>
+      expect(page.getByRole('status')).toContainText('Pesan disalin.', { timeout: 1500 }),
+    );
+
+    // Back to the result, then to the recommended personal exercise.
+    await page.goBack();
+    await page.getByRole('link', { name: 'Mulai latihan personal' }).click();
+    await expect(page).toHaveURL(/\/latihan$/);
+    await expect(page.getByText('Direkomendasikan untuk Anda')).toBeVisible();
+    await expect(page.getByText('Pencatutan Identitas Lembaga').first()).toBeVisible();
+  });
+
+  test('completes manual entry without OCR', async ({ page }) => {
+    await page.goto('/periksa');
+    await clickToRoute(
+      page,
+      page.getByRole('button', { name: 'Tulis Manual' }),
+      /\/konfirmasi$/,
+    );
+
+    await page.getByLabel('Perusahaan / P3MI').fill('PT Contoh Manual');
+    await page.getByLabel('Jenis rekening').selectOption('personal');
+    await page.getByLabel('Tenggat pembayaran').selectOption('same_day');
+    await clickToRoute(
+      page,
+      page.getByRole('button', { name: 'Lanjutkan pemeriksaan' }),
+      /\/hasil$/,
+    );
+
+    await expect(page.getByText('Tunda pembayaran dulu')).toBeVisible();
+    // No approved production dataset ships with this build, so the source is unavailable.
+    await expect(page.getByText(/Belum ada kumpulan data resmi/).first()).toBeVisible();
+    await expect(page.getByText('Contoh hasil prototipe')).toHaveCount(0);
+  });
+
+  test('separates a source outage from a record that is not found', async ({ page }) => {
+    // Not found within scope: demo dataset present, unknown company name.
+    await page.goto('/periksa');
+    await clickToRoute(
+      page,
+      page.getByRole('button', { name: /Gunakan contoh tawaran/ }),
+      /\/konfirmasi$/,
+    );
+    await page.getByLabel('Perusahaan / P3MI').fill('PT Nama Tidak Terdaftar');
+    await clickToRoute(
+      page,
+      page.getByRole('button', { name: 'Lanjutkan pemeriksaan' }),
+      /\/hasil$/,
+    );
+    await expect(
+      page.getByText(/tidak ditemukan dalam cakupan sumber yang diperiksa/i).first(),
+    ).toBeVisible();
+
+    // Source unavailable: manual entry, no approved dataset at all.
+    await page.goto('/periksa');
+    await clickToRoute(
+      page,
+      page.getByRole('button', { name: 'Tulis Manual' }),
+      /\/konfirmasi$/,
+    );
+    await page.getByLabel('Perusahaan / P3MI').fill('PT Contoh Manual');
+    await clickToRoute(
+      page,
+      page.getByRole('button', { name: 'Lanjutkan pemeriksaan' }),
+      /\/hasil$/,
+    );
+    await expect(page.getByText(/Belum ada kumpulan data resmi/).first()).toBeVisible();
+  });
+
+  test('explains lost state after a refresh instead of a dead end', async ({ page }) => {
+    await runDemoJourney(page);
+    await page.reload();
+    await expect(page.getByText('Data pemeriksaan tidak tersedia lagi')).toBeVisible();
+    await page.getByRole('link', { name: 'Mulai pemeriksaan baru' }).click();
+    await expect(page).toHaveURL(/\/periksa$/);
+  });
+
+  test('rejects an invalid upload and recovers', async ({ page }) => {
+    await page.goto('/periksa');
+    // Retried for the same reason as clickUntil: a change event that lands before React
+    // attaches its handler is a no-op. The app clears the input on rejection, so setting
+    // the same file again re-fires the event.
+    await expect(async () => {
+      await page.getByLabel('File').setInputFiles({
+        name: 'offer.exe',
+        mimeType: 'image/jpeg',
+        buffer: Buffer.from([0xff, 0xd8, 0xff, 0xe0, 0, 0, 0, 0]),
+      });
+      // Scoped to the upload error card: Next's route announcer also has role="alert".
+      await expect(
+        page.getByRole('alert').filter({ hasText: 'Berkas belum dapat digunakan' }),
+      ).toContainText('Format berkas tidak didukung', { timeout: 1500 });
+    }).toPass({ timeout: 20_000 });
+
+    await clickToRoute(
+      page,
+      page.getByRole('button', { name: 'Tulis Manual' }),
+      /\/konfirmasi$/,
+    );
+  });
+
+  test('reaches every one of the twelve screens without a dead end', async ({ page }) => {
+    const routes = [
+      '/',
+      '/periksa',
+      '/konfirmasi',
+      '/hasil',
+      '/kanal',
+      '/pesan',
+      '/bagikan',
+      '/latihan',
+      '/latihan/simulasi',
+      '/latihan/pola',
+      '/skenario',
+      '/riwayat',
+    ];
+    for (const route of routes) {
+      await page.goto(route);
+      await expect(page.locator('main')).toBeVisible();
+      await expect(
+        page.getByRole('navigation', { name: /Navigasi utama/ }),
+      ).toBeVisible();
+    }
+  });
+});
+
+test.describe('bilingual flow', () => {
+  test('completes manual entry in English', async ({ page }) => {
+    await page.goto('/');
+    await switchLanguage(page, 'Bahasa Inggris', 'en-GB');
+
+    await page.getByRole('link', { name: 'Check an offer' }).click();
+    await clickToRoute(
+      page,
+      page.getByRole('button', { name: 'Type manually' }),
+      /\/konfirmasi$/,
+    );
+    await page.getByLabel('Company / P3MI').fill('PT Example Manual');
+    await page.getByLabel('Account type').selectOption('personal');
+    await page.getByLabel('Payment deadline').selectOption('same_day');
+    await clickToRoute(
+      page,
+      page.getByRole('button', { name: 'Continue to the check' }),
+      /\/hasil$/,
+    );
+
+    await expect(page.getByText('Hold off on paying')).toBeVisible();
+    await expect(page.getByText(/risk indicators found/)).toBeVisible();
+    await expect(page.getByText(/not a legal decision/)).toBeVisible();
+  });
+
+  test('switches ID → EN → ID during the result without losing state', async ({
+    page,
+  }) => {
+    await runDemoJourney(page);
+    await expect(page.getByText('4 indikator risiko ditemukan')).toBeVisible();
+
+    await switchLanguage(page, 'Bahasa Inggris', 'en-GB');
+    await expect(page).toHaveURL(/\/hasil$/);
+    await expect(page.getByText('4 risk indicators found')).toBeVisible();
+    await expect(page.getByText('Found in the source checked')).toBeVisible();
+
+    await switchLanguage(page, 'Indonesian', 'id-ID');
+    await expect(page.getByText('4 indikator risiko ditemukan')).toBeVisible();
+  });
+
+  test('shows no raw translation key on any public screen', async ({ page }) => {
+    const locales = [
+      { option: 'Bahasa Inggris', lang: 'en-GB' },
+      { option: 'Indonesian', lang: 'id-ID' },
+    ] as const;
+
+    for (const locale of locales) {
+      await page.goto('/');
+      await switchLanguage(page, locale.option, locale.lang);
+      for (const route of [
+        '/',
+        '/periksa',
+        '/latihan',
+        '/latihan/pola',
+        '/skenario',
+        '/riwayat',
+      ]) {
+        await page.goto(route);
+        const text = (await page.locator('body').innerText()).replace(/\s+/g, ' ');
+        expect(text).not.toMatch(/\b(result|check|rule|status|missing|share)\.[a-z_]+\./);
+        expect(text).not.toContain('{');
+      }
+    }
+  });
+});

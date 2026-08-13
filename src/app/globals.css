@@ -1,0 +1,139 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens from DESIGN.md section 3. Colours are declared once here and used through
+ * Tailwind utilities; components must not hard-code hex values.
+ */
+@theme {
+  --color-brand-dark: #0a463e;
+  --color-brand-primary: #0e7c6b;
+  --color-brand-primary-strong: #0a5f52;
+  --color-brand-accent: #8fe0ce;
+
+  --color-text-primary: #16211f;
+  --color-text-secondary: #5b6a66;
+  --color-text-muted: #8a968f;
+  --color-text-faint: #9aa69f;
+
+  --color-surface-app: #f5f6f4;
+  --color-surface-card: #ffffff;
+  --color-surface-page: #dce1dd;
+  --color-border-default: #e7eae7;
+  --color-border-strong: #cbd4d0;
+
+  --color-risk-bg: #fbede4;
+  --color-risk-text: #b84a1e;
+  --color-risk-border: #f0cdb4;
+  --color-risk-deep: #7a4b32;
+
+  --color-match-bg: #e7f4ee;
+  --color-match-text: #0a6e5c;
+  --color-match-border: #bfe3d4;
+
+  --color-unknown-bg: #eef1ef;
+  --color-unknown-text: #5b6a66;
+  --color-unknown-border: #dde2df;
+
+  --color-mismatch-bg: #fbe9e9;
+  --color-mismatch-text: #9b2c2c;
+  --color-mismatch-border: #f0c2c2;
+
+  --font-sans: var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
+
+  --radius-card: 16px;
+  --radius-hero: 24px;
+  --radius-button: 13px;
+  --radius-pill: 8px;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    /* 16px minimum for form controls prevents iOS zoom on focus (DESIGN.md 3). */
+    font-size: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-surface-page);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  /* Visible focus everywhere (WCAG 2.2 AA). */
+  :focus-visible {
+    outline: 3px solid var(--color-brand-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+    font-size: 16px;
+  }
+
+  button {
+    font-family: inherit;
+  }
+}
+
+@layer utilities {
+  .app-scroll::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.28s ease;
+  }
+
+  .animate-toast-in {
+    animation: toastIn 0.2s ease;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

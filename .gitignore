@@ -1,0 +1,26 @@
+node_modules/
+.next/
+out/
+build/
+coverage/
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+
+# Environment files: only .env.example may be committed (CONVENTIONS.md 12.4)
+.env
+.env.*
+!.env.example
+
+# Vendored OCR runtime assets are downloaded by `npm run vendor:ocr`
+public/tessdata/
+public/ocr/
+
+*.log
+.DS_Store
+Thumbs.db
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+pw-report.json

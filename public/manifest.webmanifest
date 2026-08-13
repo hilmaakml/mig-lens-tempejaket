@@ -1,0 +1,28 @@
+{
+  "name": "MigranShield",
+  "short_name": "MigranShield",
+  "description": "Periksa bukti tawaran kerja luar negeri sebelum membayar. / Check the evidence in an overseas job offer before you pay.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F6F4",
+  "theme_color": "#0A463E",
+  "lang": "id-ID",
+  "dir": "ltr",
+  "categories": ["education", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

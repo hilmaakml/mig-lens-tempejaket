@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+a{color:#0E7C6B;text-decoration:none;} a:hover{color:#0A5F52;}
+button{font-family:inherit;cursor:pointer;}
+input,textarea{font-family:inherit;}
+p{text-wrap:pretty;margin:0;}
+.mscroll::-webkit-scrollbar{width:0;height:0;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(9px);}to{opacity:1;transform:none;}}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,10px);}to{opacity:1;transform:translate(-50%,0);}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#DCE1DD;display:flex;flex-direction:column;align-items:center;padding:38px 20px 60px;">
+  <div style="display:flex;align-items:center;gap:9px;margin-bottom:20px;color:#5B6A66;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;">
+    <span style="width:8px;height:8px;border-radius:99px;background:#0E7C6B;"></span>MIGRANSHIELD · PROTOTIPE KLIK
+  </div>
+
+  <div style="width:402px;height:872px;background:#F5F6F4;border-radius:36px;overflow:hidden;position:relative;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(20,40,36,.10),0 34px 70px rgba(20,40,36,.20);border:1px solid rgba(20,40,36,.06);">
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 24px 3px;font-size:14px;font-weight:700;color:#16211F;flex:none;">
+      <span>09:41</span>
+      <span style="display:flex;gap:7px;align-items:center;">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><rect x="2" y="14" width="3.4" height="6" rx="1"/><rect x="7" y="10" width="3.4" height="10" rx="1"/><rect x="12" y="6" width="3.4" height="14" rx="1"/><rect x="17" y="3" width="3.4" height="17" rx="1"/></svg>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 8.5a15 15 0 0 1 20 0"/><path d="M5 12a10 10 0 0 1 14 0"/><path d="M8.5 15.5a5 5 0 0 1 7 0"/><path d="M12 19h.01"/></svg>
+        <svg viewBox="0 0 26 24" width="24" height="17" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="6" width="19" height="12" rx="3"/><rect x="3.5" y="8" width="13" height="8" rx="1.4" fill="currentColor" stroke="none"/><path d="M23 10v4" stroke-linecap="round"/></svg>
+      </span>
+    </div>
+
+    <div ref="{{ setMain }}" class="mscroll" style="flex:1;overflow-y:auto;overflow-x:hidden;">
+
+      <!-- ============ BERANDA ============ -->
+      <sc-if value="{{ isBeranda }}" hint-placeholder-val="{{ true }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Beranda">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 18px 10px;">
+          <div style="display:flex;align-items:center;gap:9px;">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#0E7C6B" stroke-width="1.9" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 7.7-7 9-4-1.3-7-4.4-7-9V6z"/><path d="M9 12l2 2 4-4" stroke-linecap="round"/></svg>
+            <span style="font-size:20px;font-weight:800;letter-spacing:-.02em;color:#16211F;">MigranShield</span>
+          </div>
+          <div style="width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:#5B6A66;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 4.5 1.5 5.5 2 6H4c.5-.5 2-1.5 2-6"/><path d="M10.5 20a1.7 1.7 0 0 0 3 0"/></svg></div>
+        </div>
+
+        <div style="padding:2px 16px 22px;display:flex;flex-direction:column;gap:15px;">
+          <div style="background:#0A463E;border-radius:24px;padding:24px 22px;color:#fff;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;color:#8FE0CE;font-weight:600;">PERIKSA SEBELUM BAYAR</div>
+            <h1 style="margin:11px 0 9px;font-size:26px;line-height:1.16;font-weight:800;letter-spacing:-.02em;">Sudah dapat tawaran kerja ke luar negeri?</h1>
+            <p style="margin:0 0 20px;font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.82);">Unggah chat atau poster tawaran. MigranShield membantu menguraikan klaimnya dan menunjukkan apa yang masih perlu Anda verifikasi.</p>
+            <button onClick="{{ goPeriksa }}" style="width:100%;background:#fff;color:#0A463E;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:9px;">
+              <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg>
+              Periksa Tawaran
+            </button>
+          </div>
+
+          <button onClick="{{ goLatihan }}" style="display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:#fff;border:1px solid #E7EAE7;border-radius:16px;padding:15px 16px;">
+            <div style="width:44px;height:44px;border-radius:13px;background:#EEF1EF;color:#4C5A55;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5l9 4-9 4-9-4 9-4z"/><path d="M6 11v4c0 1.1 2.7 2.6 6 2.6s6-1.5 6-2.6v-4"/></svg></div>
+            <div style="flex:1;">
+              <div style="font-size:15px;font-weight:700;color:#16211F;">Latihan Literasi Digital</div>
+              <div style="font-size:12.5px;color:#7A867F;margin-top:2px;">Kenali pola manipulasi & cara verifikasi mandiri.</div>
+            </div>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#B4BEB9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+
+          <button onClick="{{ goKemajuan }}" style="text-align:left;background:#fff;border:1px solid #E7EAE7;border-radius:16px;padding:16px;">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;">
+              <span style="font-size:14px;font-weight:700;color:#16211F;">Skor kesiapan verifikasi</span>
+              <span style="font-size:20px;font-weight:800;color:#0E7C6B;letter-spacing:-.01em;">3/5</span>
+            </div>
+            <div style="display:flex;gap:5px;margin:11px 0 9px;">
+              <span style="flex:1;height:8px;border-radius:99px;background:#0E7C6B;"></span><span style="flex:1;height:8px;border-radius:99px;background:#0E7C6B;"></span><span style="flex:1;height:8px;border-radius:99px;background:#0E7C6B;"></span><span style="flex:1;height:8px;border-radius:99px;background:#E7EAE7;"></span><span style="flex:1;height:8px;border-radius:99px;background:#E7EAE7;"></span>
+            </div>
+            <div style="font-size:12.5px;color:#7A867F;">3 dari 5 langkah verifikasi inti sudah Anda latih.</div>
+          </button>
+
+          <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;overflow:hidden;">
+            <div style="padding:14px 16px 4px;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#8A968F;">Skenario komposit</div>
+            <div style="padding:0 16px 8px;font-size:11.5px;color:#9AA69F;line-height:1.4;">Disusun dari pola kasus yang dilaporkan — bukan individu nyata.</div>
+            <button onClick="{{ goSkenario }}" style="display:flex;gap:13px;align-items:center;width:100%;text-align:left;background:none;border:none;padding:6px 16px 16px;">
+              <div style="width:46px;height:46px;border-radius:99px;flex:none;background:repeating-linear-gradient(135deg,#E4E8E5,#E4E8E5 6px,#EDF0EE 6px,#EDF0EE 12px);"></div>
+              <div style="flex:1;">
+                <div style="font-size:14.5px;font-weight:700;color:#16211F;">"Siti" — caregiver Taiwan</div>
+                <div style="font-size:12.5px;color:#7A867F;margin-top:2px;line-height:1.4;">"Dia tahu nama & alamat saya, jadi saya kira resmi…"</div>
+              </div>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#B4BEB9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ PERIKSA / UNGGAH ============ -->
+      <sc-if value="{{ isPeriksa }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Unggah Tawaran">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goBeranda }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Unggah Tawaran</div>
+        </div>
+        <div style="padding:16px 16px 26px;">
+          <div style="display:flex;gap:9px;align-items:flex-start;background:#FBEDE4;border:1px solid #F0CDB4;border-radius:12px;padding:12px 14px;margin-bottom:16px;">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#B84A1E" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>
+            <span style="font-size:12.5px;line-height:1.45;color:#7A4B32;"><b>Jaga data pribadi Anda.</b> Jangan unggah KTP, paspor, nomor identitas, atau dokumen dengan data pribadi sensitif.</span>
+          </div>
+
+          <div style="border:1.8px dashed #C9D2CE;border-radius:16px;padding:26px 18px;text-align:center;background:#fff;">
+            <div style="width:52px;height:52px;border-radius:99px;background:#E6F1EE;color:#0E7C6B;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V6"/><path d="M8 10l4-4 4 4"/><path d="M5 18h14"/></svg></div>
+            <div style="font-size:15px;font-weight:700;color:#16211F;">Unggah chat, poster, atau kontrak</div>
+            <div style="font-size:12.5px;color:#8A968F;margin-top:4px;">JPG, PNG, PDF (maks. 10 MB)</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:16px;">
+              <button onClick="{{ goKonfirmasi }}" style="background:#F5F6F4;border:1px solid #E7EAE7;border-radius:11px;padding:11px 6px;display:flex;flex-direction:column;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4C5A55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.2"/></svg><span style="font-size:11.5px;font-weight:600;color:#4C5A55;">Kamera</span></button>
+              <button onClick="{{ goKonfirmasi }}" style="background:#F5F6F4;border:1px solid #E7EAE7;border-radius:11px;padding:11px 6px;display:flex;flex-direction:column;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4C5A55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg><span style="font-size:11.5px;font-weight:600;color:#4C5A55;">File</span></button>
+              <button onClick="{{ goKonfirmasi }}" style="background:#F5F6F4;border:1px solid #E7EAE7;border-radius:11px;padding:11px 6px;display:flex;flex-direction:column;align-items:center;gap:6px;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#4C5A55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg><span style="font-size:11.5px;font-weight:600;color:#4C5A55;">Tulis Manual</span></button>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;display:flex;gap:8px;align-items:flex-start;background:#EEF1EF;border-radius:12px;padding:11px 14px;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A867F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+            <span style="font-size:12.5px;line-height:1.45;color:#5B6A66;">AI hanya membaca dan mengekstrak teks dari unggahan Anda. Anda tetap dapat memeriksa dan memperbaikinya di langkah berikutnya.</span>
+          </div>
+
+          <button onClick="{{ goKonfirmasi }}" style="margin-top:18px;width:100%;background:#0E7C6B;color:#fff;border:none;border-radius:13px;padding:16px;font-size:16px;font-weight:700;">Gunakan contoh tawaran (demo)</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ KONFIRMASI INFORMASI ============ -->
+      <sc-if value="{{ isKonfirmasi }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Konfirmasi Informasi">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goPeriksa }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Konfirmasi Informasi</div>
+          <button onClick="{{ toggleEdit }}" style="margin-left:auto;background:none;border:1.4px solid #CBD4D0;border-radius:9px;padding:7px 12px;font-size:12.5px;font-weight:700;color:#0A463E;display:flex;align-items:center;gap:6px;">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>{{ editLabel }}
+          </button>
+        </div>
+        <div style="padding:14px 16px 26px;">
+          <div style="display:flex;gap:8px;align-items:flex-start;background:#EEF1EF;border-radius:12px;padding:11px 14px;margin-bottom:14px;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A867F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+            <span style="font-size:12.5px;line-height:1.45;color:#5B6A66;">Periksa kembali informasi berikut. Sistem dapat keliru membaca teks pada gambar.</span>
+          </div>
+
+          <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;overflow:hidden;">
+            <sc-for list="{{ fields }}" as="f" hint-placeholder-count="8">
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 15px;border-bottom:1px solid #EEF1EF;">
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:11.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;color:#9AA69F;">{{ f.label }}</div>
+                  <sc-if value="{{ notEditing }}" hint-placeholder-val="{{ true }}">
+                    <div style="font-size:14.5px;font-weight:600;color:{{ f.color }};margin-top:3px;word-break:break-word;">{{ f.value }}</div>
+                  </sc-if>
+                  <sc-if value="{{ editing }}" hint-placeholder-val="{{ false }}">
+                    <input value="{{ f.value }}" onChange="{{ f.onInput }}" style="width:100%;margin-top:5px;border:1px solid #CBD4D0;border-radius:8px;padding:8px 10px;font-size:14px;color:#16211F;background:#FBFCFB;" />
+                  </sc-if>
+                </div>
+                <sc-if value="{{ f.flag }}" hint-placeholder-val="{{ false }}">
+                  <span style="flex:none;display:inline-flex;align-items:center;gap:4px;background:#FBEDE4;color:#B84A1E;border:1px solid #F0CDB4;border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:700;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v3"/><path d="M12 16h.01"/></svg>perlu dicek</span>
+                </sc-if>
+              </div>
+            </sc-for>
+            <div style="padding:11px 15px;font-size:11.5px;color:#9AA69F;line-height:1.4;">Sumber ekstraksi: unggahan Anda · <b style="color:#7A867F;">Contoh hasil prototipe</b></div>
+          </div>
+
+          <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px;">
+            <button onClick="{{ toggleEdit }}" style="width:100%;background:none;color:#0A463E;border:1.5px solid #CBD4D0;border-radius:13px;padding:14px;font-size:15px;font-weight:700;">{{ editBtnLabel }}</button>
+            <button onClick="{{ goHasil }}" style="width:100%;background:#0E7C6B;color:#fff;border:none;border-radius:13px;padding:16px;font-size:16px;font-weight:700;">Lanjutkan pemeriksaan</button>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ HASIL PEMERIKSAAN ============ -->
+      <sc-if value="{{ isHasil }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Hasil Pemeriksaan">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goKonfirmasi }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Hasil Pemeriksaan</div>
+          <span style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8A968F;background:#EEF1EF;border-radius:6px;padding:4px 8px;">Contoh prototipe</span>
+        </div>
+
+        <div style="padding:16px 16px 26px;display:flex;flex-direction:column;gap:16px;">
+
+          <!-- 1 Rekomendasi utama -->
+          <div style="background:#FBEDE4;border:1px solid #F0CDB4;border-radius:16px;padding:18px;">
+            <div style="display:flex;gap:13px;align-items:flex-start;">
+              <div style="width:42px;height:42px;border-radius:11px;background:#F3D3BB;color:#B84A1E;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v5"/><path d="M12 16h.01"/><circle cx="12" cy="12" r="9"/></svg></div>
+              <div><div style="font-size:18px;font-weight:800;color:#B84A1E;letter-spacing:-.01em;">Tunda pembayaran dulu</div><div style="font-size:13px;color:#7A4B32;margin-top:4px;line-height:1.45;">Tunda pembayaran sampai identitas penghubung, rincian biaya, dan tujuan pembayaran dapat diverifikasi melalui kanal resmi.</div></div>
+            </div>
+          </div>
+
+          <!-- 2 + 3 Ringkasan & daftar indikator -->
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+              <span style="font-size:15px;font-weight:800;color:#16211F;">4 indikator risiko ditemukan</span>
+            </div>
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;overflow:hidden;">
+              <sc-for list="{{ risks }}" as="r" hint-placeholder-count="4">
+                <div style="display:flex;gap:11px;align-items:flex-start;padding:13px 15px;border-bottom:1px solid #EEF1EF;">
+                  <span style="width:22px;height:22px;border-radius:7px;background:#FBEDE4;color:#B84A1E;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;">{{ r.n }}</span>
+                  <span style="font-size:13.5px;line-height:1.45;color:#3A2A20;">{{ r.text }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- 4 Verifikasi Perusahaan -->
+          <div style="font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8A968F;">Verifikasi</div>
+          <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;padding:16px;margin-top:-6px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#4C5A55" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V7l8-4 8 4v13"/><path d="M4 20h16"/><path d="M9 20v-5h6v5"/></svg><span style="font-size:14.5px;font-weight:700;color:#16211F;">Perusahaan / P3MI</span></div>
+              <span style="display:inline-flex;align-items:center;gap:5px;background:#E7F4EE;color:#0A6E5C;border:1px solid #BFE3D4;border-radius:8px;padding:4px 9px;font-size:11px;font-weight:700;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>Ditemukan di sumber</span>
+            </div>
+            <div style="margin-top:11px;font-size:13.5px;color:#16211F;font-weight:600;">PT Mitra Kerja Global <span style="color:#9AA69F;font-weight:500;">(contoh)</span></div>
+            <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:#5B6A66;line-height:1.4;">
+              <div>No. izin: <span style="color:#9AA69F;">contoh — belum dikonfirmasi ulang</span></div>
+              <div>Sumber: <span style="color:#9AA69F;">contoh direktori resmi (prototipe)</span></div>
+              <div>Diperiksa: <span style="color:#9AA69F;">contoh tanggal</span></div>
+            </div>
+            <button onClick="{{ goKanal }}" style="margin-top:12px;width:100%;background:none;color:#0A463E;border:1.4px solid #CBD4D0;border-radius:11px;padding:11px;font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>Lihat sumber</button>
+          </div>
+
+          <!-- 5 Verifikasi Kanal Penghubung -->
+          <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;padding:16px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+              <div style="display:flex;align-items:center;gap:8px;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#4C5A55" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1-4 4.5-5 7-5s6 1 7 5"/></svg><span style="font-size:14.5px;font-weight:700;color:#16211F;">Kanal Penghubung</span></div>
+              <span style="display:inline-flex;align-items:center;gap:5px;background:#EEF1EF;color:#5B6A66;border:1px solid #DDE2DF;border-radius:8px;padding:4px 9px;font-size:11px;font-weight:700;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 0 1 5 .8c0 1.8-2.5 2-2.5 3.7"/><path d="M12 17h.01"/></svg>Belum dapat diverifikasi</span>
+            </div>
+            <div style="margin-top:11px;font-size:13.5px;color:#16211F;font-weight:600;">WhatsApp · +886 9•• ••• (contoh)</div>
+            <div style="margin-top:8px;font-size:12.5px;color:#5B6A66;line-height:1.45;">Perusahaannya ditemukan, tetapi identitas orang yang menghubungi Anda belum terbukti mewakili perusahaan tersebut.</div>
+            <div style="margin-top:9px;background:#F5F6F4;border-radius:10px;padding:10px 12px;font-size:12px;color:#5B6A66;line-height:1.45;"><b style="color:#4C5A55;">Langkah berikutnya:</b> hubungi kantor resmi lewat kontak yang tercantum di sumber, tanyakan apakah nomor ini benar mewakili mereka.</div>
+            <button onClick="{{ goKanal }}" style="margin-top:12px;width:100%;background:none;color:#0A463E;border:1.4px solid #CBD4D0;border-radius:11px;padding:11px;font-size:13.5px;font-weight:700;">Hubungi kontak resmi</button>
+          </div>
+
+          <!-- 6 Payment Safety Check (accordion) -->
+          <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;overflow:hidden;">
+            <button onClick="{{ togglePayment }}" style="width:100%;background:none;border:none;display:flex;align-items:center;gap:11px;padding:15px 16px;text-align:left;">
+              <div style="width:34px;height:34px;border-radius:10px;background:#FBEDE4;color:#B84A1E;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg></div>
+              <div style="flex:1;"><div style="font-size:14.5px;font-weight:700;color:#16211F;">Pemeriksaan Pembayaran</div><div style="font-size:12px;color:#8A968F;margin-top:1px;">Rp7.500.000 · rekening pribadi</div></div>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#B4BEB9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:{{ payChevron }};transition:transform .2s;"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <sc-if value="{{ paymentOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:0 16px 16px;">
+              <div style="border-top:1px solid #EEF1EF;">
+                <sc-for list="{{ payItems }}" as="p" hint-placeholder-count="8">
+                  <div style="display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #F1F3F1;">
+                    <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:#16211F;">{{ p.label }}</div><div style="font-size:12px;color:#7A867F;margin-top:1px;">{{ p.value }}</div></div>
+                    <sc-if value="{{ p.risk }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:4px;background:#FBEDE4;color:#B84A1E;border:1px solid #F0CDB4;border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:700;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v3"/><path d="M12 16h.01"/></svg>risiko</span></sc-if>
+                    <sc-if value="{{ p.unknown }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:4px;background:#EEF1EF;color:#5B6A66;border:1px solid #DDE2DF;border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:700;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16h.01"/><path d="M9.6 9.6a2.5 2.5 0 0 1 4.8.9c0 1.6-2.4 1.8-2.4 3.5"/></svg>belum ada</span></sc-if>
+                    <sc-if value="{{ p.info }}" hint-placeholder-val="{{ true }}"><span style="font-size:10.5px;font-weight:700;color:#9AA69F;">info</span></sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="margin-top:12px;background:#FBEDE4;border:1px solid #F0CDB4;border-radius:11px;padding:11px 13px;font-size:12.5px;line-height:1.45;color:#7A4B32;">Permintaan pembayaran ke rekening pribadi yang belum terverifikasi merupakan indikator risiko tinggi.</div>
+            </div>
+            </sc-if>
+          </div>
+
+          <!-- 7 Peta Bukti (accordion cards) -->
+          <div style="font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8A968F;">Peta bukti</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:-6px;">
+            <sc-for list="{{ evidence }}" as="e" hint-placeholder-count="7">
+              <div style="background:#fff;border:1px solid #E7EAE7;border-radius:14px;overflow:hidden;">
+                <button onClick="{{ e.onToggle }}" style="width:100%;background:none;border:none;display:flex;align-items:center;gap:10px;padding:13px 15px;text-align:left;">
+                  <span style="flex:1;font-size:14px;font-weight:700;color:#16211F;">{{ e.title }}</span>
+                  <sc-if value="{{ e.isFound }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:4px;background:#E7F4EE;color:#0A6E5C;border:1px solid #BFE3D4;border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:700;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>Sesuai sumber</span></sc-if>
+                  <sc-if value="{{ e.isUnverified }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;gap:4px;background:#EEF1EF;color:#5B6A66;border:1px solid #DDE2DF;border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:700;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16h.01"/><path d="M9.6 9.6a2.5 2.5 0 0 1 4.8.9c0 1.6-2.4 1.8-2.4 3.5"/></svg>Belum diverifikasi</span></sc-if>
+                  <sc-if value="{{ e.isRisk }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:4px;background:#FBEDE4;color:#B84A1E;border:1px solid #F0CDB4;border-radius:7px;padding:4px 8px;font-size:10.5px;font-weight:700;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v3"/><path d="M12 16h.01"/></svg>Indikator risiko</span></sc-if>
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#B4BEB9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transform:{{ e.chevron }};transition:transform .2s;"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+                <sc-if value="{{ e.open }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:0 15px 14px;display:flex;flex-direction:column;gap:9px;border-top:1px solid #EEF1EF;padding-top:12px;">
+                  <div style="font-size:12.5px;line-height:1.45;color:#4C5A55;"><b style="color:#16211F;">Alasan:</b> {{ e.reason }}</div>
+                  <div style="font-size:12.5px;line-height:1.45;color:#4C5A55;"><b style="color:#16211F;">Sumber:</b> {{ e.source }} · {{ e.date }}</div>
+                  <div style="font-size:12.5px;line-height:1.45;color:#4C5A55;"><b style="color:#16211F;">Masih kurang:</b> {{ e.missing }}</div>
+                  <div style="font-size:12.5px;line-height:1.45;color:#0A5F52;background:#EAF3F0;border-radius:9px;padding:9px 11px;"><b>Berikutnya:</b> {{ e.next }}</div>
+                </div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+          <!-- 8 Tindakan aman -->
+          <div style="font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8A968F;">Tindakan aman</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:-6px;">
+            <button onClick="{{ goPesan }}" style="width:100%;background:#0E7C6B;color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H9l-5 4z"/></svg>Buat pesan verifikasi</button>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <button onClick="{{ goKanal }}" style="background:#fff;color:#0A463E;border:1.4px solid #CBD4D0;border-radius:12px;padding:13px 10px;font-size:13px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>Lihat sumber resmi</button>
+              <button onClick="{{ goBagikan }}" style="background:#fff;color:#0A463E;border:1.4px solid #CBD4D0;border-radius:12px;padding:13px 10px;font-size:13px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="6" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8 11l8-4M8 13l8 4"/></svg>Bagikan ringkasan</button>
+              <button onClick="{{ goKanal }}" style="background:#fff;color:#0A463E;border:1.4px solid #CBD4D0;border-radius:12px;padding:13px 10px;font-size:13px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 2.5a2 2 0 0 1-.6 1.9L7.6 9.8a16 16 0 0 0 6 6l1.7-1.4a2 2 0 0 1 1.9-.6l2.5.5a2 2 0 0 1 1.8 2z"/></svg>Hubungi kontak resmi</button>
+              <button onClick="{{ goKanal }}" style="background:#fff;color:#0A463E;border:1.4px solid #CBD4D0;border-radius:12px;padding:13px 10px;font-size:13px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.6-3 7.7-7 9-4-1.3-7-4.4-7-9V6z"/></svg>Kanal pengaduan resmi</button>
+            </div>
+          </div>
+
+          <!-- 9 Latihan personal -->
+          <div style="background:#0A463E;border-radius:16px;padding:18px;color:#fff;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;color:#8FE0CE;font-weight:600;">LATIHAN PERSONAL</div>
+            <div style="margin-top:8px;font-size:15.5px;font-weight:700;line-height:1.35;">Latih bagian yang masih perlu Anda verifikasi.</div>
+            <p style="margin-top:7px;font-size:13px;line-height:1.5;color:rgba(255,255,255,.8);">Latihan ini direkomendasikan berdasarkan bagian yang masih perlu Anda verifikasi pada tawaran ini.</p>
+            <button onClick="{{ goLatihan }}" style="margin-top:14px;width:100%;background:#fff;color:#0A463E;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;">Mulai latihan personal</button>
+          </div>
+
+          <!-- 10 Batas kemampuan -->
+          <div style="background:#EEF1EF;border-radius:14px;padding:14px;font-size:12px;line-height:1.5;color:#5B6A66;">MigranShield membantu menguraikan klaim, membandingkan bukti, dan menunjukkan informasi yang masih perlu diverifikasi. Hasil ini bukan keputusan hukum atau jaminan bahwa suatu tawaran aman maupun penipuan.</div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ KANAL RESMI ============ -->
+      <sc-if value="{{ isKanal }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Kanal Resmi">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goHasil }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Kanal Resmi</div>
+        </div>
+        <div style="padding:16px 16px 26px;">
+          <div style="display:flex;gap:8px;align-items:flex-start;background:#EEF1EF;border-radius:12px;padding:11px 14px;margin-bottom:14px;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A867F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+            <span style="font-size:12.5px;line-height:1.45;color:#5B6A66;">Tombol ini mengarahkan Anda ke kanal resmi untuk verifikasi mandiri. MigranShield tidak membuat laporan otomatis.</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:11px;">
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:14px;padding:15px;">
+              <div style="font-size:14.5px;font-weight:700;color:#16211F;">Direktori P3MI resmi</div>
+              <div style="font-size:12.5px;color:#7A867F;margin-top:3px;line-height:1.4;">Cek legalitas perusahaan penempatan. <span style="color:#9AA69F;">(tautan contoh — placeholder)</span></div>
+              <div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;color:#0A463E;font-size:13px;font-weight:700;">Buka <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/></svg></div>
+            </div>
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:14px;padding:15px;">
+              <div style="font-size:14.5px;font-weight:700;color:#16211F;">Kontak resmi perusahaan</div>
+              <div style="font-size:12.5px;color:#7A867F;margin-top:3px;line-height:1.4;">Hubungi nomor kantor yang tercantum di sumber resmi, bukan nomor yang menghubungi Anda. <span style="color:#9AA69F;">(placeholder)</span></div>
+            </div>
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:14px;padding:15px;">
+              <div style="font-size:14.5px;font-weight:700;color:#16211F;">Kanal pengaduan resmi</div>
+              <div style="font-size:12.5px;color:#7A867F;margin-top:3px;line-height:1.4;">Laporkan dugaan penipuan penempatan ke kanal pengaduan resmi. <span style="color:#9AA69F;">(tautan contoh — placeholder)</span></div>
+              <div style="margin-top:10px;display:inline-flex;align-items:center;gap:6px;color:#0A463E;font-size:13px;font-weight:700;">Buka <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/></svg></div>
+            </div>
+          </div>
+          <button onClick="{{ goPesan }}" style="margin-top:16px;width:100%;background:#0E7C6B;color:#fff;border:none;border-radius:13px;padding:15px;font-size:15px;font-weight:700;">Buat pesan verifikasi</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ PESAN VERIFIKASI ============ -->
+      <sc-if value="{{ isPesan }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Pesan Verifikasi">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goHasil }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Pesan Verifikasi</div>
+        </div>
+        <div style="padding:16px 16px 26px;">
+          <p style="font-size:13.5px;line-height:1.5;color:#4C5A55;margin-bottom:14px;">Kirim pesan ini ke kontak resmi perusahaan untuk meminta bukti sebelum Anda mengambil tindakan apa pun.</p>
+          <div style="font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8A968F;margin-bottom:8px;">Pratinjau pesan</div>
+          <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;padding:16px;font-size:14px;line-height:1.6;color:#16211F;">Mohon kirimkan tautan lowongan resmi, nama dan nomor izin P3MI, draf kontrak, rincian biaya tertulis, serta kontak kantor resmi yang dapat saya hubungi untuk melakukan verifikasi.</div>
+          <button onClick="{{ copyMsg }}" style="margin-top:16px;width:100%;background:#0E7C6B;color:#fff;border:none;border-radius:13px;padding:15px;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>Salin pesan</button>
+          <button onClick="{{ goKanal }}" style="margin-top:10px;width:100%;background:none;color:#0A463E;border:1.5px solid #CBD4D0;border-radius:13px;padding:14px;font-size:14.5px;font-weight:700;">Lihat kontak resmi</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ BAGIKAN RINGKASAN ============ -->
+      <sc-if value="{{ isBagikan }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Bagikan Ringkasan">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goHasil }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Bagikan Ringkasan</div>
+        </div>
+        <div style="padding:16px 16px 26px;">
+          <div style="display:flex;gap:8px;align-items:flex-start;background:#E7F4EE;border:1px solid #BFE3D4;border-radius:12px;padding:11px 14px;margin-bottom:14px;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#0A6E5C" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><path d="M12 3l7 3v5c0 4.6-3 7.7-7 9-4-1.3-7-4.4-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span style="font-size:12.5px;line-height:1.45;color:#0A5F52;">Ringkasan ini tidak menampilkan screenshot asli, nomor rekening, nomor identitas, atau nomor telepon lengkap.</span>
+          </div>
+          <div style="font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8A968F;margin-bottom:8px;">Pratinjau ringkasan</div>
+          <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;padding:16px;">
+            <div style="font-size:15px;font-weight:800;color:#B84A1E;">Rekomendasi: Tunda pembayaran</div>
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:7px;font-size:13px;color:#4C5A55;line-height:1.45;">
+              <div>• Posisi: Caregiver · Negara: Taiwan</div>
+              <div>• Perusahaan: ditemukan di sumber (contoh)</div>
+              <div>• Kanal penghubung: belum dapat diverifikasi</div>
+              <div>• Pembayaran: ke rekening pribadi (nomor disamarkan)</div>
+              <div>• Kontak: WhatsApp +886 •••• (disamarkan)</div>
+              <div>• 4 indikator risiko ditemukan</div>
+            </div>
+            <div style="margin-top:12px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#9AA69F;">Contoh hasil prototipe · MigranShield</div>
+          </div>
+          <button onClick="{{ copyShare }}" style="margin-top:16px;width:100%;background:#0E7C6B;color:#fff;border:none;border-radius:13px;padding:15px;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="6" r="2.4"/><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8 11l8-4M8 13l8 4"/></svg>Bagikan ke keluarga / pendamping</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ LATIHAN (hub personal) ============ -->
+      <sc-if value="{{ isLatihan }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Latihan">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goBeranda }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Latihan Literasi</div>
+        </div>
+        <div style="padding:16px 16px 26px;">
+          <div style="background:#EAF3F0;border:1px solid #CFE6DF;border-radius:14px;padding:14px;font-size:13px;line-height:1.5;color:#0A5F52;">Latihan ini direkomendasikan berdasarkan bagian yang masih perlu Anda verifikasi pada tawaran terakhir.</div>
+          <div style="margin-top:16px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8A968F;">Direkomendasikan untuk Anda</div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px;">
+            <sc-for list="{{ modules }}" as="m" hint-placeholder-count="4">
+              <button onClick="{{ goSimulasi }}" style="width:100%;text-align:left;background:#fff;border:1px solid #E7EAE7;border-radius:14px;padding:14px 15px;display:flex;align-items:center;gap:12px;">
+                <div style="width:40px;height:40px;border-radius:11px;background:#EEF1EF;color:#0E7C6B;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5l9 4-9 4-9-4 9-4z"/><path d="M6 11v4c0 1.1 2.7 2.6 6 2.6s6-1.5 6-2.6v-4"/></svg></div>
+                <div style="flex:1;"><div style="font-size:14.5px;font-weight:700;color:#16211F;">{{ m.title }}</div><div style="font-size:12px;color:#7A867F;margin-top:2px;line-height:1.35;">{{ m.reason }}</div></div>
+                <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#B4BEB9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+              </button>
+            </sc-for>
+          </div>
+          <button onClick="{{ goPembongkaran }}" style="margin-top:16px;width:100%;background:none;color:#0A463E;border:1.5px solid #CBD4D0;border-radius:13px;padding:14px;font-size:14.5px;font-weight:700;">Pelajari pola manipulasi</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ SIMULASI ============ -->
+      <sc-if value="{{ isSimulasi }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Simulasi">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goLatihan }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Simulasi Perekrut</div>
+          <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#8A968F;">Latihan</div>
+        </div>
+        <div style="padding:16px 16px 26px;display:flex;flex-direction:column;gap:14px;">
+          <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:7px;background:#EEF1EF;border:1px solid #E1E5E2;border-radius:99px;padding:6px 13px;font-size:12px;font-weight:600;color:#5B6A66;"><span style="width:7px;height:7px;border-radius:99px;background:#C05621;"></span>Skenario: Tawaran caregiver Taiwan</div>
+          <div style="display:flex;gap:10px;align-items:flex-end;">
+            <div style="width:34px;height:34px;border-radius:99px;flex:none;background:#E4E8E5;color:#8A968F;display:flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c1-4 4.5-5 7-5s6 1 7 5"/></svg></div>
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:4px 17px 17px 17px;padding:13px 15px;font-size:14.5px;line-height:1.52;color:#16211F;max-width:86%;box-shadow:0 1px 2px rgba(20,40,36,.04);">"Selamat! Anda lolos seleksi caregiver di Taiwan. Kuota tinggal 2—transfer biaya administrasi Rp7.500.000 hari ini juga agar slot tidak hangus."</div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;padding-left:44px;">
+            <span style="display:inline-flex;align-items:center;gap:5px;background:#FBEDE4;color:#C05621;border:1px solid #F3D9C6;border-radius:8px;padding:5px 9px;font-size:11.5px;font-weight:700;font-family:'IBM Plex Mono',monospace;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="3.2"/><path d="M6 20c.8-3.4 3.8-4.5 6-4.5s5.2 1.1 6 4.5"/></svg>Taktik Otoritas</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;background:#FBEDE4;color:#C05621;border:1px solid #F3D9C6;border-radius:8px;padding:5px 9px;font-size:11.5px;font-weight:700;font-family:'IBM Plex Mono',monospace;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg>Taktik Urgensi</span>
+          </div>
+          <sc-if value="{{ simUnpicked }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:11px;margin-top:4px;">
+            <div style="background:#EAF3F0;border:1px solid #CFE6DF;border-radius:14px;padding:13px 16px;font-weight:700;color:#0A463E;font-size:14.5px;">Apa respons paling aman?</div>
+            <sc-for list="{{ options }}" as="opt" hint-placeholder-count="3">
+              <button onClick="{{ opt.onClick }}" style="width:100%;text-align:left;background:#fff;border:1.5px solid #E1E5E2;border-radius:13px;padding:14px 15px;font-size:14px;line-height:1.45;color:#16211F;display:flex;gap:11px;align-items:flex-start;"><span style="width:20px;height:20px;border-radius:99px;border:2px solid #C9D2CE;flex:none;margin-top:1px;"></span><span>{{ opt.text }}</span></button>
+            </sc-for>
+          </div>
+          </sc-if>
+          <sc-if value="{{ simPicked }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:13px;margin-top:2px;">
+            <div style="align-self:flex-end;background:#0E7C6B;color:#fff;border-radius:17px 4px 17px 17px;padding:13px 15px;font-size:14.5px;line-height:1.5;max-width:86%;">{{ chosenText }}</div>
+            <sc-if value="{{ simSafe }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#E9F4EF;border:1px solid #BFE3D4;border-radius:16px;padding:17px;">
+              <div style="display:flex;align-items:center;gap:9px;color:#0A6E5C;font-weight:700;font-size:15px;"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/></svg>Tepat. Anda menunda dan meminta bukti resmi.</div>
+              <p style="margin:10px 0 0;font-size:13.5px;line-height:1.55;color:#33534B;">Menunda untuk verifikasi memutus taktik urgensi. Minta nama & nomor izin P3MI, kontrak, dan rincian biaya lewat kanal resmi sebelum tindakan apa pun.</p>
+              <button onClick="{{ goPembongkaran }}" style="margin-top:15px;width:100%;background:#0E7C6B;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;">Lihat pembongkaran pola<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></button>
+            </div>
+            </sc-if>
+            <sc-if value="{{ simUnsafe }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#FBEDE4;border:1px solid #F0CDB4;border-radius:16px;padding:17px;">
+              <div style="display:flex;align-items:center;gap:9px;color:#B84A1E;font-weight:700;font-size:15px;"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v4"/><path d="M12 17h.01"/></svg>Hati-hati—ini yang diincar penipu.</div>
+              <p style="margin:10px 0 0;font-size:13.5px;line-height:1.55;color:#7A4B32;">Mentransfer sekarang atau menawar harga sama-sama melewati verifikasi. Uang yang sudah masuk ke rekening pribadi hampir mustahil ditarik kembali.</p>
+              <button onClick="{{ resetSim }}" style="margin-top:15px;width:100%;background:none;color:#B84A1E;border:1.5px solid #E9B994;border-radius:12px;padding:13px;font-size:14.5px;font-weight:700;">Coba respons lain</button>
+            </div>
+            </sc-if>
+          </div>
+          </sc-if>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ PEMBONGKARAN POLA ============ -->
+      <sc-if value="{{ isPembongkaran }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Pembongkaran Pola">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goLatihan }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Pembongkaran Pola</div>
+        </div>
+        <div style="padding:16px 16px 26px;">
+          <p style="margin:2px 0 18px;font-size:14.5px;line-height:1.55;color:#4C5A55;">Banyak kasus yang kami pelajari menggunakan kombinasi pola manipulasi berikut. Mengenali urutannya membantu Anda berhenti dan memverifikasi.</p>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;padding:16px;"><div style="display:flex;align-items:center;gap:10px;margin-bottom:11px;"><span style="width:26px;height:26px;border-radius:99px;background:#0A463E;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;">1</span><span style="font-size:15px;font-weight:700;color:#16211F;">Otoritas</span></div><div style="background:#F5F6F4;border-radius:10px;padding:10px 13px;font-size:13.5px;color:#5B6A66;font-style:italic;border-left:3px solid #C9D2CE;">"Anda lolos seleksi caregiver di Taiwan…"</div><p style="margin:10px 0 0;font-size:13.5px;line-height:1.5;color:#4C5A55;">Mengaku dari instansi atau agen resmi, supaya Anda percaya tanpa mengecek.</p></div>
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;padding:16px;"><div style="display:flex;align-items:center;gap:10px;margin-bottom:11px;"><span style="width:26px;height:26px;border-radius:99px;background:#0A463E;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;">2</span><span style="font-size:15px;font-weight:700;color:#16211F;">Urgensi</span></div><div style="background:#F5F6F4;border-radius:10px;padding:10px 13px;font-size:13.5px;color:#5B6A66;font-style:italic;border-left:3px solid #C9D2CE;">"Kuota tinggal 2—hari ini juga."</div><p style="margin:10px 0 0;font-size:13.5px;line-height:1.5;color:#4C5A55;">Menekan waktu agar Anda tak sempat berpikir jernih atau memverifikasi.</p></div>
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:16px;padding:16px;"><div style="display:flex;align-items:center;gap:10px;margin-bottom:11px;"><span style="width:26px;height:26px;border-radius:99px;background:#0A463E;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;">3</span><span style="font-size:15px;font-weight:700;color:#16211F;">Lewati Prosedur</span></div><div style="background:#F5F6F4;border-radius:10px;padding:10px 13px;font-size:13.5px;color:#5B6A66;font-style:italic;border-left:3px solid #C9D2CE;">"Tidak perlu kontrak dulu, urus belakangan."</div><p style="margin:10px 0 0;font-size:13.5px;line-height:1.5;color:#4C5A55;">Melompati kontrak kerja dan P3MI resmi—langkah yang seharusnya wajib.</p></div>
+            <div style="background:#fff;border:1px solid #F0CDB4;border-radius:16px;padding:16px;"><div style="display:flex;align-items:center;gap:10px;margin-bottom:11px;"><span style="width:26px;height:26px;border-radius:99px;background:#C05621;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;">4</span><span style="font-size:15px;font-weight:700;color:#C05621;">Minta Bayar</span></div><div style="background:#FBEDE4;border-radius:10px;padding:10px 13px;font-size:13.5px;color:#B84A1E;font-style:italic;border-left:3px solid #E9B994;">"Transfer Rp7.500.000 ke rekening ini."</div><p style="margin:10px 0 0;font-size:13.5px;line-height:1.5;color:#4C5A55;">Ujungnya sering sama: uang ke rekening pribadi, sebelum bukti apa pun diberikan.</p></div>
+          </div>
+          <div style="margin-top:16px;background:#FBEDE4;border:1px solid #F0CDB4;border-radius:14px;padding:15px;font-size:13.5px;line-height:1.55;color:#7A4B32;font-weight:600;">Permintaan pembayaran ke rekening pribadi yang belum terverifikasi merupakan indikator risiko tinggi.</div>
+          <button onClick="{{ goSkenario }}" style="margin-top:14px;width:100%;background:#0A463E;color:#fff;border:none;border-radius:13px;padding:15px;font-size:15px;font-weight:700;">Lihat skenario komposit</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ SKENARIO KOMPOSIT ============ -->
+      <sc-if value="{{ isSkenario }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Skenario Komposit">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goBeranda }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Skenario Komposit</div>
+        </div>
+        <div style="padding:16px 16px 26px;">
+          <div style="display:flex;gap:8px;align-items:flex-start;background:#EEF1EF;border-radius:12px;padding:11px 14px;margin-bottom:14px;">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A867F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+            <span style="font-size:12.5px;line-height:1.45;color:#5B6A66;">Skenario komposit berdasarkan pola kasus yang dilaporkan. Bukan individu nyata; nama dan detail disamarkan.</span>
+          </div>
+          <div style="border-radius:18px;overflow:hidden;border:1px solid #E7EAE7;">
+            <div style="height:180px;background:repeating-linear-gradient(135deg,#E4E8E5,#E4E8E5 9px,#EDF0EE 9px,#EDF0EE 18px);display:flex;align-items:flex-end;justify-content:center;padding-bottom:14px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A968F;background:rgba(255,255,255,.75);padding:4px 10px;border-radius:99px;">ilustrasi komposit</span></div>
+            <div style="background:#fff;padding:15px 16px;"><div style="font-size:18px;font-weight:800;color:#16211F;letter-spacing:-.01em;">"Siti" (komposit)</div><div style="font-size:13px;color:#7A867F;margin-top:2px;">Pola kasus caregiver, Taiwan</div></div>
+          </div>
+          <div style="margin-top:16px;background:#0A463E;border-radius:16px;padding:20px;color:#fff;"><div style="font-family:Georgia,serif;font-size:44px;line-height:0;color:#8FE0CE;height:22px;">“</div><p style="margin-top:6px;font-size:16px;line-height:1.5;font-weight:600;">Dia tahu nama lengkap dan alamat saya, jadi saya kira ini resmi. Padahal itu hanya cara membuat saya percaya tanpa mengecek.</p></div>
+          <div style="margin-top:20px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8A968F;">Yang bisa dipelajari</div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:11px;align-items:flex-start;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0E7C6B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/></svg><span style="font-size:14px;line-height:1.5;color:#33413D;">Tahu data pribadi Anda bukan tanda resmi—data mudah bocor atau dibeli.</span></div>
+            <div style="display:flex;gap:11px;align-items:flex-start;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0E7C6B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/></svg><span style="font-size:14px;line-height:1.5;color:#33413D;">"Hari ini juga" adalah taktik urgensi—alasan untuk berhenti dan cek, bukan buru-buru.</span></div>
+            <div style="display:flex;gap:11px;align-items:flex-start;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0E7C6B" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px;"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/></svg><span style="font-size:14px;line-height:1.5;color:#33413D;">Pembayaran ke rekening pribadi tanpa rincian tertulis = berhenti & verifikasi ke kanal resmi.</span></div>
+          </div>
+          <button onClick="{{ goLatihan }}" style="margin-top:20px;width:100%;background:#0E7C6B;color:#fff;border:none;border-radius:13px;padding:15px;font-size:15px;font-weight:700;">Latih skenario ini</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ KEMAJUAN / RIWAYAT ============ -->
+      <sc-if value="{{ isKemajuan }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:fadeUp .3s ease;" data-screen-label="Kemajuan">
+        <div style="position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(245,246,244,.94);backdrop-filter:blur(8px);border-bottom:1px solid #E7EAE7;">
+          <button onClick="{{ goBeranda }}" style="background:none;border:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:#16211F;"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <div style="font-size:16px;font-weight:700;color:#16211F;">Kemajuan</div>
+        </div>
+        <div style="padding:16px 16px 26px;">
+          <div style="background:#fff;border:1px solid #E7EAE7;border-radius:18px;padding:20px;">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;"><span style="font-size:15px;font-weight:700;color:#16211F;">Skor kesiapan verifikasi</span><span style="font-size:24px;font-weight:800;color:#0E7C6B;letter-spacing:-.02em;">3/5</span></div>
+            <div style="display:flex;gap:5px;margin:12px 0 10px;"><span style="flex:1;height:9px;border-radius:99px;background:#0E7C6B;"></span><span style="flex:1;height:9px;border-radius:99px;background:#0E7C6B;"></span><span style="flex:1;height:9px;border-radius:99px;background:#0E7C6B;"></span><span style="flex:1;height:9px;border-radius:99px;background:#E7EAE7;"></span><span style="flex:1;height:9px;border-radius:99px;background:#E7EAE7;"></span></div>
+            <div style="font-size:12.5px;color:#7A867F;line-height:1.45;">Dihitung dari 5 langkah verifikasi inti (perusahaan, kontak, kontrak, biaya, tekanan waktu). Anda sudah melatih 3 dari 5.</div>
+          </div>
+          <div style="margin-top:20px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8A968F;">Kemajuan per taktik</div>
+          <div style="margin-top:11px;display:flex;flex-direction:column;gap:10px;">
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:14px;padding:14px;"><div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:14px;font-weight:700;color:#16211F;">Otoritas</span><span style="display:inline-flex;align-items:center;gap:5px;color:#0A6E5C;font-size:11.5px;font-weight:700;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>Sudah dikenali dalam 2 dari 3 latihan</span></div></div>
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:14px;padding:14px;"><div style="display:flex;align-items:center;justify-content:space-between;"><span style="font-size:14px;font-weight:700;color:#16211F;">Urgensi</span><span style="display:inline-flex;align-items:center;gap:5px;color:#0A6E5C;font-size:11.5px;font-weight:700;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>Sudah dikenali dalam 3 dari 3 latihan</span></div></div>
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:14px;padding:14px;"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span style="font-size:14px;font-weight:700;color:#16211F;">Minta bukti tertulis</span><span style="font-size:11.5px;font-weight:700;color:#8A968F;white-space:nowrap;">1 dari 3 latihan</span></div><div style="height:6px;border-radius:99px;background:#EEF1EF;overflow:hidden;margin-top:9px;"><div style="width:33%;height:100%;background:#D8B455;"></div></div></div>
+            <div style="background:#fff;border:1px solid #E7EAE7;border-radius:14px;padding:14px;"><div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><span style="font-size:14px;font-weight:700;color:#16211F;">Memeriksa tujuan pembayaran</span><span style="font-size:11.5px;font-weight:700;color:#8A968F;white-space:nowrap;">1 dari 3 latihan</span></div><div style="height:6px;border-radius:99px;background:#EEF1EF;overflow:hidden;margin-top:9px;"><div style="width:33%;height:100%;background:#D8B455;"></div></div></div>
+          </div>
+          <div style="margin-top:20px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8A968F;">Riwayat pemeriksaan</div>
+          <div style="margin-top:11px;background:#fff;border:1px solid #E7EAE7;border-radius:14px;overflow:hidden;">
+            <button onClick="{{ goHasil }}" style="width:100%;text-align:left;background:none;border:none;display:flex;align-items:center;gap:12px;padding:13px 15px;border-bottom:1px solid #EEF1EF;"><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#16211F;">Tawaran caregiver Taiwan</div><div style="font-size:12px;color:#8A968F;margin-top:1px;">Contoh prototipe</div></div><span style="font-size:11px;font-weight:700;color:#B84A1E;background:#FBEDE4;border-radius:7px;padding:4px 9px;">4 indikator risiko</span></button>
+            <div style="display:flex;align-items:center;gap:12px;padding:13px 15px;"><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#16211F;">Lowongan pabrik Malaysia</div><div style="font-size:12px;color:#8A968F;margin-top:1px;">Contoh prototipe</div></div><span style="font-size:11px;font-weight:700;color:#5B6A66;background:#EEF1EF;border-radius:7px;padding:4px 9px;">Perlu dikonfirmasi</span></div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+    </div>
+
+    <!-- Toast -->
+    <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;bottom:96px;left:50%;transform:translateX(-50%);background:#16211F;color:#fff;padding:11px 18px;border-radius:99px;font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(20,40,36,.28);animation:toastIn .2s ease;z-index:20;white-space:nowrap;">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#8FE0CE" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>{{ toastText }}
+    </div>
+    </sc-if>
+
+    <!-- Bottom nav -->
+    <div style="flex:none;display:flex;justify-content:space-around;align-items:center;padding:9px 6px 12px;background:#0A463E;">
+      <button onClick="{{ goBeranda }}" style="background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 12px;color:{{ navHome }};"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/></svg><span style="font-size:11px;font-weight:600;">Beranda</span></button>
+      <button onClick="{{ goPeriksa }}" style="background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 12px;color:{{ navPeriksa }};"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4-4"/></svg><span style="font-size:11px;font-weight:600;">Periksa</span></button>
+      <button onClick="{{ goLatihan }}" style="background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 12px;color:{{ navLatihan }};"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5l9 4-9 4-9-4 9-4z"/><path d="M6 11v4c0 1.1 2.7 2.6 6 2.6s6-1.5 6-2.6v-4"/></svg><span style="font-size:11px;font-weight:600;">Latihan</span></button>
+      <button onClick="{{ goKemajuan }}" style="background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:4px;padding:5px 12px;color:{{ navRiwayat }};"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3.2 2"/></svg><span style="font-size:11px;font-weight:600;">Riwayat</span></button>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    screen: 'beranda',
+    editing: false,
+    simPicked: false, simChoice: null,
+    open: {}, paymentOpen: false,
+    toast: '', toastText: '',
+    fields: {
+      perusahaan: 'PT Mitra Kerja Global (contoh)',
+      perekrut: 'Bpk. Andi (dari chat)',
+      posisi: 'Caregiver',
+      negara: 'Taiwan',
+      asal: 'WhatsApp',
+      kontak: '+886 9•• ••• (contoh)',
+      nominal: 'Rp7.500.000',
+      alasan: 'Biaya administrasi & pemberangkatan',
+      penerima: 'a.n. pribadi (contoh)',
+      rekening: 'Pribadi',
+      kontrak: 'Belum ada',
+      visa: 'Belum ada',
+      tenggat: 'Hari ini (ditekan segera)',
+    },
+  };
+
+  go(s) {
+    const reset = s === 'simulasi' ? { simPicked: false, simChoice: null } : {};
+    this.setState({ screen: s, ...reset });
+    requestAnimationFrame(() => { if (this._main) this._main.scrollTop = 0; });
+  }
+  toggleEdit() { this.setState(s => ({ editing: !s.editing })); }
+  setField(k, v) { this.setState(s => ({ fields: { ...s.fields, [k]: v } })); }
+  toggleOpen(id) { this.setState(s => ({ open: { ...s.open, [id]: !s.open[id] } })); }
+  togglePayment() { this.setState(s => ({ paymentOpen: !s.paymentOpen })); }
+  pick(i) { this.setState({ simPicked: true, simChoice: i }); }
+  resetSim() { this.setState({ simPicked: false, simChoice: null }); }
+  showToast(t) {
+    this.setState({ toast: true, toastText: t });
+    clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ toast: false }), 1900);
+  }
+
+  renderVals() {
+    const s = this.state.screen;
+    const f = this.state.fields;
+
+    const fieldDefs = [
+      ['perusahaan', 'Perusahaan / P3MI', false],
+      ['perekrut', 'Nama perekrut', false],
+      ['posisi', 'Posisi pekerjaan', false],
+      ['negara', 'Negara tujuan', false],
+      ['asal', 'Asal tawaran', false],
+      ['kontak', 'Nomor / akun penghubung', true],
+      ['nominal', 'Nominal biaya diminta', false],
+      ['alasan', 'Alasan pembayaran', false],
+      ['penerima', 'Nama penerima', false],
+      ['rekening', 'Jenis rekening', true],
+      ['kontrak', 'Status kontrak', true],
+      ['visa', 'Status visa', true],
+      ['tenggat', 'Tenggat pembayaran', true],
+    ];
+    const fields = fieldDefs.map(([k, label, flag]) => ({
+      key: k, label, value: f[k], flag,
+      color: flag ? '#B84A1E' : '#16211F',
+      onInput: (e) => this.setField(k, e.target.value),
+    }));
+
+    const risks = [
+      { n: 1, text: 'Kontak pengirim belum dapat diverifikasi.' },
+      { n: 2, text: 'Pembayaran diminta ke rekening pribadi yang belum dapat dicocokkan.' },
+      { n: 3, text: 'Rincian biaya tertulis belum diberikan.' },
+      { n: 4, text: 'Pengguna diminta melakukan transfer hari ini.' },
+    ];
+
+    const payItems = [
+      { label: 'Nominal pembayaran', value: 'Rp7.500.000', info: true },
+      { label: 'Alasan pembayaran', value: 'Biaya administrasi & pemberangkatan', info: true },
+      { label: 'Nama penerima', value: 'a.n. pribadi (contoh)', info: true },
+      { label: 'Jenis rekening', value: 'Pribadi', risk: true },
+      { label: 'Rincian biaya tertulis', value: 'Belum diberikan', unknown: true },
+      { label: 'Kuitansi / bukti', value: 'Belum ada', unknown: true },
+      { label: 'Tekanan waktu', value: 'Diminta transfer hari ini', risk: true },
+      { label: 'Konfirmasi kanal resmi', value: 'Belum dilakukan', unknown: true },
+    ];
+
+    const evDefs = [
+      { id: 'perusahaan', title: 'Perusahaan / P3MI', st: 'found',
+        reason: 'Nama perusahaan cocok dengan entri pada sumber yang diperiksa.', source: 'Contoh direktori resmi (prototipe)', date: 'contoh tanggal',
+        missing: 'Nomor izin belum dikonfirmasi ulang.', next: 'Buka sumber dan cocokkan alamat kantor & nomor izin.' },
+      { id: 'kontak', title: 'Identitas & kanal penghubung', st: 'unv',
+        reason: 'Nomor/akun yang menghubungi belum terbukti mewakili perusahaan.', source: 'Belum ada', date: '—',
+        missing: 'Bukti bahwa kontak tercantum di kanal resmi perusahaan.', next: 'Hubungi kantor resmi, tanyakan apakah kontak ini benar mewakili mereka.' },
+      { id: 'lowongan', title: 'Lowongan', st: 'unv',
+        reason: 'Detail lowongan belum dikonfirmasi ke kanal resmi.', source: 'Belum ada', date: '—',
+        missing: 'Tautan lowongan resmi.', next: 'Minta tautan lowongan resmi kepada perusahaan.' },
+      { id: 'kontrak', title: 'Kontrak', st: 'unv',
+        reason: 'Draf kontrak kerja tertulis belum diberikan.', source: 'Belum ada', date: '—',
+        missing: 'Draf kontrak kerja.', next: 'Minta draf kontrak sebelum tindakan apa pun.' },
+      { id: 'visa', title: 'Visa', st: 'unv',
+        reason: 'Jenis & proses visa belum dijelaskan.', source: 'Belum ada', date: '—',
+        missing: 'Informasi jenis & proses visa.', next: 'Minta penjelasan proses visa resmi.' },
+      { id: 'biaya', title: 'Biaya & pembayaran', st: 'risk',
+        reason: 'Pembayaran diminta ke rekening pribadi tanpa rincian tertulis.', source: 'Isi tawaran', date: 'contoh tanggal',
+        missing: 'Rincian biaya resmi & kuitansi.', next: 'Tunda pembayaran; minta rincian biaya resmi.' },
+      { id: 'tekanan', title: 'Tekanan waktu', st: 'risk',
+        reason: 'Diminta transfer hari ini agar slot tidak hangus.', source: 'Isi tawaran', date: 'contoh tanggal',
+        missing: 'Alasan resmi untuk tenggat waktu.', next: 'Abaikan tekanan waktu; verifikasi lebih dulu.' },
+    ];
+    const evidence = evDefs.map(e => ({
+      ...e,
+      isFound: e.st === 'found', isUnverified: e.st === 'unv', isRisk: e.st === 'risk',
+      open: !!this.state.open[e.id],
+      chevron: this.state.open[e.id] ? 'rotate(180deg)' : 'rotate(0deg)',
+      onToggle: () => this.toggleOpen(e.id),
+    }));
+
+    const modules = [
+      { title: 'Pencatutan Identitas Lembaga', reason: 'Karena kontak penghubung belum dapat diverifikasi.' },
+      { title: 'Urgensi & Tekanan Waktu', reason: 'Karena Anda ditekan untuk membayar hari ini.' },
+      { title: 'Meminta Bukti Tertulis', reason: 'Karena kontrak belum tersedia.' },
+      { title: 'Memeriksa Tujuan Pembayaran', reason: 'Karena pembayaran diminta ke rekening pribadi.' },
+    ];
+
+    const opts = [
+      { text: 'Baik, saya transfer sekarang juga.', safe: false },
+      { text: 'Saya perlu verifikasi dulu. Mohon kirim nama & nomor izin P3MI resmi, kontrak kerja, dan rincian biaya resmi.', safe: true },
+      { text: 'Bisa kurang tidak biayanya?', safe: false },
+    ];
+    const options = opts.map((o, i) => ({ text: o.text, onClick: () => this.pick(i) }));
+    const chosen = this.state.simChoice == null ? null : opts[this.state.simChoice];
+
+    const active = { beranda:'home', periksa:'periksa', konfirmasi:'periksa', hasil:'periksa', kanal:'periksa', pesan:'periksa', bagikan:'periksa',
+      latihan:'latihan', simulasi:'latihan', pembongkaran:'latihan', skenario:'latihan', kemajuan:'riwayat' }[s];
+    const on = '#8FE0CE', off = 'rgba(255,255,255,.55)';
+
+    return {
+      isBeranda: s==='beranda', isPeriksa: s==='periksa', isKonfirmasi: s==='konfirmasi', isHasil: s==='hasil',
+      isKanal: s==='kanal', isPesan: s==='pesan', isBagikan: s==='bagikan', isLatihan: s==='latihan',
+      isSimulasi: s==='simulasi', isPembongkaran: s==='pembongkaran', isSkenario: s==='skenario', isKemajuan: s==='kemajuan',
+
+      goBeranda:()=>this.go('beranda'), goPeriksa:()=>this.go('periksa'), goKonfirmasi:()=>this.go('konfirmasi'),
+      goHasil:()=>this.go('hasil'), goKanal:()=>this.go('kanal'), goPesan:()=>this.go('pesan'), goBagikan:()=>this.go('bagikan'),
+      goLatihan:()=>this.go('latihan'), goSimulasi:()=>this.go('simulasi'), goPembongkaran:()=>this.go('pembongkaran'),
+      goSkenario:()=>this.go('skenario'), goKemajuan:()=>this.go('kemajuan'),
+
+      setMain:(el)=>{ this._main = el; },
+      editing: this.state.editing, notEditing: !this.state.editing,
+      toggleEdit:()=>this.toggleEdit(),
+      editLabel: this.state.editing ? 'Selesai' : 'Ubah',
+      editBtnLabel: this.state.editing ? 'Selesai mengubah' : 'Ubah informasi',
+      fields,
+
+      risks, payItems, evidence, modules,
+      paymentOpen: this.state.paymentOpen,
+      payChevron: this.state.paymentOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+      togglePayment:()=>this.togglePayment(),
+
+      copyMsg:()=>this.showToast('Pesan disalin'),
+      copyShare:()=>this.showToast('Ringkasan disalin'),
+      toast: !!this.state.toast, toastText: this.state.toastText,
+
+      options, simUnpicked: !this.state.simPicked, simPicked: this.state.simPicked,
+      simSafe: this.state.simChoice===1, simUnsafe: this.state.simPicked && this.state.simChoice!==1,
+      chosenText: chosen ? chosen.text : '',
+      resetSim:()=>this.resetSim(),
+
+      navHome: active==='home'?on:off, navPeriksa: active==='periksa'?on:off,
+      navLatihan: active==='latihan'?on:off, navRiwayat: active==='riwayat'?on:off,
+    };
+  }
+}
+</script>
+</body>
+</html>
