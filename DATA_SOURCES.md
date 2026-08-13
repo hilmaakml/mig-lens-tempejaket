@@ -1,4 +1,4 @@
-# MigranShield Data Sources and Evidence Governance
+# MigLens Data Sources and Evidence Governance
 
 > Status: Mandatory for all source, snapshot, matching, and demo work  
 > Version: 1.1  
@@ -6,7 +6,7 @@
 
 ## 1. Core rule
 
-MigranShield evaluates separate claims against the specific sources checked. It does not verify an entire offer with one lookup.
+MigLens evaluates separate claims against the specific sources checked. It does not verify an entire offer with one lookup.
 
 Keep these categories separate:
 
@@ -187,8 +187,8 @@ Every Evidence Map item includes:
 ### 5.1 Language and source fidelity
 
 - Store source records, official names, URLs, identifiers, dates, and quoted wording in their original form.
-- Localize MigranShield's labels, explanations, limitations, and next actions; do not mutate the underlying source record when the interface language changes.
-- An English explanation of Indonesian official wording must be labelled as a MigranShield translation or summary, not as an official English publication.
+- Localize MigLens's labels, explanations, limitations, and next actions; do not mutate the underlying source record when the interface language changes.
+- An English explanation of Indonesian official wording must be labelled as a MigLens translation or summary, not as an official English publication.
 - Preserve a path to the original official source and wording.
 - The same source ID, snapshot ID, rule version, status code, and evidence finding must be used in both interface languages.
 - Missing English source material is not a source failure and must not trigger demo fallback; show the original source with a localized limitation.

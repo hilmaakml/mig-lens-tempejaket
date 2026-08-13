@@ -6,12 +6,13 @@
  * verification message, complaint hand-off, product limitation) is copied verbatim from
  * PRD Appendix A and must not be reworded without a reviewed content change.
  */
+import { BRAND } from '@/content/brand';
+
 export const idMessages = {
   // ---------------------------------------------------------------- app shell
-  'app.name': 'MigranShield',
-  'app.tagline': 'Periksa bukti sebelum membayar',
-  'app.description':
-    'MigranShield membantu menguraikan klaim dalam tawaran kerja ke luar negeri dan menunjukkan informasi yang masih perlu Anda verifikasi.',
+  'app.name': `${BRAND.name}`,
+  'app.tagline': BRAND.tagline.id,
+  'app.description': BRAND.description.id,
   'app.skip_to_content': 'Lewati ke konten utama',
   'app.language_picker': 'Pilih bahasa / Choose language',
   'app.language_selected': 'Bahasa aktif: {language}',
@@ -221,12 +222,10 @@ export const idMessages = {
     'Cocokkan detail lowongan resmi itu dengan isi tawaran yang Anda terima.',
 
   // ---------------------------------------------------------------- contract & visa
-  'check.contract.reason_provided':
-    'Draf kontrak sudah Anda terima, tetapi isi dan keasliannya belum diperiksa oleh MigranShield.',
+  'check.contract.reason_provided': `Draf kontrak sudah Anda terima, tetapi isi dan keasliannya belum diperiksa oleh ${BRAND.name}.`,
   'check.contract.reason_not_provided': 'Draf kontrak kerja tertulis belum diberikan.',
   'check.contract.reason_unknown': 'Status kontrak belum diisi.',
-  'check.contract.limitation':
-    'Dokumen telah tersedia, tetapi keasliannya belum dapat diverifikasi oleh MigranShield. Konfirmasikan melalui kanal resmi.',
+  'check.contract.limitation': `Dokumen telah tersedia, tetapi keasliannya belum dapat diverifikasi oleh ${BRAND.name}. Konfirmasikan melalui kanal resmi.`,
   'check.contract.next_action':
     'Minta draf kontrak kerja tertulis sebelum melakukan tindakan apa pun.',
   'check.contract.next_action_provided':
@@ -235,8 +234,7 @@ export const idMessages = {
     'Dokumen visa disebut sudah ada, tetapi keasliannya belum dapat diperiksa dari gambar atau keterangan.',
   'check.visa.reason_not_provided': 'Dokumen dan jenis visa belum tersedia.',
   'check.visa.reason_unknown': 'Status visa belum diisi.',
-  'check.visa.limitation':
-    'Dokumen telah tersedia, tetapi keasliannya belum dapat diverifikasi oleh MigranShield. Konfirmasikan melalui kanal resmi.',
+  'check.visa.limitation': `Dokumen telah tersedia, tetapi keasliannya belum dapat diverifikasi oleh ${BRAND.name}. Konfirmasikan melalui kanal resmi.`,
   'check.visa.next_action':
     'Minta penjelasan jenis dan proses visa, lalu konfirmasi ke kanal resmi negara tujuan.',
 
@@ -265,8 +263,7 @@ export const idMessages = {
   'rule.payment_no_fee_breakdown.reason_missing':
     'Ketersediaan rincian biaya tertulis belum diisi sehingga aturan ini belum dapat dinilai.',
   'rule.payment_no_fee_breakdown.finding': 'Rincian biaya tertulis belum diberikan',
-  'rule.payment_no_fee_breakdown.limitation':
-    'Besaran biaya penempatan yang boleh dibebankan berbeda menurut negara tujuan, skema, dan jabatan. MigranShield tidak menyatakan bahwa PMI tidak boleh dibebani biaya apa pun.',
+  'rule.payment_no_fee_breakdown.limitation': `Besaran biaya penempatan yang boleh dibebankan berbeda menurut negara tujuan, skema, dan jabatan. ${BRAND.name} tidak menyatakan bahwa PMI tidak boleh dibebani biaya apa pun.`,
   'rule.payment_no_fee_breakdown.next_action':
     'Minta rincian biaya tertulis beserta dasar aturannya sebelum membayar.',
   'rule.time_pressure.reason':
@@ -300,11 +297,9 @@ export const idMessages = {
   // ---------------------------------------------------------------- home
   'home.hero.eyebrow': 'PERIKSA SEBELUM BAYAR',
   'home.hero.title': 'Sudah dapat tawaran kerja ke luar negeri?',
-  'home.hero.body':
-    'Unggah chat atau poster tawaran. MigranShield membantu menguraikan klaimnya dan menunjukkan apa yang masih perlu Anda verifikasi.',
+  'home.hero.body': `${BRAND.name} membantu calon pekerja migran memeriksa informasi dalam tawaran kerja, menemukan ketidaksesuaian, dan menentukan langkah aman berikutnya.`,
   'home.hero.cta': 'Periksa Tawaran',
-  'home.scope_notice':
-    'MigranShield memetakan bukti dan informasi yang masih kurang. Aplikasi ini tidak menjamin sebuah tawaran aman maupun menyatakan sebuah tawaran pasti penipuan.',
+  'home.scope_notice': `${BRAND.name} memetakan bukti dan informasi yang masih kurang. Aplikasi ini tidak menjamin sebuah tawaran aman maupun menyatakan sebuah tawaran pasti penipuan.`,
   'home.privacy_reminder':
     'Sebelum mengunggah: jangan unggah KTP, paspor, nomor identitas, atau dokumen yang memuat data pribadi sensitif.',
   'home.learning.title': 'Latihan Literasi Digital',
@@ -329,8 +324,7 @@ export const idMessages = {
   'upload.method_manual': 'Tulis Manual',
   'upload.ai_note':
     'Pembacaan teks berjalan di perangkat Anda dan hanya membantu mengisi formulir. Anda tetap memeriksa dan memperbaikinya di langkah berikutnya.',
-  'upload.local_note':
-    'Gambar tidak dikirim ke server MigranShield. Pembacaan teks berjalan di peramban Anda.',
+  'upload.local_note': `Gambar tidak dikirim ke server ${BRAND.name}. Pembacaan teks berjalan di peramban Anda.`,
   'upload.demo_button': 'Gunakan contoh tawaran (demo)',
   'upload.demo_note':
     'Contoh tawaran memakai data uji yang sepenuhnya fiktif dan diberi label “Contoh hasil prototipe”.',
@@ -474,8 +468,7 @@ export const idMessages = {
   'result.exercise_reason':
     'Latihan ini direkomendasikan berdasarkan bagian yang masih perlu Anda verifikasi.',
   'result.exercise_cta': 'Mulai latihan personal',
-  'result.limitation':
-    'MigranShield membantu menguraikan klaim, membandingkan bukti, dan menunjukkan informasi yang masih perlu diverifikasi. Hasil ini bukan keputusan hukum atau jaminan bahwa suatu tawaran aman maupun penipuan.',
+  'result.limitation': `${BRAND.name} membantu menguraikan klaim, membandingkan bukti, dan menunjukkan informasi yang masih perlu diverifikasi. Hasil ini bukan keputusan hukum atau jaminan bahwa suatu tawaran aman maupun penipuan.`,
   'result.no_state_title': 'Data pemeriksaan tidak tersedia lagi',
   'result.no_state_body':
     'Informasi tawaran hanya disimpan di memori selama sesi berjalan dan hilang ketika halaman dimuat ulang. Tidak ada data Anda yang tersimpan. Mulai kembali dari langkah unggah atau isian manual.',
@@ -483,8 +476,7 @@ export const idMessages = {
 
   // ---------------------------------------------------------------- official channels
   'channels.title': 'Kanal Resmi',
-  'channels.intro':
-    'Tombol berikut mengarahkan Anda ke layanan resmi untuk verifikasi mandiri. MigranShield tidak membuat laporan otomatis dan tidak mengirim isi tawaran Anda.',
+  'channels.intro': `Tombol berikut mengarahkan Anda ke layanan resmi untuk verifikasi mandiri. ${BRAND.name} tidak membuat laporan otomatis dan tidak mengirim isi tawaran Anda.`,
   'channels.section_verify': 'Untuk verifikasi mandiri',
   'channels.section_complaint': 'Kanal pengaduan resmi',
   'channels.official_contact_title': 'Kontak resmi perusahaan',
@@ -497,21 +489,17 @@ export const idMessages = {
   'channels.why': 'Mengapa kanal ini relevan',
   'channels.evidence_hint': 'Bukti yang mungkin perlu Anda siapkan',
   'channels.limitation': 'Batas layanan ini',
-  'channels.handoff_notice':
-    'Anda akan membuka layanan resmi di luar MigranShield. MigranShield tidak mengirim laporan atau data tawaran secara otomatis. Periksa kembali informasi yang ingin Anda berikan pada layanan tersebut.',
+  'channels.handoff_notice': `Anda akan membuka layanan resmi di luar ${BRAND.name}. ${BRAND.name} tidak mengirim laporan atau data tawaran secara otomatis. Periksa kembali informasi yang ingin Anda berikan pada layanan tersebut.`,
   'channels.unavailable_title': 'Kanal pengaduan digital belum tersedia',
-  'channels.unavailable_body':
-    'Belum ada tautan pengaduan digital resmi yang sudah ditinjau dan dimasukkan ke daftar sumber yang disetujui. MigranShield tidak akan menampilkan tautan yang belum diverifikasi.',
+  'channels.unavailable_body': `Belum ada tautan pengaduan digital resmi yang sudah ditinjau dan dimasukkan ke daftar sumber yang disetujui. ${BRAND.name} tidak akan menampilkan tautan yang belum diverifikasi.`,
   'channels.alternative': 'Alternatif resmi yang tersedia',
-  'channels.no_data_transmitted':
-    'Tidak ada isi tawaran, nomor, rekening, atau hasil pemeriksaan yang dikirim ke layanan tersebut oleh MigranShield.',
+  'channels.no_data_transmitted': `Tidak ada isi tawaran, nomor, rekening, atau hasil pemeriksaan yang dikirim ke layanan tersebut oleh ${BRAND.name}.`,
 
   // ---------------------------------------------------------------- complaints
   'complaint.aduannomor.object': 'Nomor telepon atau akun yang menghubungi Anda.',
   'complaint.aduannomor.why':
     'Layanan ini dipakai untuk memeriksa dan melaporkan nomor telepon yang diduga dipakai untuk penipuan.',
-  'complaint.aduannomor.evidence':
-    'Nomor lengkap, tangkapan layar percakapan, dan waktu kejadian. Siapkan sendiri; MigranShield tidak melampirkannya.',
+  'complaint.aduannomor.evidence': `Nomor lengkap, tangkapan layar percakapan, dan waktu kejadian. Siapkan sendiri; ${BRAND.name} tidak melampirkannya.`,
   'complaint.aduannomor.limitation':
     'Tidak adanya laporan pada layanan ini tidak membuktikan bahwa nomor tersebut resmi.',
   'complaint.aduannomor.recommended_because':
@@ -519,8 +507,7 @@ export const idMessages = {
   'complaint.cekrekening.object': 'Rekening bank atau e-wallet tujuan pembayaran.',
   'complaint.cekrekening.why':
     'Layanan ini dipakai untuk memeriksa dan melaporkan rekening yang diduga dipakai untuk tindak pidana.',
-  'complaint.cekrekening.evidence':
-    'Nomor rekening, nama pemilik, bukti transaksi bila ada. Siapkan sendiri; MigranShield tidak melampirkannya.',
+  'complaint.cekrekening.evidence': `Nomor rekening, nama pemilik, bukti transaksi bila ada. Siapkan sendiri; ${BRAND.name} tidak melampirkannya.`,
   'complaint.cekrekening.limitation':
     'Tidak adanya laporan pada layanan ini tidak membuktikan bahwa rekening aman atau resmi.',
   'complaint.cekrekening.recommended_because':
@@ -529,8 +516,7 @@ export const idMessages = {
     'Dugaan pelanggaran perekrutan atau penempatan oleh P3MI atau perantara.',
   'complaint.kp2mi.why':
     'Perekrutan dan penempatan pekerja migran diawasi oleh KP2MI/BP2MI.',
-  'complaint.kp2mi.evidence':
-    'Identitas perusahaan atau perantara, isi tawaran, dan kronologi. Siapkan sendiri; MigranShield tidak melampirkannya.',
+  'complaint.kp2mi.evidence': `Identitas perusahaan atau perantara, isi tawaran, dan kronologi. Siapkan sendiri; ${BRAND.name} tidak melampirkannya.`,
   'complaint.kp2mi.limitation':
     'Melaporkan bukan berarti laporan langsung diterima, diselidiki, atau diselesaikan.',
   'complaint.kp2mi.recommended_because':
@@ -539,8 +525,7 @@ export const idMessages = {
     'Kebutuhan bantuan konsuler atau prosedural bagi WNI di luar negeri.',
   'complaint.peduli_wni.why':
     'Perwakilan RI di luar negeri menangani bantuan konsuler bagi WNI.',
-  'complaint.peduli_wni.evidence':
-    'Identitas diri, lokasi, dan uraian keadaan. Siapkan sendiri; MigranShield tidak melampirkannya.',
+  'complaint.peduli_wni.evidence': `Identitas diri, lokasi, dan uraian keadaan. Siapkan sendiri; ${BRAND.name} tidak melampirkannya.`,
   'complaint.peduli_wni.limitation':
     'Sebagian layanan memerlukan pendaftaran atau informasi tambahan pada layanan resmi tersebut.',
 
@@ -569,12 +554,11 @@ export const idMessages = {
   'share.indicators': '{count} indikator risiko ditemukan',
   'share.category_line': '{category}: {status}',
   'share.checked_at': 'Diperiksa: {date}',
-  'share.footer': 'MigranShield · bukan keputusan hukum',
+  'share.footer': `${BRAND.name} · bukan keputusan hukum`,
   'share.copy': 'Salin ringkasan',
   'share.copied': 'Ringkasan disalin.',
   'share.share_menu': 'Bagikan ke keluarga atau pendamping',
-  'share.share_warning':
-    'Menu berbagi milik perangkat atau peramban berada di luar kendali MigranShield.',
+  'share.share_warning': `Menu berbagi milik perangkat atau peramban berada di luar kendali ${BRAND.name}.`,
 
   // ---------------------------------------------------------------- learning
   'learn.title': 'Latihan Literasi',

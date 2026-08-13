@@ -1,4 +1,4 @@
-# MigranShield Security and Privacy Specification
+# MigLens Security and Privacy Specification
 
 > Status: Mandatory; overrides convenience and visual fidelity  
 > Version: 1.1  
@@ -7,7 +7,7 @@
 
 ## 1. Security objective
 
-MigranShield processes potentially sensitive recruitment information. The MVP must minimize collection, keep the uploaded image and OCR text on the user's device, prevent accidental persistence or disclosure, and avoid false assurance from incomplete evidence.
+MigLens processes potentially sensitive recruitment information. The MVP must minimize collection, keep the uploaded image and OCR text on the user's device, prevent accidental persistence or disclosure, and avoid false assurance from incomplete evidence.
 
 These requirements support privacy-by-design and should be reviewed against applicable Indonesian obligations, including UU No. 27 Tahun 2022 on Personal Data Protection, before public launch. This document is not legal advice.
 
@@ -101,7 +101,7 @@ The summary must exclude:
 - file metadata;
 - internal tokens, IDs, error data, or debug fields.
 
-Mask in the view model before content reaches the component, accessibility tree, clipboard, HTML attributes, or analytics. Preview before copy/share and warn that the operating-system/browser share menu is outside MigranShield's control.
+Mask in the view model before content reaches the component, accessibility tree, clipboard, HTML attributes, or analytics. Preview before copy/share and warn that the operating-system/browser share menu is outside MigLens's control.
 
 ## 8. Logs, telemetry, and research
 

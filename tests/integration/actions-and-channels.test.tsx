@@ -172,13 +172,13 @@ describe('complaint channels (PRD FR-12)', () => {
     ).toBeInTheDocument();
   });
 
-  it('states that MigranShield sends no report or offer data', async () => {
+  it('states that MigLens sends no report or offer data', async () => {
     const { user } = renderApp(<FlowHarness />);
     await runDemoCheck(user);
     await user.click(screen.getByRole('link', { name: /Laporkan tawaran atau kontak/ }));
 
     expect(
-      await screen.findByText(/MigranShield tidak mengirim laporan atau data tawaran/),
+      await screen.findByText(/MigLens tidak mengirim laporan atau data tawaran/),
     ).toBeInTheDocument();
   });
 

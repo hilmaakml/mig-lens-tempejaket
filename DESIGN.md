@@ -1,4 +1,4 @@
-# MigranShield Design Specification
+# MigLens Design Specification
 
 > Status: Required UI implementation specification  
 > Version: 1.1  
@@ -7,7 +7,7 @@
 
 ## 1. Purpose and source of truth
 
-This document defines how the MigranShield prototype must be translated into a responsive mobile web application.
+This document defines how the MigLens prototype must be translated into a responsive mobile web application.
 
 Visual reference: `docs/reference/MigrantShield.html`. If it is not there, search the project root, parent directory, or upload folder and preserve a copy at that path.
 
@@ -17,7 +17,7 @@ When content or product behavior differs, `PRD.md`, `SECURITY.md`, and `DATA_SOU
 
 ## 2. Product surface
 
-MigranShield is a mobile web app that:
+MigLens is a mobile web app that:
 
 - opens through a normal browser URL;
 - is optimized for entry-level Android phones;

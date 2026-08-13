@@ -1,8 +1,8 @@
 {
-  "name": "migranshield",
+  "name": "miglens",
   "version": "0.1.0",
   "private": true,
-  "description": "MigranShield — mobile web app (PWA) for evidence-based review of migrant-worker recruitment offers.",
+  "description": "MigLens — an evidence-based job offer checker for prospective migrant workers, delivered as a mobile web app (PWA).",
   "scripts": {
     "dev": "next dev",
     "build": "npm run vendor:ocr && next build",

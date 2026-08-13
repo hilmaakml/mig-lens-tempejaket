@@ -4,7 +4,7 @@ import type { MessageKey } from '@/content/locales/message-key';
 /**
  * Approved source registry (DATA_SOURCES.md 3 and 5).
  *
- * IMPORTANT: none of these sources is integrated. No MigranShield component fetches them.
+ * IMPORTANT: none of these sources is integrated. No MigLens component fetches them.
  * `accessMode: 'link_out'` means the application may only render a link to the canonical
  * URL for the user to check manually. `authorizationStatus` records that reuse,
  * snapshotting, or API access has NOT been granted — an owner decision is still open

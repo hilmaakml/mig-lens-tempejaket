@@ -5,7 +5,7 @@ import type { VerificationResult } from '@/domain/verification/run-verification'
 /**
  * Local progress and check history (owner decision, see docs/decisions/0003).
  *
- * PRIVACY CONTRACT — this is the only user data MigranShield persists besides `uiLocale`.
+ * PRIVACY CONTRACT — this is the only user data MigLens persists besides `uiLocale`.
  * The schema below is an allowlist, and it deliberately cannot express offer content:
  * there is no field for an image, OCR text, company or recruiter name, phone, account,
  * email, identifier, amount, contract, or visa. A history entry holds counts, versions,

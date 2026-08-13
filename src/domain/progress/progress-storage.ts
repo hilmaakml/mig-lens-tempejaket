@@ -3,6 +3,8 @@ import {
   parseProgressState,
   type ProgressState,
 } from '@/domain/progress/progress-state';
+import { BRAND } from '@/content/brand';
+import { migrateStorageKey } from '@/domain/privacy/storage-migration';
 
 /**
  * localStorage adapter for progress and history.
@@ -12,7 +14,9 @@ import {
  * recognise. The application must never crash because local storage misbehaved.
  */
 
-export const PROGRESS_STORAGE_KEY = 'migranshield.progress';
+export const PROGRESS_STORAGE_KEY = `${BRAND.storagePrefix}.progress`;
+/** Pre-rename key, read once so existing progress and history survive the rename. */
+export const LEGACY_PROGRESS_STORAGE_KEY = `${BRAND.legacyStoragePrefix}.progress`;
 
 function getStorage(): Storage | null {
   if (typeof window === 'undefined') return null;
@@ -25,6 +29,7 @@ function getStorage(): Storage | null {
 }
 
 export function readProgress(): ProgressState {
+  migrateStorageKey(PROGRESS_STORAGE_KEY, LEGACY_PROGRESS_STORAGE_KEY);
   const storage = getStorage();
   if (!storage) return emptyProgressState;
   try {

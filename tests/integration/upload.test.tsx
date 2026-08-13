@@ -141,7 +141,7 @@ describe('upload validation in the UI (PRD FR-02)', () => {
   it('states that the image stays on the device', () => {
     renderApp(<FlowHarness />);
     expect(
-      screen.getByText(/Gambar tidak dikirim ke server MigranShield/),
+      screen.getByText(/Gambar tidak dikirim ke server MigLens/),
     ).toBeInTheDocument();
   });
 

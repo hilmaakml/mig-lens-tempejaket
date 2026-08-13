@@ -1,7 +1,7 @@
 {
-  "name": "MigranShield",
-  "short_name": "MigranShield",
-  "description": "Periksa bukti tawaran kerja luar negeri sebelum membayar. / Check the evidence in an overseas job offer before you pay.",
+  "name": "MigLens",
+  "short_name": "MigLens",
+  "description": "Pemeriksa tawaran kerja berbasis bukti untuk calon pekerja migran. / An evidence-based job offer checker for prospective migrant workers.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

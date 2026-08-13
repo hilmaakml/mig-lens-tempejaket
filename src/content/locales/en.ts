@@ -10,12 +10,13 @@ import type { IdMessages } from '@/content/locales/id';
  * become "official", "not yet verified" must not become "suspicious", and nothing here may
  * strengthen a status into a safety or fraud verdict (DATA_SOURCES.md 12).
  */
+import { BRAND } from '@/content/brand';
+
 export const enMessages: Record<keyof IdMessages, string> = {
   // ---------------------------------------------------------------- app shell
-  'app.name': 'MigranShield',
-  'app.tagline': 'Check the evidence before you pay',
-  'app.description':
-    'MigranShield helps you break down the claims in an overseas job offer and shows what you still need to verify.',
+  'app.name': `${BRAND.name}`,
+  'app.tagline': BRAND.tagline.en,
+  'app.description': BRAND.description.en,
   'app.skip_to_content': 'Skip to main content',
   'app.language_picker': 'Pilih bahasa / Choose language',
   'app.language_selected': 'Active language: {language}',
@@ -232,13 +233,11 @@ export const enMessages: Record<keyof IdMessages, string> = {
     'Compare the official vacancy details with the offer you received.',
 
   // ---------------------------------------------------------------- contract & visa
-  'check.contract.reason_provided':
-    'You have received a draft contract, but MigranShield has not checked its content or authenticity.',
+  'check.contract.reason_provided': `You have received a draft contract, but ${BRAND.name} has not checked its content or authenticity.`,
   'check.contract.reason_not_provided':
     'No written draft employment contract was provided.',
   'check.contract.reason_unknown': 'The contract status has not been filled in.',
-  'check.contract.limitation':
-    'The document exists, but MigranShield cannot verify that it is genuine. Confirm through an official channel.',
+  'check.contract.limitation': `The document exists, but ${BRAND.name} cannot verify that it is genuine. Confirm through an official channel.`,
   'check.contract.next_action':
     'Ask for a written draft employment contract before taking any action.',
   'check.contract.next_action_provided':
@@ -247,8 +246,7 @@ export const enMessages: Record<keyof IdMessages, string> = {
     'A visa document is said to exist, but its authenticity cannot be checked from an image or a description.',
   'check.visa.reason_not_provided': 'No visa document or visa type is available yet.',
   'check.visa.reason_unknown': 'The visa status has not been filled in.',
-  'check.visa.limitation':
-    'The document exists, but MigranShield cannot verify that it is genuine. Confirm through an official channel.',
+  'check.visa.limitation': `The document exists, but ${BRAND.name} cannot verify that it is genuine. Confirm through an official channel.`,
   'check.visa.next_action':
     'Ask for the visa type and process, then confirm with the official channel of the destination country.',
 
@@ -276,8 +274,7 @@ export const enMessages: Record<keyof IdMessages, string> = {
   'rule.payment_no_fee_breakdown.reason_missing':
     'Whether a written fee breakdown exists has not been filled in, so this rule cannot be evaluated yet.',
   'rule.payment_no_fee_breakdown.finding': 'No written fee breakdown provided',
-  'rule.payment_no_fee_breakdown.limitation':
-    'Which placement fees may be charged differs by destination country, scheme, and role. MigranShield does not claim that migrant workers can never be charged anything.',
+  'rule.payment_no_fee_breakdown.limitation': `Which placement fees may be charged differs by destination country, scheme, and role. ${BRAND.name} does not claim that migrant workers can never be charged anything.`,
   'rule.payment_no_fee_breakdown.next_action':
     'Ask for a written fee breakdown and the rule it is based on before paying.',
   'rule.time_pressure.reason':
@@ -312,11 +309,9 @@ export const enMessages: Record<keyof IdMessages, string> = {
   // ---------------------------------------------------------------- home
   'home.hero.eyebrow': 'CHECK BEFORE YOU PAY',
   'home.hero.title': 'Received an overseas job offer?',
-  'home.hero.body':
-    'Upload the chat or the offer poster. MigranShield helps break down its claims and shows what you still need to verify.',
+  'home.hero.body': `${BRAND.name} helps prospective migrant workers examine job-offer information, identify inconsistencies, and decide on safer next steps.`,
   'home.hero.cta': 'Check an offer',
-  'home.scope_notice':
-    'MigranShield maps evidence and missing information. It does not guarantee that an offer is safe, and it does not declare that an offer is fraud.',
+  'home.scope_notice': `${BRAND.name} maps evidence and missing information. It does not guarantee that an offer is safe, and it does not declare that an offer is fraud.`,
   'home.privacy_reminder':
     'Before uploading: do not upload an ID card, passport, identity number, or any document containing sensitive personal data.',
   'home.learning.title': 'Digital literacy practice',
@@ -342,8 +337,7 @@ export const enMessages: Record<keyof IdMessages, string> = {
   'upload.method_manual': 'Type manually',
   'upload.ai_note':
     'Text reading runs on your device and only helps fill in the form. You still review and correct it in the next step.',
-  'upload.local_note':
-    'The image is not sent to a MigranShield server. Text reading runs in your browser.',
+  'upload.local_note': `The image is not sent to a ${BRAND.name} server. Text reading runs in your browser.`,
   'upload.demo_button': 'Use the example offer (demo)',
   'upload.demo_note':
     'The example offer uses entirely fictional test data and is labelled “Prototype example result”.',
@@ -485,8 +479,7 @@ export const enMessages: Record<keyof IdMessages, string> = {
   'result.exercise_reason':
     'This exercise is recommended based on the part you still need to verify.',
   'result.exercise_cta': 'Start the personal exercise',
-  'result.limitation':
-    'MigranShield helps break down claims, compare evidence, and show what still needs verifying. This result is not a legal decision and not a guarantee that an offer is safe or fraudulent.',
+  'result.limitation': `${BRAND.name} helps break down claims, compare evidence, and show what still needs verifying. This result is not a legal decision and not a guarantee that an offer is safe or fraudulent.`,
   'result.no_state_title': 'The check data is no longer available',
   'result.no_state_body':
     'Offer information is kept in memory for the active session only and is lost when the page reloads. None of your data was stored. Start again from the upload or manual-entry step.',
@@ -494,8 +487,7 @@ export const enMessages: Record<keyof IdMessages, string> = {
 
   // ---------------------------------------------------------------- official channels
   'channels.title': 'Official channels',
-  'channels.intro':
-    'The buttons below take you to official services so you can verify things yourself. MigranShield does not file reports automatically and does not send your offer content.',
+  'channels.intro': `The buttons below take you to official services so you can verify things yourself. ${BRAND.name} does not file reports automatically and does not send your offer content.`,
   'channels.section_verify': 'For checking things yourself',
   'channels.section_complaint': 'Official complaint channels',
   'channels.official_contact_title': 'Official company contact',
@@ -508,21 +500,17 @@ export const enMessages: Record<keyof IdMessages, string> = {
   'channels.why': 'Why this channel may be relevant',
   'channels.evidence_hint': 'Evidence you may need to prepare',
   'channels.limitation': 'Limits of this service',
-  'channels.handoff_notice':
-    'You are about to open an official service outside MigranShield. MigranShield does not send a report or any offer data automatically. Review the information you want to give that service.',
+  'channels.handoff_notice': `You are about to open an official service outside ${BRAND.name}. ${BRAND.name} does not send a report or any offer data automatically. Review the information you want to give that service.`,
   'channels.unavailable_title': 'No digital complaint channel is available yet',
-  'channels.unavailable_body':
-    'No official digital complaint link has been reviewed and entered into the approved source registry. MigranShield will not show an unverified link.',
+  'channels.unavailable_body': `No official digital complaint link has been reviewed and entered into the approved source registry. ${BRAND.name} will not show an unverified link.`,
   'channels.alternative': 'Available official alternative',
-  'channels.no_data_transmitted':
-    'MigranShield sends no offer content, number, account, or check result to that service.',
+  'channels.no_data_transmitted': `${BRAND.name} sends no offer content, number, account, or check result to that service.`,
 
   // ---------------------------------------------------------------- complaints
   'complaint.aduannomor.object': 'The phone number or account that contacted you.',
   'complaint.aduannomor.why':
     'This service is used to check and report phone numbers suspected of being used for fraud.',
-  'complaint.aduannomor.evidence':
-    'The full number, screenshots of the conversation, and when it happened. Prepare these yourself; MigranShield does not attach them.',
+  'complaint.aduannomor.evidence': `The full number, screenshots of the conversation, and when it happened. Prepare these yourself; ${BRAND.name} does not attach them.`,
   'complaint.aduannomor.limitation':
     'The absence of a report on this service does not prove that the number is official.',
   'complaint.aduannomor.recommended_because':
@@ -530,8 +518,7 @@ export const enMessages: Record<keyof IdMessages, string> = {
   'complaint.cekrekening.object': 'The bank or e-wallet account receiving the payment.',
   'complaint.cekrekening.why':
     'This service is used to check and report accounts suspected of being used for crime.',
-  'complaint.cekrekening.evidence':
-    'The account number, holder name, and any transaction proof. Prepare these yourself; MigranShield does not attach them.',
+  'complaint.cekrekening.evidence': `The account number, holder name, and any transaction proof. Prepare these yourself; ${BRAND.name} does not attach them.`,
   'complaint.cekrekening.limitation':
     'The absence of a report on this service does not prove that the account is safe or official.',
   'complaint.cekrekening.recommended_because':
@@ -540,8 +527,7 @@ export const enMessages: Record<keyof IdMessages, string> = {
     'A suspected recruitment or placement violation by a P3MI or an intermediary.',
   'complaint.kp2mi.why':
     'Recruitment and placement of Indonesian migrant workers is supervised by KP2MI/BP2MI.',
-  'complaint.kp2mi.evidence':
-    'The company or intermediary identity, the offer content, and a timeline. Prepare these yourself; MigranShield does not attach them.',
+  'complaint.kp2mi.evidence': `The company or intermediary identity, the offer content, and a timeline. Prepare these yourself; ${BRAND.name} does not attach them.`,
   'complaint.kp2mi.limitation':
     'Filing a report does not mean it is immediately accepted, investigated, or resolved.',
   'complaint.kp2mi.recommended_because':
@@ -550,8 +536,7 @@ export const enMessages: Record<keyof IdMessages, string> = {
     'A need for consular or procedural help for an Indonesian citizen abroad.',
   'complaint.peduli_wni.why':
     'Indonesian missions abroad handle consular assistance for Indonesian citizens.',
-  'complaint.peduli_wni.evidence':
-    'Your identity, location, and a description of the situation. Prepare these yourself; MigranShield does not attach them.',
+  'complaint.peduli_wni.evidence': `Your identity, location, and a description of the situation. Prepare these yourself; ${BRAND.name} does not attach them.`,
   'complaint.peduli_wni.limitation':
     'Some functions require registration or extra information on that official service.',
 
@@ -580,12 +565,11 @@ export const enMessages: Record<keyof IdMessages, string> = {
   'share.indicators': '{count} risk indicators found',
   'share.category_line': '{category}: {status}',
   'share.checked_at': 'Checked: {date}',
-  'share.footer': 'MigranShield · not a legal decision',
+  'share.footer': `${BRAND.name} · not a legal decision`,
   'share.copy': 'Copy the summary',
   'share.copied': 'Summary copied.',
   'share.share_menu': 'Share with family or a companion',
-  'share.share_warning':
-    'Your device or browser share menu is outside MigranShield’s control.',
+  'share.share_warning': `Your device or browser share menu is outside ${BRAND.name}’s control.`,
 
   // ---------------------------------------------------------------- learning
   'learn.title': 'Literacy practice',

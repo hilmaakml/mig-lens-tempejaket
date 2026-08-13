@@ -1,6 +1,6 @@
-# MigranShield
+# MigLens
 
-MigranShield is a **mobile web application delivered as a Progressive Web App (PWA)**. It is not a native Android or iOS application.
+MigLens is a **mobile web application delivered as a Progressive Web App (PWA)**. It is not a native Android or iOS application.
 
 ## Required document map
 

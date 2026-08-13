@@ -147,13 +147,13 @@ describe('canonical copy (PRD Appendix A)', () => {
 
   it('keeps the complaint hand-off notice verbatim', () => {
     expect(idMessages['channels.handoff_notice']).toBe(
-      'Anda akan membuka layanan resmi di luar MigranShield. MigranShield tidak mengirim laporan atau data tawaran secara otomatis. Periksa kembali informasi yang ingin Anda berikan pada layanan tersebut.',
+      'Anda akan membuka layanan resmi di luar MigLens. MigLens tidak mengirim laporan atau data tawaran secara otomatis. Periksa kembali informasi yang ingin Anda berikan pada layanan tersebut.',
     );
   });
 
   it('keeps the product limitation verbatim', () => {
     expect(idMessages['result.limitation']).toBe(
-      'MigranShield membantu menguraikan klaim, membandingkan bukti, dan menunjukkan informasi yang masih perlu diverifikasi. Hasil ini bukan keputusan hukum atau jaminan bahwa suatu tawaran aman maupun penipuan.',
+      'MigLens membantu menguraikan klaim, membandingkan bukti, dan menunjukkan informasi yang masih perlu diverifikasi. Hasil ini bukan keputusan hukum atau jaminan bahwa suatu tawaran aman maupun penipuan.',
     );
   });
 

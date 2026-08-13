@@ -1,4 +1,4 @@
-# MigranShield Testing and Completion Gates
+# MigLens Testing and Completion Gates
 
 > Status: Required before any completion claim  
 > Version: 1.1  

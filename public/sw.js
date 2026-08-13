@@ -1,5 +1,5 @@
 /*
- * MigranShield service worker.
+ * MigLens service worker.
  *
  * Caching policy (SECURITY.md 10, DESIGN.md 9, PRD FR-15):
  * - Only the public shell and static learning assets are cached.
@@ -9,7 +9,10 @@
  * - Obsolete cache versions are deleted on activation.
  */
 
-const CACHE_VERSION = 'migranshield-shell-v1';
+// Bumped with the product rename. `activate` deletes every cache whose key differs, so
+// the previous shell cache is cleared. This only touches the Cache Storage shell; it
+// never touches localStorage, where the user's progress and history live.
+const CACHE_VERSION = 'miglens-shell-v2';
 
 /** Routes whose responses may never enter a cache. */
 const EXCLUDED_PATH_PREFIXES = [

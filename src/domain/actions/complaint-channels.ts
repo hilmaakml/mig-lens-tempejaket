@@ -9,7 +9,7 @@ import {
 /**
  * Contextual complaint-channel selection (PRD FR-12).
  *
- * MigranShield never submits a report. Every channel is a link-out to an official service,
+ * MigLens never submits a report. Every channel is a link-out to an official service,
  * carries no offer content in the URL, and is only openable when the registry holds a
  * reviewed HTTPS URL on an allowlisted domain. A channel without one renders as
  * unavailable with an approved alternative — never a guessed or demo URL.

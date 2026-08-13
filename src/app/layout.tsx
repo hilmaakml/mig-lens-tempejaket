@@ -6,6 +6,8 @@ import { OfferProvider } from '@/app/providers/offer-provider';
 import { ToastProvider } from '@/app/providers/toast-provider';
 import { AppShell } from '@/components/layout/app-shell';
 import { ServiceWorkerRegistrar } from '@/components/layout/service-worker-registrar';
+import { BRAND, BRAND_LOCALE_TAG } from '@/content/brand';
+import { DEFAULT_LOCALE } from '@/content/locales/locale';
 
 // Fonts are self-hosted by next/font at build time, so the browser makes no third-party
 // font request at runtime (DESIGN.md 3).
@@ -23,15 +25,34 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: 'swap',
 });
 
+// Server-rendered metadata uses the first-visit locale, matching the empty-state server
+// snapshot the locale store returns. The client updates the document title after the user
+// picks a language.
+const DEFAULT_METADATA_LOCALE = DEFAULT_LOCALE;
+const metadataTitle = `${BRAND.name} — ${BRAND.tagline[DEFAULT_METADATA_LOCALE]}`;
+const metadataDescription = BRAND.description[DEFAULT_METADATA_LOCALE];
+
 export const metadata: Metadata = {
-  title: 'MigranShield — Periksa bukti sebelum membayar',
-  description:
-    'MigranShield membantu menguraikan klaim dalam tawaran kerja ke luar negeri dan menunjukkan informasi yang masih perlu diverifikasi.',
-  applicationName: 'MigranShield',
+  title: metadataTitle,
+  description: metadataDescription,
+  applicationName: BRAND.name,
   manifest: '/manifest.webmanifest',
-  appleWebApp: { capable: true, title: 'MigranShield', statusBarStyle: 'default' },
+  appleWebApp: { capable: true, title: BRAND.name, statusBarStyle: 'default' },
   formatDetection: { telephone: false },
   robots: { index: false, follow: false },
+  openGraph: {
+    type: 'website',
+    siteName: BRAND.name,
+    title: metadataTitle,
+    description: metadataDescription,
+    locale: BRAND_LOCALE_TAG[DEFAULT_METADATA_LOCALE],
+    alternateLocale: BRAND_LOCALE_TAG.en,
+  },
+  twitter: {
+    card: 'summary',
+    title: metadataTitle,
+    description: metadataDescription,
+  },
 };
 
 /**

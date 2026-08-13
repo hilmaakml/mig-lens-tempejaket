@@ -1,4 +1,4 @@
-# MigranShield Engineering Conventions
+# MigLens Engineering Conventions
 
 > Status: Required implementation rules  
 > Version: 1.1  
@@ -27,7 +27,7 @@ Do not silently choose between conflicting requirements. Document the conflict a
 Claude Code automatically loads `CLAUDE.md`, not this filename by itself. The repository should contain a short root `CLAUDE.md` with instructions to read these documents when relevant:
 
 ```md
-# MigranShield
+# MigLens
 
 Before changing code, read `CONVENTIONS.md` completely.
 For product behavior or scope, also read the relevant requirements and acceptance criteria in `PRD.md`.
@@ -446,7 +446,7 @@ Do not implement “temporary storage” without an automated deletion job, moni
 
 ### 13.1 Existing design
 
-- Preserve MigranShield's established mobile-first identity, navy/teal palette, card language, typography, icons, and navigation unless a requirement needs a change.
+- Preserve MigLens's established mobile-first identity, navy/teal palette, card language, typography, icons, and navigation unless a requirement needs a change.
 - Do not recreate the UI from scratch.
 - Use shared design tokens; do not scatter arbitrary colors, spacing, or radii.
 - Orange is a warning/risk accent, red is for serious mismatch/error, green is for source match, and gray is for unavailable/unverified. Text and icons remain mandatory.

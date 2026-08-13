@@ -34,7 +34,7 @@ export type EvidenceCategory =
 
 /**
  * Domain text is locale-neutral: rules and source adapters emit either a message key
- * (MigranShield's own wording, translated at the presentation boundary) or a verbatim
+ * (MigLens's own wording, translated at the presentation boundary) or a verbatim
  * `source` value that must never be translated — official names, identifiers, URLs, and
  * user input (CONVENTIONS.md 13.3, DATA_SOURCES.md 5.1).
  */

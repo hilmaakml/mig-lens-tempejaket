@@ -1,10 +1,10 @@
-# MigranShield
+# MigLens
 
 Mobile web application (PWA) that helps prospective, current, and returnee Indonesian
 migrant workers break down the claims inside a recruitment offer, compare them with the
 sources actually checked, and take a safer next step.
 
-MigranShield does **not** decide whether an offer is safe or fraudulent. It shows which
+MigLens does **not** decide whether an offer is safe or fraudulent. It shows which
 claims are supported, contradicted, or still unverified, and what to verify next.
 
 ## Requirements
@@ -121,7 +121,7 @@ carries the nonce and that a button-only action still navigates.
   reuse, snapshotting, or API access yet.
 - The KP2MI/BP2MI digital complaint URL is an open owner decision, so that channel renders
   as unavailable with an approved official alternative rather than a guessed link.
-- Contract and visa checks assess availability and completeness only. MigranShield cannot
+- Contract and visa checks assess availability and completeness only. MigLens cannot
   authenticate a document from an image.
 - Fee rules are references to published regulation, not legal advice. They require human
   review before any production use.

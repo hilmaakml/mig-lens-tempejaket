@@ -1,4 +1,4 @@
-# MigranShield — Product Requirements Document
+# MigLens — Product Requirements Document
 
 > Status: Draft for implementation  
 > Version: 1.1  
@@ -10,13 +10,13 @@
 
 ## 1. Purpose of this document
 
-This document is the product source of truth for the first testable version of MigranShield. It defines what the product must do, what it must not claim, how evidence is represented, how official sources are governed, and how user data is protected.
+This document is the product source of truth for the first testable version of MigLens. It defines what the product must do, what it must not claim, how evidence is represented, how official sources are governed, and how user data is protected.
 
 If an implementation detail conflicts with this document, stop and resolve the conflict before shipping. Legal interpretations and the current status of official sources must be reviewed by a qualified person before a public launch.
 
 ## 2. Product summary
 
-MigranShield is a mobile-first verification and Media and Information Literacy (MIL) tool for:
+MigLens is a mobile-first verification and Media and Information Literacy (MIL) tool for:
 
 - prospective Indonesian migrant workers (CPMI);
 - current Indonesian migrant workers (PMI); and
@@ -24,7 +24,7 @@ MigranShield is a mobile-first verification and Media and Information Literacy (
 
 Users can enter or upload information from a recruitment offer, correct the extracted information, compare its claims with available official references, review a transparent Evidence Map, and take a safer next action.
 
-MigranShield does **not** decide that an offer is safe or fraudulent. It helps users answer three narrower questions:
+MigLens does **not** decide that an offer is safe or fraudulent. It helps users answer three narrower questions:
 
 1. What claims are present in this offer?
 2. Which claims are supported, contradicted, or still unverified using the sources currently checked?
@@ -102,7 +102,7 @@ The MVP will not:
 
 ### 7.2 Secondary user: PMI or purna-PMI supporting another person
 
-- May use MigranShield to help a family member or peer review an offer.
+- May use MigLens to help a family member or peer review an offer.
 - Needs a shareable, privacy-safe summary.
 - May contribute usability feedback, but does not become an official verifier.
 
@@ -138,7 +138,7 @@ All fixture screens must display **“Contoh hasil prototipe”**. Fixture names
 
 The home screen must:
 
-- keep the existing MigranShield visual identity and primary navigation;
+- keep the existing MigLens visual identity and primary navigation;
 - make “Periksa Tawaran” the primary call to action;
 - provide a secondary path to “Latihan”;
 - briefly explain that the product checks evidence and missing information, not whether an offer is guaranteed safe;
@@ -340,7 +340,7 @@ Visa checks may identify whether:
 
 Required limitation:
 
-> Dokumen telah tersedia, tetapi keasliannya belum dapat diverifikasi oleh MigranShield. Konfirmasikan melalui kanal resmi.
+> Dokumen telah tersedia, tetapi keasliannya belum dapat diverifikasi oleh MigLens. Konfirmasikan melalui kanal resmi.
 
 Never label a document authentic based on OCR, formatting, logo, or an image alone.
 
@@ -403,7 +403,7 @@ Present results in this order:
 
 Required limitation notice:
 
-> MigranShield membantu menguraikan klaim, membandingkan bukti, dan menunjukkan informasi yang masih perlu diverifikasi. Hasil ini bukan keputusan hukum atau jaminan bahwa suatu tawaran aman maupun penipuan.
+> MigLens membantu menguraikan klaim, membandingkan bukti, dan menunjukkan informasi yang masih perlu diverifikasi. Hasil ini bukan keputusan hukum atau jaminan bahwa suatu tawaran aman maupun penipuan.
 
 Use progressive disclosure to avoid one excessively long page.
 
@@ -427,7 +427,7 @@ Requirements:
 - Show a preview before copy/share.
 - Copy action shows “Pesan disalin.”
 - The complaint action must open a functional complaint-channel selection view; it must not be a decorative card, inactive `<div>`, placeholder link, or dead end.
-- Complaint language must refer to the item that can actually be reported—such as an offer, contact, number, account, or suspected placement violation—not “melaporkan indikator.” An indicator is MigranShield's analysis output, not the report object.
+- Complaint language must refer to the item that can actually be reported—such as an offer, contact, number, account, or suspected placement violation—not “melaporkan indikator.” An indicator is MigLens's analysis output, not the report object.
 - Recommend complaint channels contextually from the confirmed input and triggered evidence, while still allowing the user to choose another applicable category:
 
   | User need or evidence                                                      | Primary official destination                         | Product behavior                                                                                                                                                                                                               |
@@ -443,7 +443,7 @@ Requirements:
   - examples of evidence the user may need to prepare, without automatically attaching or transmitting it;
   - the channel limitation; and
   - an explicit “Buka [nama layanan]” action.
-- Complaint actions are safe external link-outs, not automatic reports. MigranShield must not claim that a report has been submitted, accepted, investigated, or resolved.
+- Complaint actions are safe external link-outs, not automatic reports. MigLens must not claim that a report has been submitted, accepted, investigated, or resolved.
 - Do not prefill external forms or encode the offer, OCR text, phone number, account number, personal identifier, message, or evidence result in a URL, query string, fragment, referrer, clipboard action, or network request.
 - Never attach the original screenshot, OCR output, or application state to an external service. The user independently decides what to submit after reading that service's privacy notice and requirements.
 - Every complaint URL must come from the approved source registry. If its approval, availability, or canonical domain cannot be confirmed, show “Kanal pengaduan digital belum tersedia” and a safe official alternative; never substitute a demo or invented URL.
@@ -454,10 +454,10 @@ Acceptance criteria:
 
 - Selecting “Laporkan tawaran atau kontak mencurigakan” always opens the complaint-channel selection view and never leads to a placeholder or dead end.
 - A triggered suspicious-contact indicator recommends AduanNomor; a triggered suspicious-payment-recipient/account indicator recommends CekRekening; neither recommendation is described as proof that fraud occurred.
-- The user can see why a channel is recommended, its destination domain, its limitations, and what evidence may be needed before leaving MigranShield.
+- The user can see why a channel is recommended, its destination domain, its limitations, and what evidence may be needed before leaving MigLens.
 - Each enabled “Buka” action is a keyboard-accessible link with a valid allowlisted `href` and safe external-link attributes.
 - A channel without an approved current URL is visibly unavailable and cannot be opened; an approved official alternative is offered.
-- No click on a complaint action sends offer content or personal data from MigranShield, and returning to the app does not display a false “laporan berhasil” state.
+- No click on a complaint action sends offer content or personal data from MigLens, and returning to the app does not display a false “laporan berhasil” state.
 - The complaint-selection view remains usable through keyboard navigation, 200% zoom, and 360–430 px viewports.
 
 ### FR-13 — Privacy-safe sharing
@@ -571,7 +571,7 @@ Only Tier 1 and Tier 2 sources may be described as official. Search-engine snipp
 | CekRekening — `https://cekrekening.id/`                                                                      | Manual check of reported bank/e-wallet accounts    | Official link-out until an authorized API exists                                                   | No report does not mean an account is safe or official                 |
 | AduanNomor — `https://aduannomor.id/`                                                                        | Manual check of reported phone numbers             | Official link-out until an authorized API exists                                                   | No report does not mean a number is official                           |
 | Peduli WNI/Kemlu — `https://peduliwni.kemlu.go.id/`                                                          | Consular/procedural direction where applicable     | Official link-out                                                                                  | Some features require authentication or institutional access           |
-| Destination-country immigration/labor sites and Indonesian missions                                          | Visa/work-process guidance                         | Curated allowlist and link-out                                                                     | MigranShield cannot authenticate a document from an image              |
+| Destination-country immigration/labor sites and Indonesian missions                                          | Visa/work-process guidance                         | Curated allowlist and link-out                                                                     | MigLens cannot authenticate a document from an image                   |
 
 ### 10.3 Source onboarding requirements
 
@@ -669,7 +669,7 @@ Prefer:
 
 ## 12. Privacy and data protection requirements
 
-MigranShield must be designed consistently with applicable Indonesian data-protection obligations, including UU No. 27 Tahun 2022 on Personal Data Protection. This PRD is not a substitute for legal advice.
+MigLens must be designed consistently with applicable Indonesian data-protection obligations, including UU No. 27 Tahun 2022 on Personal Data Protection. This PRD is not a substitute for legal advice.
 
 ### 12.1 Data minimization
 
@@ -685,7 +685,7 @@ MigranShield must be designed consistently with applicable Indonesian data-prote
 Default MVP behavior:
 
 - OCR runs locally in the browser.
-- Raw images are not uploaded to MigranShield servers.
+- Raw images are not uploaded to MigLens servers.
 - Raw images are not written to logs, analytics, caches, crash reports, or backups.
 - Object URLs and image buffers are revoked/released after extraction or when the user leaves the flow.
 
@@ -727,7 +727,7 @@ If server-side processing is introduced later, it requires a separate reviewed d
 
 - Redact before preview; preview before share.
 - Never include the original upload in a generated summary.
-- Warn users that device/browser share menus are outside MigranShield's control.
+- Warn users that device/browser share menus are outside MigLens's control.
 - Do not generate public, guessable result URLs.
 
 ### 12.6 Incident readiness
@@ -1044,7 +1044,7 @@ Use these exact statements unless a reviewed content change replaces them:
 
 **Complaint hand-off notice**
 
-> Anda akan membuka layanan resmi di luar MigranShield. MigranShield tidak mengirim laporan atau data tawaran secara otomatis. Periksa kembali informasi yang ingin Anda berikan pada layanan tersebut.
+> Anda akan membuka layanan resmi di luar MigLens. MigLens tidak mengirim laporan atau data tawaran secara otomatis. Periksa kembali informasi yang ingin Anda berikan pada layanan tersebut.
 
 **Exercise rationale**
 
@@ -1052,7 +1052,7 @@ Use these exact statements unless a reviewed content change replaces them:
 
 **Product limitation**
 
-> MigranShield membantu menguraikan klaim, membandingkan bukti, dan menunjukkan informasi yang masih perlu diverifikasi. Hasil ini bukan keputusan hukum atau jaminan bahwa suatu tawaran aman maupun penipuan.
+> MigLens membantu menguraikan klaim, membandingkan bukti, dan menunjukkan informasi yang masih perlu diverifikasi. Hasil ini bukan keputusan hukum atau jaminan bahwa suatu tawaran aman maupun penipuan.
 
 ## Appendix B — Legal/privacy references
 
