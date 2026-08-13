@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ScreenHeader } from '@/components/layout/screen-header';
 import { LinkButton } from '@/components/ui/button';
@@ -13,6 +13,7 @@ import { PaymentSafetyCheck } from '@/features/result/payment-safety-check';
 import { ExternalSourceLink } from '@/features/actions/external-source-link';
 import { useLocale } from '@/app/providers/locale-provider';
 import { useOffer } from '@/app/providers/offer-provider';
+import { useProgress } from '@/features/progress/use-progress';
 import { maskContactHandle } from '@/domain/privacy/mask';
 import { getExercise, mapExercise } from '@/domain/learning/exercise-mapping';
 import type { EvidenceCategory } from '@/domain/evidence/evidence-item';
@@ -20,7 +21,15 @@ import type { EvidenceCategory } from '@/domain/evidence/evidence-item';
 export default function ResultPage() {
   const { t, locale, formatDate } = useLocale();
   const { claim, result } = useOffer();
+  const { recordCheckCompleted } = useProgress();
   const [openCategories, setOpenCategories] = useState<readonly EvidenceCategory[]>([]);
+
+  // One history entry per completed check, written after the result screen has actually
+  // rendered. The store skips demo runs and ignores a check whose timestamp is already
+  // recorded, so a re-render, a language switch, or a repeat visit cannot duplicate it.
+  useEffect(() => {
+    if (result) recordCheckCompleted(result);
+  }, [result, recordCheckCompleted]);
 
   // A reload clears the in-memory offer state by design; explain it instead of restoring.
   if (!result) {

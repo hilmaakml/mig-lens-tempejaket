@@ -5,16 +5,14 @@ import { Icon } from '@/components/ui/icon';
 import { Notice } from '@/components/ui/notice';
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
 import { useLocale } from '@/app/providers/locale-provider';
-import { EXERCISES } from '@/domain/learning/exercise-mapping';
-
-const CORE_VERIFICATION_STEPS = 5;
+import { useProgress } from '@/features/progress/use-progress';
 
 export default function HomePage() {
   const { t } = useLocale();
 
-  // Explainable count, not a decorative score: how many of the core verification steps
-  // have a practised exercise (PRD FR-14).
-  const practised = EXERCISES.filter((exercise) => exercise.recognised >= 2).length;
+  // Explainable count, not a decorative score: distinct core verification steps the user
+  // has actually practised (PRD FR-14). A first-time visitor sees 0.
+  const { readinessDone: practised, readinessTotal } = useProgress();
 
   return (
     <div className="pb-8">
@@ -78,14 +76,11 @@ export default function HomePage() {
               {t('home.progress.title')}
             </span>
             <span className="text-xl font-extrabold text-brand-primary">
-              {t('home.progress.value', {
-                done: practised,
-                total: CORE_VERIFICATION_STEPS,
-              })}
+              {t('home.progress.value', { done: practised, total: readinessTotal })}
             </span>
           </span>
           <span className="my-3 flex gap-1.5" aria-hidden="true">
-            {Array.from({ length: CORE_VERIFICATION_STEPS }, (_, index) => (
+            {Array.from({ length: readinessTotal }, (_, index) => (
               <span
                 key={index}
                 className={`h-2 flex-1 rounded-full ${
@@ -95,7 +90,7 @@ export default function HomePage() {
             ))}
           </span>
           <span className="block text-[12.5px] text-text-muted">
-            {t('home.progress.body', { done: practised, total: CORE_VERIFICATION_STEPS })}
+            {t('home.progress.body', { done: practised, total: readinessTotal })}
           </span>
         </Link>
 

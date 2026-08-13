@@ -5,24 +5,26 @@ import { ScreenHeader } from '@/components/layout/screen-header';
 import { Button, LinkButton } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { useLocale } from '@/app/providers/locale-provider';
-import type { MessageKey } from '@/content/locales/message-key';
-
-interface Option {
-  readonly id: string;
-  readonly textKey: MessageKey;
-  readonly isSafe: boolean;
-}
-
-const OPTIONS: readonly Option[] = [
-  { id: 'transfer', textKey: 'sim.option_transfer', isSafe: false },
-  { id: 'verify', textKey: 'sim.option_verify', isSafe: true },
-  { id: 'negotiate', textKey: 'sim.option_negotiate', isSafe: false },
-];
+import { useProgress } from '@/features/progress/use-progress';
+import { SCENARIOS } from '@/domain/learning/scenarios';
 
 export default function SimulationPage() {
   const { t } = useLocale();
+  const { recordScenarioCompleted } = useProgress();
   const [chosenId, setChosenId] = useState<string | null>(null);
-  const chosen = OPTIONS.find((option) => option.id === chosenId) ?? null;
+
+  // The catalogue currently holds one scenario; the screen renders whichever is first.
+  const scenario = SCENARIOS[0];
+  const options = scenario?.options ?? [];
+  const chosen = options.find((option) => option.id === chosenId) ?? null;
+
+  const handleChoose = (optionId: string) => {
+    setChosenId(optionId);
+    const option = options.find((entry) => entry.id === optionId);
+    // Only a safe answer earns progress, and the store ignores a repeat of the same
+    // scenario, so replaying it cannot inflate the count.
+    if (scenario && option?.isSafe) recordScenarioCompleted(scenario.id);
+  };
 
   return (
     <div className="pb-8">
@@ -55,11 +57,11 @@ export default function SimulationPage() {
             <p className="rounded-card border border-match-border bg-match-bg px-4 py-3 text-[14.5px] font-bold text-brand-dark">
               {t('sim.question')}
             </p>
-            {OPTIONS.map((option) => (
+            {options.map((option) => (
               <button
                 key={option.id}
                 type="button"
-                onClick={() => setChosenId(option.id)}
+                onClick={() => handleChoose(option.id)}
                 className="flex min-h-11 w-full items-start gap-3 rounded-button border-[1.5px] border-border-default bg-surface-card px-4 py-3.5 text-left text-sm leading-relaxed text-text-primary"
               >
                 <span

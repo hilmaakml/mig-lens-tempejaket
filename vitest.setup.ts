@@ -2,6 +2,7 @@ import '@testing-library/jest-dom/vitest';
 import { afterEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import { resetLocaleCache } from '@/domain/privacy/locale-store';
+import { resetProgressCache } from '@/domain/progress/progress-store';
 
 vi.mock('next/navigation', async () => {
   const { routerMock, navigationState } = await import('./tests/helpers/navigation-mock');
@@ -19,6 +20,7 @@ afterEach(() => {
   cleanup();
   window.localStorage.clear();
   resetLocaleCache();
+  resetProgressCache();
 });
 
 // jsdom does not implement these; several components rely on them.

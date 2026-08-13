@@ -595,6 +595,7 @@ export const enMessages: Record<keyof IdMessages, string> = {
     'There is no check result in this session yet. You can still try any of the exercises below.',
   'learn.recommended_for_you': 'Recommended for you',
   'learn.all_exercises': 'All exercises',
+  'learn.no_scenario_yet': 'No practice scenario is available for this part yet.',
   'learn.pattern_cta': 'Study the manipulation patterns',
   'learn.progress_label': 'Recognised in {done} of {total} exercises.',
   'exercise.identity_misuse.title': 'Misuse of an institution’s identity',
@@ -680,14 +681,17 @@ export const enMessages: Record<keyof IdMessages, string> = {
   'progress.per_tactic': 'Progress per exercise',
   'progress.history': 'Check history',
   'progress.history_note':
-    'History only holds checks from this session plus prototype examples. MigranShield does not store your offer history.',
+    'History is stored on your own device and holds only the date, the indicator count, and rule versions. Offer content, names, numbers, and amounts are never stored. The 20 most recent checks are kept.',
   'progress.history_empty':
-    'No check has been run in this session yet. The entries below are prototype data.',
-  'progress.history_demo_1': 'Caregiver offer, Taiwan',
-  'progress.history_demo_2': 'Factory vacancy, Malaysia',
-  'progress.history_needs_confirmation': 'Needs confirmation',
-  'progress.session_entry': 'Check from this session',
+    'No checks yet. History will appear here once you complete an offer check.',
+  'progress.history_entry': 'Offer check',
   'progress.indicator_badge': '{count} risk indicators',
+  'progress.reset': 'Delete progress and history',
+  'progress.reset_confirm':
+    'Practice progress and every check in this device’s history will be deleted and cannot be recovered. Your language choice is kept.',
+  'progress.reset_confirm_action': 'Yes, delete now',
+  'progress.reset_cancel': 'Cancel',
+  'progress.reset_done': 'Progress and history deleted.',
 
   // ---------------------------------------------------------------- errors
   'error.title': 'Something went wrong',

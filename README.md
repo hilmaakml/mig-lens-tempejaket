@@ -7,7 +7,6 @@ sources actually checked, and take a safer next step.
 MigranShield does **not** decide whether an offer is safe or fraudulent. It shows which
 claims are supported, contradicted, or still unverified, and what to verify next.
 
-
 ## Requirements
 
 - Node.js 20.9 or newer (developed on Node 24)
@@ -94,7 +93,12 @@ from it is labelled "Contoh hasil prototipe".
 - The uploaded image never leaves the device; OCR runs in a Web Worker from local assets.
 - Offer data lives in React memory for the active flow and is never persisted. A page
   reload clears it and the app explains that instead of restoring anything.
-- The only persisted value is the `uiLocale` enum (`id` or `en`).
+- Two values are persisted locally: the `uiLocale` enum (`id` or `en`) and a minimised
+  progress record (practice scenario ids, check timestamps, indicator and evidence counts,
+  rule and snapshot versions). No offer content, name, number, or amount is ever stored;
+  the schema is an allowlist that cannot express them. History is capped at 20 checks,
+  demo runs are excluded, and the user can delete it from the Kemajuan screen without
+  losing the language choice. See `docs/decisions/0003-local-progress-and-history.md`.
 - Phone numbers, account numbers, and personal names are masked in the view model before
   they reach a component, the accessibility tree, an export, or the clipboard.
 - Sharing is generated from a dedicated allowlisted `RedactedShareSummary`.

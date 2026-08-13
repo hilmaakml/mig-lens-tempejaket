@@ -114,10 +114,11 @@ describe('personal exercise mapping (PRD FR-14)', () => {
     expect(mapExercise([])).toBeNull();
   });
 
-  it('uses explainable counts, never a percentage or mastery label', () => {
+  it('carries no progress numbers in the catalogue, so a new visitor starts at zero', () => {
     for (const exercise of EXERCISES) {
-      expect(exercise.recognised).toBeLessThanOrEqual(exercise.total);
-      expect(exercise.total).toBeGreaterThan(0);
+      expect(exercise).not.toHaveProperty('recognised');
+      expect(exercise).not.toHaveProperty('total');
+      expect(exercise.titleKey).toBeTruthy();
     }
   });
 });

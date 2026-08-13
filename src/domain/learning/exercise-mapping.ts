@@ -17,41 +17,38 @@ export interface Exercise {
   readonly id: ExerciseId;
   readonly titleKey: MessageKey;
   readonly reasonKey: MessageKey;
-  /** Explainable progress: recognised in `recognised` of `total` exercises. */
-  readonly recognised: number;
-  readonly total: number;
 }
 
+/**
+ * The exercise catalogue carries no progress numbers. Counts come from what the user has
+ * actually completed (`domain/progress`) measured against the scenarios that actually
+ * exist (`domain/learning/scenarios`), so a new visitor starts at zero.
+ */
 export const EXERCISES: readonly Exercise[] = [
   {
     id: 'institution-identity-misuse',
     titleKey: 'exercise.identity_misuse.title',
     reasonKey: 'exercise.identity_misuse.reason',
-    recognised: 2,
-    total: 3,
   },
   {
     id: 'urgency-and-time-pressure',
     titleKey: 'exercise.urgency.title',
     reasonKey: 'exercise.urgency.reason',
-    recognised: 3,
-    total: 3,
   },
   {
     id: 'asking-for-written-evidence',
     titleKey: 'exercise.written_evidence.title',
     reasonKey: 'exercise.written_evidence.reason',
-    recognised: 1,
-    total: 3,
   },
   {
     id: 'checking-payment-destination',
     titleKey: 'exercise.payment_destination.title',
     reasonKey: 'exercise.payment_destination.reason',
-    recognised: 1,
-    total: 3,
   },
 ];
+
+/** Core verification steps the readiness count is measured against (PRD FR-14). */
+export const CORE_VERIFICATION_STEPS = 5;
 
 export const getExercise = (id: ExerciseId): Exercise => {
   const found = EXERCISES.find((exercise) => exercise.id === id);

@@ -22,22 +22,23 @@ These requirements support privacy-by-design and should be reviewed against appl
 - Do not log raw uploads, OCR text, form values, share content, full identifiers, or user-entered search terms.
 - Do not send uploads or OCR text to an LLM or third party.
 - Do not enable analytics, session replay, heatmaps, DOM capture, or advertising scripts for the MVP.
-- Do not persist a real user history. MVP history is synthetic or ephemeral.
+- Do not persist offer content. Practice progress and a minimised check history may be stored locally under the allowlist in `docs/decisions/0003-local-progress-and-history.md`: counts, timestamps, locale-neutral rule and snapshot versions, and completed scenario ids only. Demo runs are never recorded.
 - The application never guarantees that an offer is safe or fraudulent.
 
 Any change to these invariants requires a separately reviewed product, privacy, security, and legal decision. A developer may not relax them to simplify implementation.
 
 ## 3. Data classification
 
-| Class                   | Examples                                                                      | MVP handling                                                                 |
-| ----------------------- | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Prohibited input        | KTP, passport, identity number, selfie/biometric, exact home address          | Warn users not to submit; do not build fields for it                         |
-| Sensitive offer content | Screenshot, OCR text, phone, email, account, recruiter name, contract details | Memory only; never networked or persisted by default                         |
-| Confirmed claims        | User-corrected company, role, country, fee, deadline                          | Memory only during the active flow                                           |
-| Redacted output         | Masked identifiers, evidence statuses, official URLs, next actions            | May be previewed/copied only after redaction                                 |
-| Approved reference data | Reviewed source snapshots and metadata                                        | Versioned, validated, separate from user data                                |
-| Synthetic fixtures      | Fictional demo offers and records                                             | Explicit `isDemo: true`; never used as live fallback                         |
-| UI language preference  | `uiLocale` with value `id` or `en` only                                       | May be stored locally; must never be bundled with offer state or identifiers |
+| Class                   | Examples                                                                                        | MVP handling                                                                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Prohibited input        | KTP, passport, identity number, selfie/biometric, exact home address                            | Warn users not to submit; do not build fields for it                                                                           |
+| Sensitive offer content | Screenshot, OCR text, phone, email, account, recruiter name, contract details                   | Memory only; never networked or persisted by default                                                                           |
+| Confirmed claims        | User-corrected company, role, country, fee, deadline                                            | Memory only during the active flow                                                                                             |
+| Redacted output         | Masked identifiers, evidence statuses, official URLs, next actions                              | May be previewed/copied only after redaction                                                                                   |
+| Approved reference data | Reviewed source snapshots and metadata                                                          | Versioned, validated, separate from user data                                                                                  |
+| Synthetic fixtures      | Fictional demo offers and records                                                               | Explicit `isDemo: true`; never used as live fallback                                                                           |
+| UI language preference  | `uiLocale` with value `id` or `en` only                                                         | May be stored locally; must never be bundled with offer state or identifiers                                                   |
+| Local progress metadata | Completed scenario ids, check timestamps, indicator and evidence counts, rule/snapshot versions | May be stored locally under `migranshield.progress`; schema-validated allowlist, capped at 20 checks, user-erasable (ADR 0003) |
 
 ## 4. Upload security
 
@@ -74,7 +75,10 @@ Do not print OCR content to the console. Error messages may include a safe error
 ## 6. Application state and browser storage
 
 - Hold offer state in memory only.
-- The only MVP preference that may be persisted is the non-sensitive `uiLocale` enum (`id` or `en`). Store it under a dedicated key, validate it before use, and never serialize offer state beside it.
+- Exactly two keys may be persisted: the non-sensitive `uiLocale` enum (`id` or `en`) and the minimised progress record `migranshield.progress` (ADR 0003). Store each under its own dedicated key, validate both before use, and never serialize offer state beside them.
+- The progress record is defined by a runtime allowlist schema. It has no field for an image, OCR text, raw offer content, company or recruiter name, phone, account, email, identifier, payment amount, contract, or visa, and adding one is a reviewed privacy decision.
+- Storage failure, corruption, or an unknown schema must degrade to the empty state and an in-memory session, never to a crash.
+- The user must be able to delete progress and history without losing the language preference.
 - A refresh may clear the state. Explain this clearly and return the user to input.
 - Do not silently restore sensitive state.
 - Do not serialize the offer store for debugging tools in production.

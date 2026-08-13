@@ -1,7 +1,13 @@
 import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 3100;
-const baseURL = `http://127.0.0.1:${PORT}`;
+/**
+ * `PLAYWRIGHT_BASE_URL` points the suite at an already-running deployment so the same
+ * privacy and header assertions can verify an authorized preview (SECURITY.md 13). When it
+ * is set, the local build/serve step is skipped.
+ */
+const remoteBaseURL = process.env.PLAYWRIGHT_BASE_URL;
+const baseURL = remoteBaseURL ?? `http://127.0.0.1:${PORT}`;
 
 /**
  * End-to-end tests run against a production build so the real security headers, the
@@ -45,12 +51,16 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 900 } },
     },
   ],
-  webServer: {
-    command: `npm run build && npx next start -p ${PORT}`,
-    url: baseURL,
-    reuseExistingServer: !process.env.CI,
-    timeout: 300_000,
-    stdout: 'ignore',
-    stderr: 'pipe',
-  },
+  ...(remoteBaseURL
+    ? {}
+    : {
+        webServer: {
+          command: `npm run build && npx next start -p ${PORT}`,
+          url: baseURL,
+          reuseExistingServer: !process.env.CI,
+          timeout: 300_000,
+          stdout: 'ignore' as const,
+          stderr: 'pipe' as const,
+        },
+      }),
 });

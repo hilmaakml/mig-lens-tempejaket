@@ -584,6 +584,7 @@ export const idMessages = {
     'Belum ada hasil pemeriksaan pada sesi ini. Anda tetap dapat mencoba seluruh latihan di bawah.',
   'learn.recommended_for_you': 'Direkomendasikan untuk Anda',
   'learn.all_exercises': 'Semua latihan',
+  'learn.no_scenario_yet': 'Skenario latihan untuk bagian ini belum tersedia.',
   'learn.pattern_cta': 'Pelajari pola manipulasi',
   'learn.progress_label': 'Sudah dikenali dalam {done} dari {total} latihan.',
   'exercise.identity_misuse.title': 'Pencatutan Identitas Lembaga',
@@ -667,14 +668,17 @@ export const idMessages = {
   'progress.per_tactic': 'Kemajuan per latihan',
   'progress.history': 'Riwayat pemeriksaan',
   'progress.history_note':
-    'Riwayat hanya berisi pemeriksaan pada sesi ini dan contoh prototipe. MigranShield tidak menyimpan riwayat tawaran Anda.',
+    'Riwayat disimpan di perangkat Anda sendiri dan hanya memuat tanggal, jumlah indikator, serta versi aturan. Isi tawaran, nama, nomor, dan nominal tidak pernah disimpan. Maksimal 20 pemeriksaan terakhir.',
   'progress.history_empty':
-    'Belum ada pemeriksaan pada sesi ini. Contoh di bawah adalah data prototipe.',
-  'progress.history_demo_1': 'Tawaran caregiver Taiwan',
-  'progress.history_demo_2': 'Lowongan pabrik Malaysia',
-  'progress.history_needs_confirmation': 'Perlu dikonfirmasi',
-  'progress.session_entry': 'Pemeriksaan pada sesi ini',
+    'Belum ada pemeriksaan. Riwayat akan muncul di sini setelah Anda menyelesaikan pemeriksaan tawaran.',
+  'progress.history_entry': 'Pemeriksaan tawaran',
   'progress.indicator_badge': '{count} indikator risiko',
+  'progress.reset': 'Hapus kemajuan dan riwayat',
+  'progress.reset_confirm':
+    'Kemajuan latihan dan seluruh riwayat pemeriksaan di perangkat ini akan dihapus dan tidak dapat dikembalikan. Pilihan bahasa tetap tersimpan.',
+  'progress.reset_confirm_action': 'Ya, hapus sekarang',
+  'progress.reset_cancel': 'Batal',
+  'progress.reset_done': 'Kemajuan dan riwayat dihapus.',
 
   // ---------------------------------------------------------------- errors
   'error.title': 'Terjadi kesalahan',
