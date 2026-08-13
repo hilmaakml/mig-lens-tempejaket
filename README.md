@@ -7,9 +7,6 @@ sources actually checked, and take a safer next step.
 MigranShield does **not** decide whether an offer is safe or fraudulent. It shows which
 claims are supported, contradicted, or still unverified, and what to verify next.
 
-Product, privacy, source, design, and testing requirements live in `PRD.md`,
-`SECURITY.md`, `DATA_SOURCES.md`, `DESIGN.md`, `CONVENTIONS.md`, and `TESTING.md`.
-`CLAUDE.md` is the entry point for AI-assisted changes.
 
 ## Requirements
 
