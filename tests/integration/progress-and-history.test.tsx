@@ -11,12 +11,12 @@ import { TOTAL_SCENARIO_COUNT } from '@/domain/learning/scenarios';
 beforeEach(() => {
   window.localStorage.clear();
   resetProgressCache();
-  resetNavigation('/');
+  resetNavigation('/app');
 });
 
 /** Answers the practice scenario safely, which is what earns progress. */
 async function answerScenarioSafely(user: ReturnType<typeof renderApp>['user']) {
-  navigationState.pathname = '/latihan/simulasi';
+  navigationState.pathname = '/app/latihan/simulasi';
   await user.click(
     await screen.findByRole('button', { name: /Saya perlu verifikasi dulu/ }),
   );
@@ -25,7 +25,7 @@ async function answerScenarioSafely(user: ReturnType<typeof renderApp>['user']) 
 
 /** Runs a real (non-demo) check through to the result screen. */
 async function runRealCheck(user: ReturnType<typeof renderApp>['user']) {
-  navigationState.pathname = '/periksa';
+  navigationState.pathname = '/app/periksa';
   await user.click(await screen.findByRole('button', { name: 'Tulis Manual' }));
   const companyInput = await screen.findByLabelText('Perusahaan / P3MI');
   await user.type(companyInput, 'PT Contoh Manual');
@@ -35,14 +35,14 @@ async function runRealCheck(user: ReturnType<typeof renderApp>['user']) {
 }
 
 describe('first visit is empty (no hardcoded demo progress)', () => {
-  it('shows 0 of 5 readiness on the home screen', async () => {
+  it('shows 0 of 5 readiness on the app home screen', async () => {
     renderApp(<FlowHarness />);
     expect(await screen.findByText('0/5')).toBeInTheDocument();
     expect(screen.getByText(/0 dari 5 langkah verifikasi inti/)).toBeInTheDocument();
   });
 
   it('shows 0 of N practice progress, with N from the scenario catalogue', async () => {
-    resetNavigation('/latihan');
+    resetNavigation('/app/latihan');
     renderApp(<FlowHarness />);
     expect(
       await screen.findByText(
@@ -52,7 +52,7 @@ describe('first visit is empty (no hardcoded demo progress)', () => {
   });
 
   it('shows an empty history with no example entries', async () => {
-    resetNavigation('/riwayat');
+    resetNavigation('/app/riwayat');
     renderApp(<FlowHarness />);
 
     expect(await screen.findByTestId('history-empty')).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe('practice updates progress', () => {
     const { user } = renderApp(<FlowHarness />);
     await answerScenarioSafely(user);
 
-    navigationState.pathname = '/riwayat';
+    navigationState.pathname = '/app/riwayat';
     expect(await screen.findByText('1/5')).toBeInTheDocument();
     expect(
       screen.getByText(`Sudah dikenali dalam 1 dari ${TOTAL_SCENARIO_COUNT} latihan.`),
@@ -83,13 +83,13 @@ describe('practice updates progress', () => {
 
   it('credits nothing for an unsafe answer', async () => {
     const { user } = renderApp(<FlowHarness />);
-    navigationState.pathname = '/latihan/simulasi';
+    navigationState.pathname = '/app/latihan/simulasi';
     await user.click(
       await screen.findByRole('button', { name: /Baik, saya transfer sekarang juga/ }),
     );
     await screen.findByText('Hati-hati — ini yang diincar pelaku penipuan.');
 
-    navigationState.pathname = '/riwayat';
+    navigationState.pathname = '/app/riwayat';
     expect(await screen.findByText('0/5')).toBeInTheDocument();
   });
 
@@ -99,12 +99,12 @@ describe('practice updates progress', () => {
 
     // Retry the same scenario and answer safely again.
     await user.click(screen.getByRole('link', { name: 'Lihat pembongkaran pola' }));
-    navigationState.pathname = '/latihan/simulasi';
+    navigationState.pathname = '/app/latihan/simulasi';
     await user.click(
       await screen.findByRole('button', { name: /Saya perlu verifikasi dulu/ }),
     );
 
-    navigationState.pathname = '/riwayat';
+    navigationState.pathname = '/app/riwayat';
     expect(await screen.findByText('1/5')).toBeInTheDocument();
     expect(
       screen.getByText(`Sudah dikenali dalam 1 dari ${TOTAL_SCENARIO_COUNT} latihan.`),
@@ -118,7 +118,7 @@ describe('practice updates progress', () => {
     // Simulate a fresh page load: unmount, drop the in-memory cache, render again.
     unmount();
     resetProgressCache();
-    resetNavigation('/riwayat');
+    resetNavigation('/app/riwayat');
     renderApp(<FlowHarness />);
 
     expect(await screen.findByText('1/5')).toBeInTheDocument();
@@ -130,7 +130,7 @@ describe('a completed check produces exactly one history entry', () => {
     const { user } = renderApp(<FlowHarness />);
     await runRealCheck(user);
 
-    navigationState.pathname = '/riwayat';
+    navigationState.pathname = '/app/riwayat';
     const list = await screen.findByTestId('history-list');
     expect(within(list).getAllByRole('listitem')).toHaveLength(1);
     expect(within(list).getByText('Pemeriksaan tawaran')).toBeInTheDocument();
@@ -141,11 +141,11 @@ describe('a completed check produces exactly one history entry', () => {
     await runRealCheck(user);
 
     // Leave and return to the result screen several times.
-    navigationState.pathname = '/riwayat';
+    navigationState.pathname = '/app/riwayat';
     await screen.findByTestId('history-list');
-    navigationState.pathname = '/hasil';
+    navigationState.pathname = '/app/hasil';
     await screen.findByText('Tunda pembayaran dulu');
-    navigationState.pathname = '/riwayat';
+    navigationState.pathname = '/app/riwayat';
 
     const list = await screen.findByTestId('history-list');
     expect(within(list).getAllByRole('listitem')).toHaveLength(1);
@@ -159,14 +159,14 @@ describe('a completed check produces exactly one history entry', () => {
     // recovery notice and must not write a second entry.
     unmount();
     resetProgressCache();
-    resetNavigation('/hasil');
+    resetNavigation('/app/hasil');
     const second = renderApp(<FlowHarness />);
     expect(
       await screen.findByText('Data pemeriksaan tidak tersedia lagi'),
     ).toBeInTheDocument();
 
     second.unmount();
-    resetNavigation('/riwayat');
+    resetNavigation('/app/riwayat');
     renderApp(<FlowHarness />);
     const list = await screen.findByTestId('history-list');
     expect(within(list).getAllByRole('listitem')).toHaveLength(1);
@@ -178,7 +178,7 @@ describe('a completed check produces exactly one history entry', () => {
 
     unmount();
     resetProgressCache();
-    resetNavigation('/riwayat');
+    resetNavigation('/app/riwayat');
     renderApp(<FlowHarness />);
 
     const list = await screen.findByTestId('history-list');
@@ -189,7 +189,7 @@ describe('a completed check produces exactly one history entry', () => {
 describe('the demo never becomes real progress or history', () => {
   it('records no history for a demo check', async () => {
     const { user } = renderApp(<FlowHarness />);
-    navigationState.pathname = '/periksa';
+    navigationState.pathname = '/app/periksa';
     await user.click(
       await screen.findByRole('button', { name: /Gunakan contoh tawaran/i }),
     );
@@ -198,7 +198,7 @@ describe('the demo never becomes real progress or history', () => {
     );
     await screen.findByText('Tunda pembayaran dulu');
 
-    navigationState.pathname = '/riwayat';
+    navigationState.pathname = '/app/riwayat';
     expect(await screen.findByTestId('history-empty')).toBeInTheDocument();
     expect(screen.getByText('0/5')).toBeInTheDocument();
     expect(window.localStorage.getItem(PROGRESS_STORAGE_KEY)).toBeNull();
@@ -224,7 +224,7 @@ describe('resetting local data', () => {
     await answerScenarioSafely(user);
     await runRealCheck(user);
 
-    navigationState.pathname = '/riwayat';
+    navigationState.pathname = '/app/riwayat';
     await screen.findByTestId('history-list');
 
     // The locale is only persisted once the user actually picks one.
@@ -247,7 +247,7 @@ describe('unavailable or corrupt storage', () => {
   it('renders the empty state instead of crashing when storage is corrupt', async () => {
     window.localStorage.setItem(PROGRESS_STORAGE_KEY, '{broken');
     resetProgressCache();
-    resetNavigation('/riwayat');
+    resetNavigation('/app/riwayat');
 
     renderApp(<FlowHarness />);
     expect(await screen.findByTestId('history-empty')).toBeInTheDocument();
@@ -263,7 +263,7 @@ describe('unavailable or corrupt storage', () => {
     await answerScenarioSafely(user);
 
     // The session still reflects the answer even though nothing could be persisted.
-    navigationState.pathname = '/riwayat';
+    navigationState.pathname = '/app/riwayat';
     expect(await screen.findByText('1/5')).toBeInTheDocument();
     vi.restoreAllMocks();
   });
@@ -275,7 +275,7 @@ describe('language switching does not disturb progress', () => {
     await answerScenarioSafely(user);
     await runRealCheck(user);
 
-    navigationState.pathname = '/riwayat';
+    navigationState.pathname = '/app/riwayat';
     const before = within(await screen.findByTestId('history-list')).getAllByRole(
       'listitem',
     ).length;

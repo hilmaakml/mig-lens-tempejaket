@@ -25,7 +25,7 @@ const makeFile = (name: string, type: string, bytes: Uint8Array) =>
   new File([bytes.buffer as ArrayBuffer], name, { type });
 
 beforeEach(() => {
-  resetNavigation('/periksa');
+  resetNavigation('/app/periksa');
   startOcrMock.mockReset();
 });
 
@@ -98,7 +98,7 @@ describe('upload validation in the UI (PRD FR-02)', () => {
       'PT Contoh Uji',
     );
     expect(screen.getByLabelText('Posisi pekerjaan')).toHaveValue('Caregiver');
-    expect(getRoute()).toBe('/konfirmasi');
+    expect(getRoute()).toBe('/app/konfirmasi');
   });
 
   it('falls back to manual entry when reading fails', async () => {
@@ -115,7 +115,7 @@ describe('upload validation in the UI (PRD FR-02)', () => {
 
     expect(await screen.findByText('Teks tidak dapat dibaca')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Isi manual saja' }));
-    expect(getRoute()).toBe('/konfirmasi');
+    expect(getRoute()).toBe('/app/konfirmasi');
     expect(await screen.findByLabelText('Perusahaan / P3MI')).toHaveValue('');
   });
 
@@ -135,7 +135,7 @@ describe('upload validation in the UI (PRD FR-02)', () => {
 
     expect(cancel).toHaveBeenCalled();
     expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-    expect(getRoute()).toBe('/periksa');
+    expect(getRoute()).toBe('/app/periksa');
   });
 
   it('states that the image stays on the device', () => {

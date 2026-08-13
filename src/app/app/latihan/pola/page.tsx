@@ -42,7 +42,7 @@ export default function PatternPage() {
 
   return (
     <div className="pb-8">
-      <ScreenHeader titleKey="pattern.title" backHref="/latihan" />
+      <ScreenHeader titleKey="pattern.title" backHref="/app/latihan" />
 
       <div className="flex flex-col gap-4 px-4 py-4">
         <p className="text-[14.5px] leading-relaxed text-text-secondary">
@@ -90,7 +90,7 @@ export default function PatternPage() {
         </ol>
 
         <Notice tone="warning">{t('pattern.closing')}</Notice>
-        <LinkButton href="/skenario" variant="dark">
+        <LinkButton href="/app/skenario" variant="dark">
           {t('pattern.scenario_cta')}
         </LinkButton>
       </div>

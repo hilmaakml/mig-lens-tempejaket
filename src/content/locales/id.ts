@@ -312,6 +312,53 @@ export const idMessages = {
   'home.scenario.title': '“Siti” — caregiver Taiwan',
   'home.scenario.quote': '“Dia tahu nama dan alamat saya, jadi saya kira resmi…”',
 
+  // ---------------------------------------------------------------- landing
+  'landing.hero.eyebrow': 'PERIKSA SEBELUM BAYAR',
+  'landing.hero.title': 'Tawaran kerja ke luar negeri, diperiksa dengan bukti.',
+  'landing.hero.body': `${BRAND.name} membantu calon pekerja migran memeriksa informasi dalam tawaran kerja, menemukan ketidaksesuaian, dan menentukan langkah aman berikutnya.`,
+  'landing.hero.cta': 'Mulai periksa tawaran',
+  'landing.hero.secondary': 'Pelajari dulu cara kerjanya',
+
+  'landing.problem.section': 'Masalahnya',
+  'landing.problem.title': 'Perusahaan terdaftar belum tentu berarti tawarannya benar.',
+  'landing.problem.body':
+    'Banyak tawaran memakai nama perusahaan asli, tetapi dikirim lewat nomor yang tidak dikenal, tanpa kontrak, tanpa rincian biaya tertulis, dan meminta transfer ke rekening pribadi. Memeriksa nama perusahaan saja bisa membuat Anda merasa aman padahal belum.',
+
+  'landing.audience.section': 'Untuk siapa',
+  'landing.audience.cpmi.title': 'Calon pekerja migran (CPMI)',
+  'landing.audience.cpmi.body':
+    'Sedang menimbang sebuah tawaran dan perlu tahu apa yang harus diverifikasi sebelum membayar atau menyerahkan dokumen.',
+  'landing.audience.pmi.title': 'Pekerja migran dan purna-PMI',
+  'landing.audience.pmi.body':
+    'Membantu keluarga atau rekan menilai sebuah tawaran, lalu membagikan ringkasan yang aman tanpa data pribadi.',
+
+  'landing.how.section': 'Cara kerjanya',
+  'landing.how.step1.title': 'Isi atau unggah tawaran',
+  'landing.how.step1.body':
+    'Ketik manual, atau unggah tangkapan layar. Pembacaan teks berjalan di perangkat Anda.',
+  'landing.how.step2.title': 'Periksa dan perbaiki isinya',
+  'landing.how.step2.body':
+    'Setiap isian dapat Anda koreksi lebih dulu. Tidak ada penilaian sebelum Anda mengonfirmasi.',
+  'landing.how.step3.title': 'Lihat peta bukti',
+  'landing.how.step3.body':
+    'Tiap klaim diberi status, alasan, sumber, batasannya, dan apa yang masih kurang.',
+  'landing.how.step4.title': 'Ambil langkah aman',
+  'landing.how.step4.body':
+    'Pesan verifikasi siap salin, kanal resmi untuk mengecek sendiri, dan latihan mengenali pola.',
+
+  'landing.limits.section': 'Yang perlu Anda tahu',
+  'landing.limits.verdict.title': 'Bukan penentu aman atau penipuan',
+  'landing.limits.verdict.body': `${BRAND.name} menguraikan klaim dan menunjukkan apa yang masih perlu diverifikasi. Hasilnya bukan keputusan hukum dan bukan jaminan bahwa suatu tawaran aman maupun penipuan.`,
+  'landing.limits.privacy.title': 'Data tawaran tidak dikirim ke server',
+  'landing.limits.privacy.body':
+    'Gambar dan isi tawaran tetap berada di perangkat Anda. Tidak ada akun, tidak ada pelacakan, dan tidak ada isi tawaran yang disimpan.',
+  'landing.limits.sources.title': 'Sumber resmi diperiksa manual',
+  'landing.limits.sources.body':
+    'Belum ada integrasi resmi. Untuk hal yang belum dapat diperiksa, aplikasi menyatakannya apa adanya dan menautkan Anda ke kanal resmi.',
+
+  'landing.footer.disclaimer': `${BRAND.name} adalah alat bantu literasi dan verifikasi, bukan pengganti KP2MI/BP2MI, penegak hukum, imigrasi, kedutaan, atau penasihat yang berwenang.`,
+  'landing.footer.cta': 'Periksa tawaran sekarang',
+
   // ---------------------------------------------------------------- upload
   'upload.title': 'Unggah Tawaran',
   'upload.privacy_warning_title': 'Jaga data pribadi Anda.',

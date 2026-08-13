@@ -15,20 +15,37 @@ interface NavItem {
 }
 
 const NAV_ITEMS: readonly NavItem[] = [
-  { href: '/', labelKey: 'nav.home', icon: 'home', group: ['/'] },
+  { href: '/app', labelKey: 'nav.home', icon: 'home', group: ['/app'] },
   {
-    href: '/periksa',
+    href: '/app/periksa',
     labelKey: 'nav.check',
     icon: 'search',
-    group: ['/periksa', '/konfirmasi', '/hasil', '/kanal', '/pesan', '/bagikan'],
+    group: [
+      '/app/periksa',
+      '/app/konfirmasi',
+      '/app/hasil',
+      '/app/kanal',
+      '/app/pesan',
+      '/app/bagikan',
+    ],
   },
   {
-    href: '/latihan',
+    href: '/app/latihan',
     labelKey: 'nav.learn',
     icon: 'graduation',
-    group: ['/latihan', '/latihan/simulasi', '/latihan/pola', '/skenario'],
+    group: [
+      '/app/latihan',
+      '/app/latihan/simulasi',
+      '/app/latihan/pola',
+      '/app/skenario',
+    ],
   },
-  { href: '/riwayat', labelKey: 'nav.history', icon: 'clock', group: ['/riwayat'] },
+  {
+    href: '/app/riwayat',
+    labelKey: 'nav.history',
+    icon: 'clock',
+    group: ['/app/riwayat'],
+  },
 ];
 
 export function BottomNav() {

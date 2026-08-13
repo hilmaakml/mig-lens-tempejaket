@@ -35,12 +35,12 @@ export default function ResultPage() {
   if (!result) {
     return (
       <div className="pb-8">
-        <ScreenHeader titleKey="result.title" backHref="/periksa" />
+        <ScreenHeader titleKey="result.title" backHref="/app/periksa" />
         <div className="flex flex-col gap-4 px-4 py-4">
           <Notice tone="info" title={t('result.no_state_title')} role="status">
             {t('result.no_state_body')}
           </Notice>
-          <LinkButton href="/periksa">{t('result.no_state_cta')}</LinkButton>
+          <LinkButton href="/app/periksa">{t('result.no_state_cta')}</LinkButton>
         </div>
       </div>
     );
@@ -65,7 +65,7 @@ export default function ResultPage() {
     <div className="pb-8">
       <ScreenHeader
         titleKey="result.title"
-        backHref="/konfirmasi"
+        backHref="/app/konfirmasi"
         showDemoBadge={isDemo}
       />
 
@@ -241,7 +241,7 @@ export default function ResultPage() {
             {contactView.nextAction}
           </p>
           <div className="mt-3">
-            <LinkButton href="/kanal" variant="secondary">
+            <LinkButton href="/app/kanal" variant="secondary">
               {t('result.action_contact')}
             </LinkButton>
           </div>
@@ -270,20 +270,28 @@ export default function ResultPage() {
           {t('result.section_actions')}
         </h2>
         <div className="flex flex-col gap-2.5">
-          <LinkButton href="/pesan">
+          <LinkButton href="/app/pesan">
             <Icon name="message" size={19} />
             {t('result.action_message')}
           </LinkButton>
           <div className="grid grid-cols-2 gap-2.5">
             <ActionTile
-              href="/kanal"
+              href="/app/kanal"
               icon="external"
               label={t('result.action_sources')}
             />
-            <ActionTile href="/bagikan" icon="share" label={t('result.action_share')} />
-            <ActionTile href="/kanal" icon="phone" label={t('result.action_contact')} />
             <ActionTile
-              href="/kanal#pengaduan"
+              href="/app/bagikan"
+              icon="share"
+              label={t('result.action_share')}
+            />
+            <ActionTile
+              href="/app/kanal"
+              icon="phone"
+              label={t('result.action_contact')}
+            />
+            <ActionTile
+              href="/app/kanal#pengaduan"
               icon="shield"
               label={t('result.action_complaint')}
             />
@@ -306,7 +314,7 @@ export default function ResultPage() {
               {t(exercise.reasonKey)}
             </p>
             <Link
-              href="/latihan"
+              href="/app/latihan"
               className="mt-4 flex min-h-11 w-full items-center justify-center rounded-button bg-white px-4 py-3.5 text-[15px] font-bold text-brand-dark"
             >
               {t('result.exercise_cta')}

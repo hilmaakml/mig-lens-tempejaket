@@ -24,7 +24,7 @@ export default function VerificationMessagePage() {
 
   return (
     <div className="pb-8">
-      <ScreenHeader titleKey="message.title" backHref={result ? '/hasil' : '/'} />
+      <ScreenHeader titleKey="message.title" backHref={result ? '/app/hasil' : '/'} />
 
       <div className="flex flex-col gap-4 px-4 py-4">
         <p className="text-[13.5px] leading-relaxed text-text-secondary">
@@ -42,7 +42,7 @@ export default function VerificationMessagePage() {
           <Icon name="copy" size={18} />
           {t('message.copy')}
         </Button>
-        <LinkButton href="/kanal" variant="secondary">
+        <LinkButton href="/app/kanal" variant="secondary">
           {t('message.view_channels')}
         </LinkButton>
       </div>

@@ -4,7 +4,7 @@ import { renderApp } from '../helpers/render-app';
 import { FlowHarness } from '../helpers/flow-harness';
 import { resetNavigation } from '../helpers/navigation-mock';
 
-beforeEach(() => resetNavigation('/periksa'));
+beforeEach(() => resetNavigation('/app/periksa'));
 
 describe('demo offer flow (TESTING.md 4.1)', () => {
   it('runs upload → confirmation → result without a dead end', async () => {
@@ -155,7 +155,7 @@ describe('manual entry without OCR', () => {
 
 describe('ephemeral state (SECURITY.md 6)', () => {
   it('explains the loss instead of restoring the result after a reload', async () => {
-    resetNavigation('/hasil');
+    resetNavigation('/app/hasil');
     renderApp(<FlowHarness />);
     expect(
       await screen.findByText('Data pemeriksaan tidak tersedia lagi'),

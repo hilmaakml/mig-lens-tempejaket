@@ -5,7 +5,7 @@ import { FlowHarness } from '../helpers/flow-harness';
 import { resetNavigation } from '../helpers/navigation-mock';
 import { demoOfferClaim } from '@data/fixtures/demo-offer';
 
-beforeEach(() => resetNavigation('/periksa'));
+beforeEach(() => resetNavigation('/app/periksa'));
 
 const runDemoCheck = async (user: ReturnType<typeof renderApp>['user']) => {
   await user.click(screen.getByRole('button', { name: /Gunakan contoh tawaran/i }));

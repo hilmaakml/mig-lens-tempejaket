@@ -64,7 +64,7 @@ export default function UploadPage() {
         const extraction = extractClaimFromText(text);
         applyExtraction(extraction.claim, extraction.fieldsNeedingReview);
         clearFile();
-        router.push('/konfirmasi');
+        router.push('/app/konfirmasi');
       } catch (error) {
         if (error instanceof OcrError && error.code === 'cancelled') {
           setPhase('idle');
@@ -103,19 +103,19 @@ export default function UploadPage() {
 
   const handleManual = () => {
     startManual();
-    router.push('/konfirmasi');
+    router.push('/app/konfirmasi');
   };
 
   const handleDemo = () => {
     startDemo();
-    router.push('/konfirmasi');
+    router.push('/app/konfirmasi');
   };
 
   const isBusy = phase === 'validating' || phase === 'reading';
 
   return (
     <div className="pb-8">
-      <ScreenHeader titleKey="upload.title" backHref="/" />
+      <ScreenHeader titleKey="upload.title" backHref="/app" />
 
       <div className="flex flex-col gap-4 px-4 py-4">
         <Notice tone="warning" title={t('upload.privacy_warning_title')}>

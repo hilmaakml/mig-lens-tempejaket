@@ -4,17 +4,17 @@ import { clickToRoute, clickUntil, switchLanguage } from './helpers';
 /** Drives the demo journey from home to the result screen. */
 async function runDemoJourney(page: Page) {
   await page.goto('/');
-  await page.getByRole('link', { name: 'Periksa Tawaran' }).click();
-  await expect(page).toHaveURL(/\/periksa$/);
+  await page.getByRole('link', { name: 'Mulai periksa tawaran' }).click();
+  await expect(page).toHaveURL(/\/app\/periksa$/);
   await clickToRoute(
     page,
     page.getByRole('button', { name: /Gunakan contoh tawaran/ }),
-    /\/konfirmasi$/,
+    /\/app\/konfirmasi$/,
   );
   await clickToRoute(
     page,
     page.getByRole('button', { name: 'Lanjutkan pemeriksaan' }),
-    /\/hasil$/,
+    /\/app\/hasil$/,
   );
 }
 
@@ -44,7 +44,7 @@ test.describe('core journey', () => {
 
     // Action pack → verification message → copy feedback.
     await page.getByRole('link', { name: 'Buat pesan verifikasi' }).click();
-    await expect(page).toHaveURL(/\/pesan$/);
+    await expect(page).toHaveURL(/\/app\/pesan$/);
     await clickUntil(page.getByRole('button', { name: 'Salin pesan' }), () =>
       expect(page.getByRole('status')).toContainText('Pesan disalin.', { timeout: 1500 }),
     );
@@ -52,17 +52,17 @@ test.describe('core journey', () => {
     // Back to the result, then to the recommended personal exercise.
     await page.goBack();
     await page.getByRole('link', { name: 'Mulai latihan personal' }).click();
-    await expect(page).toHaveURL(/\/latihan$/);
+    await expect(page).toHaveURL(/\/app\/latihan$/);
     await expect(page.getByText('Direkomendasikan untuk Anda')).toBeVisible();
     await expect(page.getByText('Pencatutan Identitas Lembaga').first()).toBeVisible();
   });
 
   test('completes manual entry without OCR', async ({ page }) => {
-    await page.goto('/periksa');
+    await page.goto('/app/periksa');
     await clickToRoute(
       page,
       page.getByRole('button', { name: 'Tulis Manual' }),
-      /\/konfirmasi$/,
+      /\/app\/konfirmasi$/,
     );
 
     await page.getByLabel('Perusahaan / P3MI').fill('PT Contoh Manual');
@@ -71,7 +71,7 @@ test.describe('core journey', () => {
     await clickToRoute(
       page,
       page.getByRole('button', { name: 'Lanjutkan pemeriksaan' }),
-      /\/hasil$/,
+      /\/app\/hasil$/,
     );
 
     await expect(page.getByText('Tunda pembayaran dulu')).toBeVisible();
@@ -82,34 +82,34 @@ test.describe('core journey', () => {
 
   test('separates a source outage from a record that is not found', async ({ page }) => {
     // Not found within scope: demo dataset present, unknown company name.
-    await page.goto('/periksa');
+    await page.goto('/app/periksa');
     await clickToRoute(
       page,
       page.getByRole('button', { name: /Gunakan contoh tawaran/ }),
-      /\/konfirmasi$/,
+      /\/app\/konfirmasi$/,
     );
     await page.getByLabel('Perusahaan / P3MI').fill('PT Nama Tidak Terdaftar');
     await clickToRoute(
       page,
       page.getByRole('button', { name: 'Lanjutkan pemeriksaan' }),
-      /\/hasil$/,
+      /\/app\/hasil$/,
     );
     await expect(
       page.getByText(/tidak ditemukan dalam cakupan sumber yang diperiksa/i).first(),
     ).toBeVisible();
 
     // Source unavailable: manual entry, no approved dataset at all.
-    await page.goto('/periksa');
+    await page.goto('/app/periksa');
     await clickToRoute(
       page,
       page.getByRole('button', { name: 'Tulis Manual' }),
-      /\/konfirmasi$/,
+      /\/app\/konfirmasi$/,
     );
     await page.getByLabel('Perusahaan / P3MI').fill('PT Contoh Manual');
     await clickToRoute(
       page,
       page.getByRole('button', { name: 'Lanjutkan pemeriksaan' }),
-      /\/hasil$/,
+      /\/app\/hasil$/,
     );
     await expect(page.getByText(/Belum ada kumpulan data resmi/).first()).toBeVisible();
   });
@@ -119,11 +119,11 @@ test.describe('core journey', () => {
     await page.reload();
     await expect(page.getByText('Data pemeriksaan tidak tersedia lagi')).toBeVisible();
     await page.getByRole('link', { name: 'Mulai pemeriksaan baru' }).click();
-    await expect(page).toHaveURL(/\/periksa$/);
+    await expect(page).toHaveURL(/\/app\/periksa$/);
   });
 
   test('rejects an invalid upload and recovers', async ({ page }) => {
-    await page.goto('/periksa');
+    await page.goto('/app/periksa');
     // Retried for the same reason as clickUntil: a change event that lands before React
     // attaches its handler is a no-op. The app clears the input on rejection, so setting
     // the same file again re-fires the event.
@@ -142,31 +142,38 @@ test.describe('core journey', () => {
     await clickToRoute(
       page,
       page.getByRole('button', { name: 'Tulis Manual' }),
-      /\/konfirmasi$/,
+      /\/app\/konfirmasi$/,
     );
   });
 
-  test('reaches every one of the twelve screens without a dead end', async ({ page }) => {
+  test('reaches the landing page and every one of the twelve app screens', async ({
+    page,
+  }) => {
     const routes = [
       '/',
-      '/periksa',
-      '/konfirmasi',
-      '/hasil',
-      '/kanal',
-      '/pesan',
-      '/bagikan',
-      '/latihan',
-      '/latihan/simulasi',
-      '/latihan/pola',
-      '/skenario',
-      '/riwayat',
+      '/app',
+      '/app/periksa',
+      '/app/konfirmasi',
+      '/app/hasil',
+      '/app/kanal',
+      '/app/pesan',
+      '/app/bagikan',
+      '/app/latihan',
+      '/app/latihan/simulasi',
+      '/app/latihan/pola',
+      '/app/skenario',
+      '/app/riwayat',
     ];
     for (const route of routes) {
       await page.goto(route);
       await expect(page.locator('main')).toBeVisible();
-      await expect(
-        page.getByRole('navigation', { name: /Navigasi utama/ }),
-      ).toBeVisible();
+      // The bottom navigation belongs to the application, not the public landing page.
+      const nav = page.getByRole('navigation', { name: /Navigasi utama/ });
+      if (route === '/') {
+        await expect(nav).toHaveCount(0);
+      } else {
+        await expect(nav).toBeVisible();
+      }
     }
   });
 });
@@ -176,11 +183,11 @@ test.describe('bilingual flow', () => {
     await page.goto('/');
     await switchLanguage(page, 'Bahasa Inggris', 'en-GB');
 
-    await page.getByRole('link', { name: 'Check an offer' }).click();
+    await page.getByRole('link', { name: 'Start checking an offer' }).click();
     await clickToRoute(
       page,
       page.getByRole('button', { name: 'Type manually' }),
-      /\/konfirmasi$/,
+      /\/app\/konfirmasi$/,
     );
     await page.getByLabel('Company / P3MI').fill('PT Example Manual');
     await page.getByLabel('Account type').selectOption('personal');
@@ -188,7 +195,7 @@ test.describe('bilingual flow', () => {
     await clickToRoute(
       page,
       page.getByRole('button', { name: 'Continue to the check' }),
-      /\/hasil$/,
+      /\/app\/hasil$/,
     );
 
     await expect(page.getByText('Hold off on paying')).toBeVisible();
@@ -203,7 +210,7 @@ test.describe('bilingual flow', () => {
     await expect(page.getByText('4 indikator risiko ditemukan')).toBeVisible();
 
     await switchLanguage(page, 'Bahasa Inggris', 'en-GB');
-    await expect(page).toHaveURL(/\/hasil$/);
+    await expect(page).toHaveURL(/\/app\/hasil$/);
     await expect(page.getByText('4 risk indicators found')).toBeVisible();
     await expect(page.getByText('Found in the source checked')).toBeVisible();
 
@@ -222,11 +229,12 @@ test.describe('bilingual flow', () => {
       await switchLanguage(page, locale.option, locale.lang);
       for (const route of [
         '/',
-        '/periksa',
-        '/latihan',
-        '/latihan/pola',
-        '/skenario',
-        '/riwayat',
+        '/app',
+        '/app/periksa',
+        '/app/latihan',
+        '/app/latihan/pola',
+        '/app/skenario',
+        '/app/riwayat',
       ]) {
         await page.goto(route);
         const text = (await page.locator('body').innerText()).replace(/\s+/g, ' ');

@@ -1,27 +1,29 @@
 import { useSyncExternalStore, type MouseEvent } from 'react';
-import UploadPage from '@/app/periksa/page';
-import ConfirmationPage from '@/app/konfirmasi/page';
-import ResultPage from '@/app/hasil/page';
-import SharePage from '@/app/bagikan/page';
-import ChannelsPage from '@/app/kanal/page';
-import MessagePage from '@/app/pesan/page';
-import LearningPage from '@/app/latihan/page';
-import HomePage from '@/app/page';
-import ProgressPage from '@/app/riwayat/page';
-import SimulationPage from '@/app/latihan/simulasi/page';
+import UploadPage from '@/app/app/periksa/page';
+import ConfirmationPage from '@/app/app/konfirmasi/page';
+import ResultPage from '@/app/app/hasil/page';
+import SharePage from '@/app/app/bagikan/page';
+import ChannelsPage from '@/app/app/kanal/page';
+import MessagePage from '@/app/app/pesan/page';
+import LearningPage from '@/app/app/latihan/page';
+import LandingPage from '@/app/page';
+import HomePage from '@/app/app/page';
+import ProgressPage from '@/app/app/riwayat/page';
+import SimulationPage from '@/app/app/latihan/simulasi/page';
 import { getRoute, navigationState, subscribeToRoute } from './navigation-mock';
 
 const SCREENS: Record<string, () => React.JSX.Element> = {
-  '/': HomePage,
-  '/periksa': UploadPage,
-  '/konfirmasi': ConfirmationPage,
-  '/hasil': ResultPage,
-  '/bagikan': SharePage,
-  '/kanal': ChannelsPage,
-  '/pesan': MessagePage,
-  '/latihan': LearningPage,
-  '/riwayat': ProgressPage,
-  '/latihan/simulasi': SimulationPage,
+  '/': LandingPage,
+  '/app': HomePage,
+  '/app/periksa': UploadPage,
+  '/app/konfirmasi': ConfirmationPage,
+  '/app/hasil': ResultPage,
+  '/app/bagikan': SharePage,
+  '/app/kanal': ChannelsPage,
+  '/app/pesan': MessagePage,
+  '/app/latihan': LearningPage,
+  '/app/riwayat': ProgressPage,
+  '/app/latihan/simulasi': SimulationPage,
 };
 
 /**

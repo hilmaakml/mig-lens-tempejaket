@@ -17,7 +17,7 @@ export default function ScenarioPage() {
 
   return (
     <div className="pb-8">
-      <ScreenHeader titleKey="scenario.title" backHref="/" />
+      <ScreenHeader titleKey="scenario.title" backHref="/app" />
 
       <div className="flex flex-col gap-4 px-4 py-4">
         <Notice tone="info">{t('scenario.notice')}</Notice>
@@ -62,7 +62,7 @@ export default function ScenarioPage() {
           ))}
         </ul>
 
-        <LinkButton href="/latihan/simulasi">{t('scenario.cta')}</LinkButton>
+        <LinkButton href="/app/latihan/simulasi">{t('scenario.cta')}</LinkButton>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ export default function ProgressPage() {
 
   return (
     <div className="pb-8">
-      <ScreenHeader titleKey="progress.title" backHref="/" />
+      <ScreenHeader titleKey="progress.title" backHref="/app" />
 
       <div className="flex flex-col gap-4 px-4 py-4">
         <section className="rounded-hero border border-border-default bg-surface-card p-5">

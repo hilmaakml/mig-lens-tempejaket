@@ -325,6 +325,53 @@ export const enMessages: Record<keyof IdMessages, string> = {
   'home.scenario.title': '“Siti” — caregiver in Taiwan',
   'home.scenario.quote': '“They knew my name and address, so I assumed it was official…”',
 
+  // ---------------------------------------------------------------- landing
+  'landing.hero.eyebrow': 'CHECK BEFORE YOU PAY',
+  'landing.hero.title': 'Overseas job offers, examined with evidence.',
+  'landing.hero.body': `${BRAND.name} helps prospective migrant workers examine job-offer information, identify inconsistencies, and decide on safer next steps.`,
+  'landing.hero.cta': 'Start checking an offer',
+  'landing.hero.secondary': 'See how it works first',
+
+  'landing.problem.section': 'The problem',
+  'landing.problem.title': 'A registered company does not make the offer genuine.',
+  'landing.problem.body':
+    'Many offers use a real company name yet arrive from an unknown number, with no contract, no written fee breakdown, and a request to transfer money to a personal account. Checking the company name alone can leave you feeling safe when you are not.',
+
+  'landing.audience.section': 'Who it is for',
+  'landing.audience.cpmi.title': 'Prospective migrant workers',
+  'landing.audience.cpmi.body':
+    'Weighing up an offer and needing to know what to verify before paying or handing over documents.',
+  'landing.audience.pmi.title': 'Current and returnee migrant workers',
+  'landing.audience.pmi.body':
+    'Helping family or peers assess an offer, then sharing a redacted summary that carries no personal data.',
+
+  'landing.how.section': 'How it works',
+  'landing.how.step1.title': 'Enter or upload the offer',
+  'landing.how.step1.body':
+    'Type it in, or upload a screenshot. Text reading runs on your own device.',
+  'landing.how.step2.title': 'Review and correct it',
+  'landing.how.step2.body':
+    'Every field stays editable. Nothing is evaluated until you confirm the details.',
+  'landing.how.step3.title': 'Read the evidence map',
+  'landing.how.step3.body':
+    'Each claim gets a status, a reason, its source, its limits, and what is still missing.',
+  'landing.how.step4.title': 'Take a safer next step',
+  'landing.how.step4.body':
+    'A verification message to copy, official channels to check yourself, and practice recognising the patterns.',
+
+  'landing.limits.section': 'What you should know',
+  'landing.limits.verdict.title': 'Not a safe-or-fraud verdict',
+  'landing.limits.verdict.body': `${BRAND.name} breaks down claims and shows what still needs verifying. The result is not a legal decision and not a guarantee that an offer is safe or fraudulent.`,
+  'landing.limits.privacy.title': 'Offer data never reaches a server',
+  'landing.limits.privacy.body':
+    'Images and offer content stay on your device. No account, no tracking, and no offer content is stored.',
+  'landing.limits.sources.title': 'Official sources are checked manually',
+  'landing.limits.sources.body':
+    'No official integration exists yet. Where something cannot be checked, the app says so plainly and links you to the official channel.',
+
+  'landing.footer.disclaimer': `${BRAND.name} is a literacy and verification aid, not a replacement for KP2MI/BP2MI, law enforcement, immigration, embassies, or a qualified adviser.`,
+  'landing.footer.cta': 'Check an offer now',
+
   // ---------------------------------------------------------------- upload
   'upload.title': 'Upload an offer',
   'upload.privacy_warning_title': 'Protect your personal data.',

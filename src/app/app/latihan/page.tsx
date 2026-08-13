@@ -25,7 +25,7 @@ export default function LearningPage() {
 
   return (
     <div className="pb-8">
-      <ScreenHeader titleKey="learn.title" backHref="/" />
+      <ScreenHeader titleKey="learn.title" backHref="/app" />
 
       <div className="flex flex-col gap-4 px-4 py-4">
         <Notice tone="match">
@@ -58,7 +58,7 @@ export default function LearningPage() {
           ))}
         </ul>
 
-        <LinkButton href="/latihan/pola" variant="secondary">
+        <LinkButton href="/app/latihan/pola" variant="secondary">
           {t('learn.pattern_cta')}
         </LinkButton>
       </div>
@@ -103,7 +103,7 @@ function ExerciseLink({ entry }: { readonly entry: ExerciseProgress }) {
 
   // An exercise with no scenario is not a link: it would be a dead end.
   return isAvailable ? (
-    <Link href="/latihan/simulasi" className={className}>
+    <Link href="/app/latihan/simulasi" className={className}>
       {body}
     </Link>
   ) : (

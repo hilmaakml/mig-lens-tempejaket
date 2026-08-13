@@ -28,7 +28,7 @@ export default function SimulationPage() {
 
   return (
     <div className="pb-8">
-      <ScreenHeader titleKey="sim.title" backHref="/latihan" />
+      <ScreenHeader titleKey="sim.title" backHref="/app/latihan" />
 
       <div className="flex flex-col gap-4 px-4 py-4">
         <p className="self-start rounded-full border border-border-default bg-unknown-bg px-3 py-1.5 text-xs font-semibold text-text-secondary">
@@ -88,7 +88,9 @@ export default function SimulationPage() {
                   {t('sim.safe_body')}
                 </p>
                 <div className="mt-4">
-                  <LinkButton href="/latihan/pola">{t('sim.see_patterns')}</LinkButton>
+                  <LinkButton href="/app/latihan/pola">
+                    {t('sim.see_patterns')}
+                  </LinkButton>
                 </div>
               </section>
             ) : (

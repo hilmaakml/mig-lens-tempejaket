@@ -27,7 +27,7 @@ export default function OfficialChannelsPage() {
 
   return (
     <div className="pb-8">
-      <ScreenHeader titleKey="channels.title" backHref={result ? '/hasil' : '/'} />
+      <ScreenHeader titleKey="channels.title" backHref={result ? '/app/hasil' : '/'} />
 
       <div className="flex flex-col gap-4 px-4 py-4">
         <Notice tone="info">{t('channels.intro')}</Notice>
@@ -167,7 +167,7 @@ export default function OfficialChannelsPage() {
           ))}
         </div>
 
-        <LinkButton href="/pesan">{t('result.action_message')}</LinkButton>
+        <LinkButton href="/app/pesan">{t('result.action_message')}</LinkButton>
       </div>
     </div>
   );

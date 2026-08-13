@@ -97,7 +97,7 @@ export default function ConfirmationPage() {
       return;
     }
     runChecks();
-    router.push('/hasil');
+    router.push('/app/hasil');
   };
 
   const text = (field: keyof OfferClaim, labelKey: MessageKey, inputMode?: 'tel') => (
@@ -116,7 +116,7 @@ export default function ConfirmationPage() {
     <div className="pb-8">
       <ScreenHeader
         titleKey="confirm.title"
-        backHref="/periksa"
+        backHref="/app/periksa"
         showDemoBadge={origin === 'demo'}
       />
 
@@ -235,7 +235,7 @@ export default function ConfirmationPage() {
           <Button variant="primary" onClick={handleSubmit}>
             {t('confirm.submit')}
           </Button>
-          <LinkButton href="/periksa" variant="secondary">
+          <LinkButton href="/app/periksa" variant="secondary">
             {t('confirm.back_to_upload')}
           </LinkButton>
         </div>

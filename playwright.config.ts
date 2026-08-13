@@ -19,7 +19,9 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  // Every page is rendered per request, so a single `next start` is the bottleneck.
+  // Capping workers keeps the four viewport projects from starving each other.
+  workers: process.env.CI ? 1 : 2,
   reporter: [['list']],
   timeout: 60_000,
   use: {

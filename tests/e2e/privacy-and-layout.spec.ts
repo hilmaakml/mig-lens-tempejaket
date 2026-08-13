@@ -3,16 +3,16 @@ import { clickToRoute, clickUntil } from './helpers';
 
 /** Runs the demo check from the upload screen to the result screen. */
 async function runDemoCheck(page: import('@playwright/test').Page) {
-  await page.goto('/periksa');
+  await page.goto('/app/periksa');
   await clickToRoute(
     page,
     page.getByRole('button', { name: /Gunakan contoh tawaran/ }),
-    /\/konfirmasi$/,
+    /\/app\/konfirmasi$/,
   );
   await clickToRoute(
     page,
     page.getByRole('button', { name: 'Lanjutkan pemeriksaan' }),
-    /\/hasil$/,
+    /\/app\/hasil$/,
   );
   await expect(page.getByText('Tunda pembayaran dulu')).toBeVisible();
 }
@@ -155,7 +155,7 @@ test.describe('privacy boundaries (SECURITY.md 13)', () => {
   });
 
   test('marks offer-flow responses no-store', async ({ page }) => {
-    const response = await page.goto('/hasil');
+    const response = await page.goto('/app/hasil');
     expect(response?.headers()['cache-control']).toContain('no-store');
   });
 
@@ -183,13 +183,13 @@ test.describe('privacy boundaries (SECURITY.md 13)', () => {
     // And the page really is interactive: a button-only action must work.
     await clickToRoute(
       page,
-      page.getByRole('link', { name: 'Periksa Tawaran' }),
-      /\/periksa$/,
+      page.getByRole('link', { name: 'Mulai periksa tawaran' }),
+      /\/app\/periksa$/,
     );
     await clickToRoute(
       page,
       page.getByRole('button', { name: 'Tulis Manual' }),
-      /\/konfirmasi$/,
+      /\/app\/konfirmasi$/,
     );
   });
 });
@@ -197,11 +197,12 @@ test.describe('privacy boundaries (SECURITY.md 13)', () => {
 test.describe('mobile layout (DESIGN.md 10)', () => {
   const routes = [
     '/',
-    '/periksa',
-    '/konfirmasi',
-    '/latihan',
-    '/latihan/pola',
-    '/riwayat',
+    '/app',
+    '/app/periksa',
+    '/app/konfirmasi',
+    '/app/latihan',
+    '/app/latihan/pola',
+    '/app/riwayat',
   ];
 
   test('has no horizontal overflow', async ({ page }) => {
@@ -215,7 +216,7 @@ test.describe('mobile layout (DESIGN.md 10)', () => {
   });
 
   test('keeps the bottom navigation reachable', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/app');
     const nav = page.getByRole('navigation', { name: /Navigasi utama/ });
     await expect(nav).toBeInViewport();
     await expect(nav.getByRole('link', { name: 'Periksa' })).toBeVisible();
@@ -229,7 +230,7 @@ test.describe('mobile layout (DESIGN.md 10)', () => {
   });
 
   test('keeps critical content readable at 200% zoom', async ({ page }) => {
-    await page.goto('/periksa');
+    await page.goto('/app/periksa');
     await page.evaluate(() => {
       document.documentElement.style.fontSize = '200%';
     });
@@ -243,25 +244,25 @@ test.describe('mobile layout (DESIGN.md 10)', () => {
   });
 
   test('supports keyboard-only completion of the demo flow', async ({ page }) => {
-    await page.goto('/periksa');
+    await page.goto('/app/periksa');
     const demoButton = page.getByRole('button', { name: /Gunakan contoh tawaran/ });
     await expect(async () => {
       await demoButton.focus();
       await page.keyboard.press('Enter');
-      await expect(page).toHaveURL(/\/konfirmasi$/, { timeout: 1500 });
+      await expect(page).toHaveURL(/\/app\/konfirmasi$/, { timeout: 1500 });
     }).toPass({ timeout: 20_000 });
 
     const submit = page.getByRole('button', { name: 'Lanjutkan pemeriksaan' });
     await expect(async () => {
       await submit.focus();
       await page.keyboard.press('Enter');
-      await expect(page).toHaveURL(/\/hasil$/, { timeout: 1500 });
+      await expect(page).toHaveURL(/\/app\/hasil$/, { timeout: 1500 });
     }).toPass({ timeout: 20_000 });
     await expect(page.getByText('Tunda pembayaran dulu')).toBeVisible();
   });
 
   test('exposes a working skip link', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/app');
     await page.keyboard.press('Tab');
     await expect(
       page.getByRole('link', { name: /Lewati ke konten utama/ }),

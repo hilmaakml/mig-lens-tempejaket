@@ -5,7 +5,7 @@ import { FlowHarness } from '../helpers/flow-harness';
 import { resetNavigation, getRoute } from '../helpers/navigation-mock';
 import { LOCALE_STORAGE_KEY } from '@/domain/privacy/locale-storage';
 
-beforeEach(() => resetNavigation('/periksa'));
+beforeEach(() => resetNavigation('/app/periksa'));
 
 const switchTo = async (
   user: ReturnType<typeof renderApp>['user'],
@@ -33,7 +33,7 @@ describe('state-preserving language switching (DESIGN.md 2, TESTING.md 3)', () =
     await switchTo(user, 'Bahasa Inggris');
 
     // Same route, same result, English copy.
-    expect(getRoute()).toBe('/hasil');
+    expect(getRoute()).toBe('/app/hasil');
     expect(await screen.findByText('Hold off on paying')).toBeInTheDocument();
     const enList = screen.getByRole('list', {
       name: 'List of triggered risk indicators',
@@ -46,7 +46,7 @@ describe('state-preserving language switching (DESIGN.md 2, TESTING.md 3)', () =
 
     expect(await screen.findByText('Tunda pembayaran dulu')).toBeInTheDocument();
     expect(screen.getByText('Ditemukan di sumber resmi')).toBeInTheDocument();
-    expect(getRoute()).toBe('/hasil');
+    expect(getRoute()).toBe('/app/hasil');
   });
 
   it('keeps entered form values when the language changes mid-form', async () => {

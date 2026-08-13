@@ -1,6 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 import { BottomNav } from '@/components/layout/bottom-nav';
 import { OfflineNotice } from '@/components/layout/offline-notice';
 import { useLocale } from '@/app/providers/locale-provider';
@@ -8,9 +9,14 @@ import { useLocale } from '@/app/providers/locale-provider';
 /**
  * Mobile-first shell (DESIGN.md 2): fills the viewport on a phone, centres an ~430 px
  * column on wider screens, and shows no fake device frame or fake OS status bar.
+ *
+ * The bottom navigation belongs to the application itself, so it appears under `/app`
+ * only. The public landing page at `/` has its own in-page navigation.
  */
 export function AppShell({ children }: { children: ReactNode }) {
   const { t } = useLocale();
+  const pathname = usePathname();
+  const isAppRoute = pathname === '/app' || pathname.startsWith('/app/');
 
   return (
     <div className="flex min-h-dvh justify-center bg-surface-page">
@@ -28,7 +34,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         >
           <main className="animate-fade-up">{children}</main>
         </div>
-        <BottomNav />
+        {isAppRoute ? <BottomNav /> : null}
       </div>
     </div>
   );

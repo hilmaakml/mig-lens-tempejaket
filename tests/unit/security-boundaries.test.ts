@@ -185,7 +185,13 @@ describe('service-worker cache policy (SECURITY.md 10)', () => {
   const source = readFileSync(join(projectRoot, 'public', 'sw.js'), 'utf8');
 
   it('excludes every offer-flow route from caching', () => {
-    for (const route of ['/periksa', '/konfirmasi', '/hasil', '/bagikan', '/pesan']) {
+    for (const route of [
+      '/app/periksa',
+      '/app/konfirmasi',
+      '/app/hasil',
+      '/app/bagikan',
+      '/app/pesan',
+    ]) {
       expect(source).toContain(`'${route}'`);
     }
   });
@@ -195,7 +201,13 @@ describe('service-worker cache policy (SECURITY.md 10)', () => {
       source.indexOf('const SHELL_ASSETS'),
       source.indexOf('self.addEventListener'),
     );
-    for (const route of ['/periksa', '/konfirmasi', '/hasil', '/bagikan', '/pesan']) {
+    for (const route of [
+      '/app/periksa',
+      '/app/konfirmasi',
+      '/app/hasil',
+      '/app/bagikan',
+      '/app/pesan',
+    ]) {
       expect(shellBlock).not.toContain(route);
     }
   });

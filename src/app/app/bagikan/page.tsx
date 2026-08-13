@@ -29,12 +29,12 @@ export default function SharePage() {
   if (!summary) {
     return (
       <div className="pb-8">
-        <ScreenHeader titleKey="share.title" backHref="/periksa" />
+        <ScreenHeader titleKey="share.title" backHref="/app/periksa" />
         <div className="flex flex-col gap-4 px-4 py-4">
           <Notice tone="info" title={t('result.no_state_title')} role="status">
             {t('result.no_state_body')}
           </Notice>
-          <LinkButton href="/periksa">{t('result.no_state_cta')}</LinkButton>
+          <LinkButton href="/app/periksa">{t('result.no_state_cta')}</LinkButton>
         </div>
       </div>
     );
@@ -50,7 +50,7 @@ export default function SharePage() {
     <div className="pb-8">
       <ScreenHeader
         titleKey="share.title"
-        backHref="/hasil"
+        backHref="/app/hasil"
         showDemoBadge={summary.isDemo}
       />
 

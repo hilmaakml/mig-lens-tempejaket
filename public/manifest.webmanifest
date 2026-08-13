@@ -2,7 +2,7 @@
   "name": "MigLens",
   "short_name": "MigLens",
   "description": "Pemeriksa tawaran kerja berbasis bukti untuk calon pekerja migran. / An evidence-based job offer checker for prospective migrant workers.",
-  "start_url": "/",
+  "start_url": "/app",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",

@@ -3,25 +3,85 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/assets/logo.jpg';
-import { Icon } from '@/components/ui/icon';
-import { Notice } from '@/components/ui/notice';
+import { Icon, type IconName } from '@/components/ui/icon';
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
 import { useLocale } from '@/app/providers/locale-provider';
-import { useProgress } from '@/features/progress/use-progress';
+import type { MessageKey } from '@/content/locales/message-key';
 
-export default function HomePage() {
+/**
+ * Public landing page.
+ *
+ * It explains the problem, who the product is for, how a check works, and — required by
+ * PRD FR-01 and SECURITY.md — what the product does not claim and what it does not store.
+ * The application itself lives under `/app`; this page carries no bottom navigation and
+ * holds no offer state.
+ */
+
+interface Step {
+  readonly titleKey: MessageKey;
+  readonly bodyKey: MessageKey;
+  readonly icon: IconName;
+}
+
+const STEPS: readonly Step[] = [
+  {
+    titleKey: 'landing.how.step1.title',
+    bodyKey: 'landing.how.step1.body',
+    icon: 'upload',
+  },
+  {
+    titleKey: 'landing.how.step2.title',
+    bodyKey: 'landing.how.step2.body',
+    icon: 'pencil',
+  },
+  {
+    titleKey: 'landing.how.step3.title',
+    bodyKey: 'landing.how.step3.body',
+    icon: 'search',
+  },
+  {
+    titleKey: 'landing.how.step4.title',
+    bodyKey: 'landing.how.step4.body',
+    icon: 'shield-check',
+  },
+];
+
+const AUDIENCES: readonly { titleKey: MessageKey; bodyKey: MessageKey }[] = [
+  {
+    titleKey: 'landing.audience.cpmi.title',
+    bodyKey: 'landing.audience.cpmi.body',
+  },
+  {
+    titleKey: 'landing.audience.pmi.title',
+    bodyKey: 'landing.audience.pmi.body',
+  },
+];
+
+const LIMITS: readonly { titleKey: MessageKey; bodyKey: MessageKey; icon: IconName }[] = [
+  {
+    titleKey: 'landing.limits.verdict.title',
+    bodyKey: 'landing.limits.verdict.body',
+    icon: 'info',
+  },
+  {
+    titleKey: 'landing.limits.privacy.title',
+    bodyKey: 'landing.limits.privacy.body',
+    icon: 'shield',
+  },
+  {
+    titleKey: 'landing.limits.sources.title',
+    bodyKey: 'landing.limits.sources.body',
+    icon: 'external',
+  },
+];
+
+export default function LandingPage() {
   const { t } = useLocale();
 
-  // Explainable count, not a decorative score: distinct core verification steps the user
-  // has actually practised (PRD FR-14). A first-time visitor sees 0.
-  const { readinessDone: practised, readinessTotal } = useProgress();
-
   return (
-    <div className="pb-8">
-      <div className="flex items-center justify-between gap-2 px-4 pt-3 pb-2">
-        <div className="flex items-center gap-2">
-          {/* Brand mark. The `shield-check` icon elsewhere is a functional success icon,
-              not the logo, so it stays as it is. */}
+    <div className="pb-10">
+      <header className="flex items-center justify-between gap-2 px-4 pt-3 pb-2">
+        <span className="flex items-center gap-2">
           <Image
             src={logo}
             alt=""
@@ -34,105 +94,156 @@ export default function HomePage() {
           <span className="text-xl font-extrabold tracking-tight text-text-primary">
             {t('app.name')}
           </span>
-        </div>
+        </span>
         <LanguageSwitcher />
-      </div>
+      </header>
 
-      <div className="flex flex-col gap-4 px-4 pb-4">
+      <div className="flex flex-col gap-8 px-4 pt-2">
+        {/* Hero */}
         <section className="rounded-hero bg-brand-dark p-6 text-white">
           <p className="font-mono text-[11px] font-semibold tracking-[0.16em] text-brand-accent">
-            {t('home.hero.eyebrow')}
+            {t('landing.hero.eyebrow')}
           </p>
-          <h2 className="mt-3 text-[26px] leading-tight font-extrabold tracking-tight">
-            {t('home.hero.title')}
-          </h2>
-          <p className="mt-2 mb-5 text-[14.5px] leading-relaxed text-white/80">
-            {t('home.hero.body')}
+          <h1 className="mt-3 text-[26px] leading-tight font-extrabold tracking-tight">
+            {t('landing.hero.title')}
+          </h1>
+          <p className="mt-3 text-[14.5px] leading-relaxed text-white/85">
+            {t('landing.hero.body')}
           </p>
           <Link
-            href="/periksa"
-            className="flex min-h-11 w-full items-center justify-center gap-2 rounded-button bg-white px-4 py-4 text-base font-bold text-brand-dark"
+            href="/app/periksa"
+            className="mt-5 flex min-h-11 w-full items-center justify-center gap-2 rounded-button bg-white px-4 py-4 text-base font-bold text-brand-dark"
           >
             <Icon name="search" size={21} />
-            {t('home.hero.cta')}
+            {t('landing.hero.cta')}
           </Link>
+          <a
+            href="#cara-kerja"
+            className="mt-2 flex min-h-11 w-full items-center justify-center gap-2 rounded-button border-[1.5px] border-white/35 px-4 py-3 text-[14.5px] font-bold text-white"
+          >
+            {t('landing.hero.secondary')}
+          </a>
         </section>
 
-        <Notice tone="info">{t('home.scope_notice')}</Notice>
-        <Notice tone="warning">{t('home.privacy_reminder')}</Notice>
-
-        <Link
-          href="/latihan"
-          className="flex items-center gap-3 rounded-card border border-border-default bg-surface-card p-4"
-        >
-          <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-unknown-bg text-text-secondary">
-            <Icon name="graduation" size={22} />
-          </span>
-          <span className="flex-1">
-            <span className="block text-[15px] font-bold text-text-primary">
-              {t('home.learning.title')}
-            </span>
-            <span className="mt-0.5 block text-[12.5px] text-text-muted">
-              {t('home.learning.body')}
-            </span>
-          </span>
-          <Icon name="chevron-right" size={20} className="text-border-strong" />
-        </Link>
-
-        <Link
-          href="/riwayat"
-          className="block rounded-card border border-border-default bg-surface-card p-4"
-        >
-          <span className="flex items-baseline justify-between">
-            <span className="text-sm font-bold text-text-primary">
-              {t('home.progress.title')}
-            </span>
-            <span className="text-xl font-extrabold text-brand-primary">
-              {t('home.progress.value', { done: practised, total: readinessTotal })}
-            </span>
-          </span>
-          <span className="my-3 flex gap-1.5" aria-hidden="true">
-            {Array.from({ length: readinessTotal }, (_, index) => (
-              <span
-                key={index}
-                className={`h-2 flex-1 rounded-full ${
-                  index < practised ? 'bg-brand-primary' : 'bg-border-default'
-                }`}
-              />
-            ))}
-          </span>
-          <span className="block text-[12.5px] text-text-muted">
-            {t('home.progress.body', { done: practised, total: readinessTotal })}
-          </span>
-        </Link>
-
-        <section className="overflow-hidden rounded-card border border-border-default bg-surface-card">
-          <h3 className="px-4 pt-4 text-xs font-bold tracking-wide text-text-muted uppercase">
-            {t('home.scenario.section')}
-          </h3>
-          <p className="px-4 pt-1 text-[11.5px] leading-snug text-text-faint">
-            {t('home.scenario.note')}
+        {/* The problem */}
+        <section aria-labelledby="masalah">
+          <h2
+            id="masalah"
+            className="text-xs font-bold tracking-wide text-text-muted uppercase"
+          >
+            {t('landing.problem.section')}
+          </h2>
+          <p className="mt-2 text-lg leading-snug font-extrabold text-text-primary">
+            {t('landing.problem.title')}
           </p>
-          <Link href="/skenario" className="flex items-center gap-3 px-4 pt-2 pb-4">
-            <span
-              className="size-11 shrink-0 rounded-full"
-              style={{
-                background:
-                  'repeating-linear-gradient(135deg,#E4E8E5,#E4E8E5 6px,#EDF0EE 6px,#EDF0EE 12px)',
-              }}
-              aria-hidden="true"
-            />
-            <span className="flex-1">
-              <span className="block text-[14.5px] font-bold text-text-primary">
-                {t('home.scenario.title')}
-              </span>
-              <span className="mt-0.5 block text-[12.5px] leading-snug text-text-muted">
-                {t('home.scenario.quote')}
-              </span>
-            </span>
-            <Icon name="chevron-right" size={20} className="text-border-strong" />
+          <p className="mt-2 text-[13.5px] leading-relaxed text-text-secondary">
+            {t('landing.problem.body')}
+          </p>
+        </section>
+
+        {/* Who it is for */}
+        <section aria-labelledby="untuk-siapa">
+          <h2
+            id="untuk-siapa"
+            className="text-xs font-bold tracking-wide text-text-muted uppercase"
+          >
+            {t('landing.audience.section')}
+          </h2>
+          <ul className="mt-3 flex flex-col gap-2.5">
+            {AUDIENCES.map((audience) => (
+              <li
+                key={audience.titleKey}
+                className="rounded-card border border-border-default bg-surface-card p-4"
+              >
+                <p className="text-[14.5px] font-bold text-text-primary">
+                  {t(audience.titleKey)}
+                </p>
+                <p className="mt-1 text-[12.5px] leading-relaxed text-text-secondary">
+                  {t(audience.bodyKey)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* How it works */}
+        <section aria-labelledby="cara-kerja" className="scroll-mt-4">
+          <h2
+            id="cara-kerja"
+            className="text-xs font-bold tracking-wide text-text-muted uppercase"
+          >
+            {t('landing.how.section')}
+          </h2>
+          <ol className="mt-3 flex flex-col gap-2.5">
+            {STEPS.map((step, index) => (
+              <li
+                key={step.titleKey}
+                className="flex items-start gap-3 rounded-card border border-border-default bg-surface-card p-4"
+              >
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-match-bg text-brand-primary">
+                  <Icon name={step.icon} size={19} />
+                </span>
+                <span className="flex-1">
+                  <span className="block text-[11px] font-bold text-text-faint">
+                    {index + 1}
+                  </span>
+                  <span className="block text-[14.5px] font-bold text-text-primary">
+                    {t(step.titleKey)}
+                  </span>
+                  <span className="mt-1 block text-[12.5px] leading-relaxed text-text-secondary">
+                    {t(step.bodyKey)}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* Limits and privacy */}
+        <section aria-labelledby="batasan">
+          <h2
+            id="batasan"
+            className="text-xs font-bold tracking-wide text-text-muted uppercase"
+          >
+            {t('landing.limits.section')}
+          </h2>
+          <ul className="mt-3 flex flex-col gap-2.5">
+            {LIMITS.map((limit) => (
+              <li
+                key={limit.titleKey}
+                className="rounded-card border border-border-default bg-unknown-bg p-4"
+              >
+                <p className="flex items-center gap-2 text-[14px] font-bold text-text-primary">
+                  <Icon name={limit.icon} size={17} className="shrink-0" />
+                  {t(limit.titleKey)}
+                </p>
+                <p className="mt-1.5 text-[12.5px] leading-relaxed text-text-secondary">
+                  {t(limit.bodyKey)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Closing call to action */}
+        <section className="flex flex-col gap-3 rounded-card border border-border-default bg-surface-card p-5">
+          <Link
+            href="/app/periksa"
+            className="flex min-h-11 w-full items-center justify-center gap-2 rounded-button bg-brand-primary px-4 py-4 text-base font-bold text-white"
+          >
+            {t('landing.footer.cta')}
+          </Link>
+          <Link
+            href="/app"
+            className="flex min-h-11 w-full items-center justify-center rounded-button border-[1.5px] border-border-strong px-4 py-3 text-[14.5px] font-bold text-brand-dark"
+          >
+            {t('nav.home')}
           </Link>
         </section>
+
+        <footer className="border-t border-border-default pt-4 text-[11.5px] leading-relaxed text-text-muted">
+          {t('landing.footer.disclaimer')}
+        </footer>
       </div>
     </div>
   );
