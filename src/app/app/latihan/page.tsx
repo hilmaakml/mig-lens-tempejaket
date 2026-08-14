@@ -8,6 +8,7 @@ import { Notice } from '@/components/ui/notice';
 import { useLocale } from '@/app/providers/locale-provider';
 import { useOffer } from '@/app/providers/offer-provider';
 import { mapExercise } from '@/domain/learning/exercise-mapping';
+import { firstScenarioForExercise } from '@/domain/learning/scenarios';
 import { useProgress, type ExerciseProgress } from '@/features/progress/use-progress';
 
 export default function LearningPage() {
@@ -69,6 +70,8 @@ export default function LearningPage() {
 function ExerciseLink({ entry }: { readonly entry: ExerciseProgress }) {
   const { t } = useLocale();
   const isAvailable = entry.total > 0;
+  // Open the exercise at its own scenario rather than whichever one happens to be first.
+  const scenario = firstScenarioForExercise(entry.exercise.id);
 
   const body = (
     <>
@@ -102,8 +105,8 @@ function ExerciseLink({ entry }: { readonly entry: ExerciseProgress }) {
     'flex items-center gap-3 rounded-card border border-border-default bg-surface-card p-4';
 
   // An exercise with no scenario is not a link: it would be a dead end.
-  return isAvailable ? (
-    <Link href="/app/latihan/simulasi" className={className}>
+  return isAvailable && scenario ? (
+    <Link href={`/app/latihan/simulasi#${scenario.id}`} className={className}>
       {body}
     </Link>
   ) : (
