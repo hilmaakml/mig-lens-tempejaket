@@ -86,7 +86,7 @@ describe('no old brand name reaches the user', () => {
 
   it('uses a renamed service-worker cache so the old shell is dropped', () => {
     const source = readFileSync(join(projectRoot, 'public', 'sw.js'), 'utf8');
-    expect(source).toContain("const CACHE_VERSION = 'miglens-shell-v3'");
+    expect(source).toContain("const CACHE_VERSION = 'miglens-shell-v4'");
     expect(source).toContain('caches.delete');
   });
 });

@@ -44,3 +44,18 @@ export async function switchLanguage(
     expect(page.locator('html')).toHaveAttribute('lang', expectedLang, { timeout: 2000 }),
   );
 }
+
+/**
+ * Marks first-run onboarding complete before a test navigates, so suites that exercise the
+ * application itself are not gated by it. Seeded per origin via an init script, which runs
+ * before any page script.
+ */
+export async function skipOnboarding(page: Page): Promise<void> {
+  await page.addInitScript(() => {
+    try {
+      window.localStorage.setItem('miglens.onboarding.v1.completed', 'true');
+    } catch {
+      /* storage unavailable: the test will see onboarding, which its assertions cover */
+    }
+  });
+}

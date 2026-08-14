@@ -33,6 +33,7 @@ export type IconName =
   | 'home'
   | 'arrow-right'
   | 'bolt'
+  | 'book'
   | 'cross';
 
 const PATHS: Record<IconName, React.ReactNode> = {
@@ -169,6 +170,12 @@ const PATHS: Record<IconName, React.ReactNode> = {
     </>
   ),
   bolt: <path d="M13 3L5 14h6l-1 7 8-11h-6z" />,
+  book: (
+    <>
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z" />
+      <path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H19v3H6.5A2.5 2.5 0 0 1 4 20.5z" />
+    </>
+  ),
   cross: (
     <>
       <path d="M6 6l12 12" />

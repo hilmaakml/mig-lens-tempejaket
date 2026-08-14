@@ -29,16 +29,17 @@ Any change to these invariants requires a separately reviewed product, privacy, 
 
 ## 3. Data classification
 
-| Class                   | Examples                                                                                        | MVP handling                                                                                                                   |
-| ----------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Prohibited input        | KTP, passport, identity number, selfie/biometric, exact home address                            | Warn users not to submit; do not build fields for it                                                                           |
-| Sensitive offer content | Screenshot, OCR text, phone, email, account, recruiter name, contract details                   | Memory only; never networked or persisted by default                                                                           |
-| Confirmed claims        | User-corrected company, role, country, fee, deadline                                            | Memory only during the active flow                                                                                             |
-| Redacted output         | Masked identifiers, evidence statuses, official URLs, next actions                              | May be previewed/copied only after redaction                                                                                   |
-| Approved reference data | Reviewed source snapshots and metadata                                                          | Versioned, validated, separate from user data                                                                                  |
-| Synthetic fixtures      | Fictional demo offers and records                                                               | Explicit `isDemo: true`; never used as live fallback                                                                           |
-| UI language preference  | `uiLocale` with value `id` or `en` only                                                         | May be stored locally; must never be bundled with offer state or identifiers                                                   |
-| Local progress metadata | Completed scenario ids, check timestamps, indicator and evidence counts, rule/snapshot versions | May be stored locally under `migranshield.progress`; schema-validated allowlist, capped at 20 checks, user-erasable (ADR 0003) |
+| Class                     | Examples                                                                                        | MVP handling                                                                                                              |
+| ------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Prohibited input          | KTP, passport, identity number, selfie/biometric, exact home address                            | Warn users not to submit; do not build fields for it                                                                      |
+| Sensitive offer content   | Screenshot, OCR text, phone, email, account, recruiter name, contract details                   | Memory only; never networked or persisted by default                                                                      |
+| Confirmed claims          | User-corrected company, role, country, fee, deadline                                            | Memory only during the active flow                                                                                        |
+| Redacted output           | Masked identifiers, evidence statuses, official URLs, next actions                              | May be previewed/copied only after redaction                                                                              |
+| Approved reference data   | Reviewed source snapshots and metadata                                                          | Versioned, validated, separate from user data                                                                             |
+| Synthetic fixtures        | Fictional demo offers and records                                                               | Explicit `isDemo: true`; never used as live fallback                                                                      |
+| UI language preference    | `uiLocale` with value `id` or `en` only                                                         | May be stored locally; must never be bundled with offer state or identifiers                                              |
+| Local progress metadata   | Completed scenario ids, check timestamps, indicator and evidence counts, rule/snapshot versions | May be stored locally under `miglens.progress`; schema-validated allowlist, capped at 20 checks, user-erasable (ADR 0003) |
+| First-run onboarding flag | `miglens.onboarding.v1.completed` with the single value `true`                                  | May be stored locally; written only on an explicit start or skip action; never combined with any other value (ADR 0004)   |
 
 ## 4. Upload security
 
@@ -75,7 +76,8 @@ Do not print OCR content to the console. Error messages may include a safe error
 ## 6. Application state and browser storage
 
 - Hold offer state in memory only.
-- Exactly two keys may be persisted: the non-sensitive `uiLocale` enum (`id` or `en`) and the minimised progress record `migranshield.progress` (ADR 0003). Store each under its own dedicated key, validate both before use, and never serialize offer state beside them.
+- Exactly three keys may be persisted: the non-sensitive `uiLocale` enum (`id` or `en`), the minimised progress record `miglens.progress` (ADR 0003), and the first-run onboarding flag `miglens.onboarding.v1.completed` (ADR 0004). Store each under its own dedicated key, validate all three before use, and never serialize offer state beside them.
+- The onboarding flag holds the single value `true` and nothing else: no timestamp, identifier, device fingerprint, navigation history, or source route. A missing, malformed, or unexpected value means "not completed".
 - The progress record is defined by a runtime allowlist schema. It has no field for an image, OCR text, raw offer content, company or recruiter name, phone, account, email, identifier, payment amount, contract, or visa, and adding one is a reviewed privacy decision.
 - Storage failure, corruption, or an unknown schema must degrade to the empty state and an in-memory session, never to a crash.
 - The user must be able to delete progress and history without losing the language preference.

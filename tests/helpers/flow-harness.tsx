@@ -9,6 +9,7 @@ import LearningPage from '@/app/app/latihan/page';
 import LandingPage from '@/app/page';
 import HomePage from '@/app/app/page';
 import ProgressPage from '@/app/app/riwayat/page';
+import GuidePage from '@/app/app/panduan/page';
 import SimulationPage from '@/app/app/latihan/simulasi/page';
 import { getRoute, navigationState, subscribeToRoute } from './navigation-mock';
 
@@ -24,6 +25,7 @@ const SCREENS: Record<string, () => React.JSX.Element> = {
   '/app/latihan': LearningPage,
   '/app/riwayat': ProgressPage,
   '/app/latihan/simulasi': SimulationPage,
+  '/app/panduan': GuidePage,
 };
 
 /**

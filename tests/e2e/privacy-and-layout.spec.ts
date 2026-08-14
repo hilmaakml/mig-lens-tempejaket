@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
-import { clickToRoute, clickUntil } from './helpers';
+import { clickToRoute, clickUntil, skipOnboarding } from './helpers';
+
+test.beforeEach(async ({ page }) => skipOnboarding(page));
 
 /** Runs the demo check from the upload screen to the result screen. */
 async function runDemoCheck(page: import('@playwright/test').Page) {
@@ -87,8 +89,15 @@ test.describe('privacy boundaries (SECURITY.md 13)', () => {
       expect(blob).not.toContain(marker);
     }
     // Only the language preference may be persisted.
+    // Only the three approved preference keys may exist (SECURITY.md 6, ADR 0003, 0004).
     const localKeys = Object.keys(JSON.parse(stored.local) as Record<string, string>);
-    expect(localKeys.every((key) => key === 'migranshield.uiLocale')).toBe(true);
+    for (const key of localKeys) {
+      expect([
+        'miglens.uiLocale',
+        'miglens.progress',
+        'miglens.onboarding.v1.completed',
+      ]).toContain(key);
+    }
   });
 
   test('logs no sensitive content to the console', async ({ page }) => {
@@ -164,7 +173,7 @@ test.describe('privacy boundaries (SECURITY.md 13)', () => {
   }) => {
     // Regression guard: with `strict-dynamic`, a document served without the per-request
     // nonce blocks all of Next's scripts. Links keep working, buttons silently do not.
-    const response = await page.goto('/');
+    const response = await page.goto('/app');
     const csp = response?.headers()['content-security-policy'] ?? '';
     const nonce = /'nonce-([^']+)'/.exec(csp)?.[1];
     expect(nonce, 'CSP header must carry a nonce').toBeTruthy();
@@ -183,7 +192,7 @@ test.describe('privacy boundaries (SECURITY.md 13)', () => {
     // And the page really is interactive: a button-only action must work.
     await clickToRoute(
       page,
-      page.getByRole('link', { name: 'Mulai periksa tawaran' }),
+      page.getByRole('link', { name: 'Periksa Tawaran' }),
       /\/app\/periksa$/,
     );
     await clickToRoute(
@@ -196,7 +205,6 @@ test.describe('privacy boundaries (SECURITY.md 13)', () => {
 
 test.describe('mobile layout (DESIGN.md 10)', () => {
   const routes = [
-    '/',
     '/app',
     '/app/periksa',
     '/app/konfirmasi',

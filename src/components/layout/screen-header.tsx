@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { Icon } from '@/components/ui/icon';
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
+import { GuideLink } from '@/components/layout/guide-link';
 import { useLocale } from '@/app/providers/locale-provider';
 import type { MessageKey } from '@/content/locales/message-key';
 
@@ -11,13 +12,20 @@ interface ScreenHeaderProps {
   /** Route the back control returns to. Omit to hide the back control. */
   readonly backHref?: string;
   readonly showDemoBadge?: boolean;
+  /** The Guide screen itself hides the control that opens it. */
+  readonly hideGuideLink?: boolean;
 }
 
 /**
  * Sticky screen header with a predictable back action and the language control in a
  * consistent position on every public screen (DESIGN.md 2).
  */
-export function ScreenHeader({ titleKey, backHref, showDemoBadge }: ScreenHeaderProps) {
+export function ScreenHeader({
+  titleKey,
+  backHref,
+  showDemoBadge,
+  hideGuideLink,
+}: ScreenHeaderProps) {
   const router = useRouter();
   const { t } = useLocale();
 
@@ -41,6 +49,7 @@ export function ScreenHeader({ titleKey, backHref, showDemoBadge }: ScreenHeader
           {t('app.demo_badge_short')}
         </span>
       ) : null}
+      {hideGuideLink ? null : <GuideLink />}
       <LanguageSwitcher />
     </header>
   );

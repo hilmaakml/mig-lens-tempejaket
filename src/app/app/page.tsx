@@ -3,9 +3,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/assets/logo.jpg';
+import caseIllustration from '@/assets/kasus-herlambang.png';
 import { Icon } from '@/components/ui/icon';
 import { Notice } from '@/components/ui/notice';
 import { LanguageSwitcher } from '@/components/layout/language-switcher';
+import { GuideLink } from '@/components/layout/guide-link';
 import { useLocale } from '@/app/providers/locale-provider';
 import { useProgress } from '@/features/progress/use-progress';
 
@@ -35,7 +37,10 @@ export default function HomePage() {
             {t('app.name')}
           </span>
         </div>
-        <LanguageSwitcher />
+        <span className="flex shrink-0 items-center gap-1">
+          <GuideLink />
+          <LanguageSwitcher />
+        </span>
       </div>
 
       <div className="flex flex-col gap-4 px-4 pb-4">
@@ -114,13 +119,13 @@ export default function HomePage() {
             {t('home.scenario.note')}
           </p>
           <Link href="/app/skenario" className="flex items-center gap-3 px-4 pt-2 pb-4">
-            <span
-              className="size-11 shrink-0 rounded-full"
-              style={{
-                background:
-                  'repeating-linear-gradient(135deg,#E4E8E5,#E4E8E5 6px,#EDF0EE 6px,#EDF0EE 12px)',
-              }}
+            <Image
+              src={caseIllustration}
+              alt=""
               aria-hidden="true"
+              width={88}
+              height={88}
+              className="size-11 shrink-0 rounded-full object-cover"
             />
             <span className="flex-1">
               <span className="block text-[14.5px] font-bold text-text-primary">

@@ -12,7 +12,7 @@
 // Bumped with the product rename. `activate` deletes every cache whose key differs, so
 // the previous shell cache is cleared. This only touches the Cache Storage shell; it
 // never touches localStorage, where the user's progress and history live.
-const CACHE_VERSION = 'miglens-shell-v3';
+const CACHE_VERSION = 'miglens-shell-v4';
 
 /** Routes whose responses may never enter a cache. */
 const EXCLUDED_PATH_PREFIXES = [
@@ -28,6 +28,7 @@ const EXCLUDED_PATH_PREFIXES = [
 const SHELL_ASSETS = [
   '/',
   '/app',
+  '/app/panduan',
   '/app/latihan',
   '/app/latihan/pola',
   '/app/skenario',

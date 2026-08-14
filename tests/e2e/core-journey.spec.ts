@@ -1,11 +1,18 @@
 import { expect, test, type Page } from '@playwright/test';
-import { clickToRoute, clickUntil, switchLanguage } from './helpers';
+import { clickToRoute, clickUntil, skipOnboarding, switchLanguage } from './helpers';
+
+// The application suites assume onboarding is already done; the onboarding suite
+// covers the first-run gate itself.
+test.beforeEach(async ({ page }) => skipOnboarding(page));
 
 /** Drives the demo journey from home to the result screen. */
 async function runDemoJourney(page: Page) {
-  await page.goto('/');
-  await page.getByRole('link', { name: 'Mulai periksa tawaran' }).click();
-  await expect(page).toHaveURL(/\/app\/periksa$/);
+  await page.goto('/app');
+  await clickToRoute(
+    page,
+    page.getByRole('link', { name: 'Periksa Tawaran' }),
+    /\/app\/periksa$/,
+  );
   await clickToRoute(
     page,
     page.getByRole('button', { name: /Gunakan contoh tawaran/ }),
@@ -146,11 +153,8 @@ test.describe('core journey', () => {
     );
   });
 
-  test('reaches the landing page and every one of the twelve app screens', async ({
-    page,
-  }) => {
+  test('reaches every application screen without a dead end', async ({ page }) => {
     const routes = [
-      '/',
       '/app',
       '/app/periksa',
       '/app/konfirmasi',
@@ -167,23 +171,23 @@ test.describe('core journey', () => {
     for (const route of routes) {
       await page.goto(route);
       await expect(page.locator('main')).toBeVisible();
-      // The bottom navigation belongs to the application, not the public landing page.
-      const nav = page.getByRole('navigation', { name: /Navigasi utama/ });
-      if (route === '/') {
-        await expect(nav).toHaveCount(0);
-      } else {
-        await expect(nav).toBeVisible();
-      }
+      await expect(
+        page.getByRole('navigation', { name: /Navigasi utama/ }),
+      ).toBeVisible();
     }
   });
 });
 
 test.describe('bilingual flow', () => {
   test('completes manual entry in English', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/app');
     await switchLanguage(page, 'Bahasa Inggris', 'en-GB');
 
-    await page.getByRole('link', { name: 'Start checking an offer' }).click();
+    await clickToRoute(
+      page,
+      page.getByRole('link', { name: 'Check an offer' }),
+      /\/app\/periksa$/,
+    );
     await clickToRoute(
       page,
       page.getByRole('button', { name: 'Type manually' }),
@@ -228,7 +232,6 @@ test.describe('bilingual flow', () => {
       await page.goto('/');
       await switchLanguage(page, locale.option, locale.lang);
       for (const route of [
-        '/',
         '/app',
         '/app/periksa',
         '/app/latihan',

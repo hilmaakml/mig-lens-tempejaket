@@ -103,6 +103,10 @@
   .animate-toast-in {
     animation: toastIn 0.2s ease;
   }
+
+  .animate-delayed-fallback {
+    animation: delayedFallback 4s step-end forwards;
+  }
 }
 
 @keyframes fadeUp {
@@ -113,6 +117,20 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* Escape hatch on the entry route: hidden while a normal resolution happens, revealed if
+   client JavaScript never resolves the first-run flag. */
+@keyframes delayedFallback {
+  0%,
+  99% {
+    opacity: 0;
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 
@@ -128,7 +146,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
+  /* The delayed escape hatch is a functional timer, not decorative motion, so it keeps
+     its delay here; collapsing it would surface the link during a normal fast load. */
+  *:not(.animate-delayed-fallback),
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
