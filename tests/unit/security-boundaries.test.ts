@@ -226,6 +226,14 @@ describe('security headers and CSP (SECURITY.md 10)', () => {
     expect(middleware).not.toContain("script-src 'self' 'unsafe-inline'");
   });
 
+  it('applies upgrade-insecure-requests only on an HTTPS origin', () => {
+    // On a plain-HTTP origin the directive rewrites same-origin subresources to https://,
+    // which has no listener — stylesheets and scripts then fail silently. That breaks
+    // device testing over a LAN address, so it is conditional.
+    expect(middleware).toContain('isHttps');
+    expect(middleware).toContain("...(isHttps ? ['upgrade-insecure-requests'] : [])");
+  });
+
   it('restricts connections, frames, and objects', () => {
     expect(middleware).toContain("connect-src 'self'");
     expect(middleware).toContain("frame-ancestors 'none'");

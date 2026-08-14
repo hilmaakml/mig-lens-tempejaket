@@ -1,3 +1,29 @@
+import { networkInterfaces } from 'node:os';
+
+/**
+ * Hosts allowed to load Next's development resources.
+ *
+ * Testing on a real phone means opening the dev server over the LAN, which Next blocks by
+ * default. Rather than hard-coding an address that changes with the network, the machine's
+ * own private IPv4 addresses are detected at start-up. This affects `next dev` only; the
+ * production server ignores it.
+ *
+ * Override with `ALLOWED_DEV_ORIGINS=host1,host2` when the detected list is not enough.
+ */
+function localDevOrigins() {
+  const fromEnv = (process.env.ALLOWED_DEV_ORIGINS ?? '')
+    .split(',')
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  const detected = Object.values(networkInterfaces())
+    .flat()
+    .filter((entry) => entry && entry.family === 'IPv4' && !entry.internal)
+    .map((entry) => entry.address);
+
+  return [...new Set([...fromEnv, ...detected])];
+}
+
 /**
  * Security headers are required by SECURITY.md section 10.
  * Content-Security-Policy is emitted per-request with a nonce in `middleware.ts`
@@ -40,6 +66,7 @@ const MOVED_APP_ROUTES = [
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  allowedDevOrigins: localDevOrigins(),
   async redirects() {
     return MOVED_APP_ROUTES.map((route) => ({
       source: `/${route}/:path*`,

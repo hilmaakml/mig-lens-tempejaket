@@ -12,6 +12,18 @@ export function middleware(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   const isDev = process.env.NODE_ENV !== 'production';
 
+  /**
+   * `upgrade-insecure-requests` is only meaningful on an HTTPS origin, and it is actively
+   * harmful on a plain-HTTP one: the browser rewrites every same-origin subresource to
+   * `https://`, which has no listener, so stylesheets and scripts silently fail to load.
+   * That is exactly what happens when the app is opened over a LAN address for device
+   * testing. Emit it only when the request already arrived over HTTPS.
+   */
+  const forwardedProto = request.headers.get('x-forwarded-proto');
+  const isHttps = forwardedProto
+    ? forwardedProto.split(',')[0]?.trim() === 'https'
+    : request.nextUrl.protocol === 'https:';
+
   const csp = [
     `default-src 'self'`,
     `base-uri 'self'`,
@@ -30,7 +42,7 @@ export function middleware(request: NextRequest) {
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval'${
       isDev ? " 'unsafe-eval'" : ''
     }`,
-    `upgrade-insecure-requests`,
+    ...(isHttps ? ['upgrade-insecure-requests'] : []),
   ].join('; ');
 
   const requestHeaders = new Headers(request.headers);
