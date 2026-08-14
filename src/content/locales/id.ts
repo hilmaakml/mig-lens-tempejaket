@@ -18,6 +18,8 @@ export const idMessages = {
   'app.language_selected': 'Bahasa aktif: {language}',
   'app.language_indonesian': 'Bahasa Indonesia',
   'app.language_english': 'Bahasa Inggris',
+  'app.loading': 'Memuat…',
+  'app.continue_to_app': 'Lanjut ke aplikasi',
   'app.back': 'Kembali',
   'app.demo_badge': 'Contoh hasil prototipe',
   'app.demo_badge_short': 'Contoh prototipe',
@@ -307,10 +309,11 @@ export const idMessages = {
   'home.progress.title': 'Kesiapan verifikasi',
   'home.progress.value': '{done}/{total}',
   'home.progress.body': '{done} dari {total} langkah verifikasi inti sudah Anda latih.',
-  'home.scenario.section': 'Skenario komposit',
-  'home.scenario.note': 'Disusun dari pola kasus yang dilaporkan — bukan individu nyata.',
-  'home.scenario.title': '“Siti” — caregiver Taiwan',
-  'home.scenario.quote': '“Dia tahu nama dan alamat saya, jadi saya kira resmi…”',
+  'home.scenario.section': 'Kasus yang dilaporkan',
+  'home.scenario.note': 'Diberitakan detikJogja. Ilustrasi, bukan foto narasumber.',
+  'home.scenario.title': 'Herlambang — ditawari Taiwan, berakhir di Kamboja',
+  'home.scenario.quote':
+    '“Yang pertama itu harus jelas dulu dari PT ataupun lembaganya.”',
 
   // ---------------------------------------------------------------- landing
   'landing.hero.eyebrow': 'PERIKSA SEBELUM BAYAR',
@@ -358,6 +361,51 @@ export const idMessages = {
 
   'landing.footer.disclaimer': `${BRAND.name} adalah alat bantu literasi dan verifikasi, bukan pengganti KP2MI/BP2MI, penegak hukum, imigrasi, kedutaan, atau penasihat yang berwenang.`,
   'landing.footer.cta': 'Periksa tawaran sekarang',
+
+  // ---------------------------------------------------------------- onboarding
+  'onboarding.skip': 'Lewati',
+  'onboarding.guide_label': 'Panduan',
+  'onboarding.guide_intro':
+    'Panduan singkat tentang apa yang diperiksa MigLens dan cara membaca hasilnya.',
+  'onboarding.return_to_app': 'Kembali ke Aplikasi',
+
+  'onboarding.intro.eyebrow': 'Pemeriksaan tawaran kerja berbasis bukti',
+  'onboarding.intro.heading': 'Lihat bukti di balik setiap tawaran.',
+  'onboarding.intro.description': `${BRAND.name} membantu calon pekerja migran memeriksa informasi dalam tawaran kerja, menemukan ketidaksesuaian, dan menentukan langkah aman berikutnya.`,
+  'onboarding.intro.primary': 'Mulai Periksa',
+  'onboarding.intro.secondary': 'Pelajari Cara Kerjanya',
+  'onboarding.intro.preview_label': 'Contoh tampilan Peta Bukti',
+
+  'onboarding.checks.heading':
+    'Satu tawaran terdiri dari banyak hal yang perlu dibuktikan.',
+  'onboarding.checks.body':
+    'Perusahaan yang ditemukan belum otomatis membuktikan bahwa perekrut, lowongan, rekening, kontrak, atau visa juga resmi.',
+
+  'onboarding.how.heading': 'Cara kerjanya',
+  'onboarding.how.step1.title': 'Masukkan tawaran',
+  'onboarding.how.step1.body':
+    'Ketik informasinya secara manual atau unggah tangkapan layar yang didukung.',
+  'onboarding.how.step2.title': 'Tinjau informasinya',
+  'onboarding.how.step2.body': `Perbaiki hasil pembacaan teks sebelum ${BRAND.name} menilai informasi yang Anda konfirmasi.`,
+  'onboarding.how.step3.title': 'Periksa bukti dan langkah berikutnya',
+  'onboarding.how.step3.body':
+    'Telusuri apa yang sesuai, berbeda, belum diketahui, atau belum dapat diverifikasi.',
+  'onboarding.how.note': `${BRAND.name} menampilkan Peta Bukti dan langkah verifikasi berikutnya—bukan label mutlak "aman" atau "penipuan".`,
+
+  'onboarding.privacy.heading': 'Privasi sejak awal.',
+  'onboarding.privacy.point1': 'Tidak perlu membuat akun.',
+  'onboarding.privacy.point2':
+    'Gambar dan hasil OCR diproses di perangkat pada alur bawaan.',
+  'onboarding.privacy.point3':
+    'Isi tawaran tidak disimpan sebagai riwayat pengguna nyata.',
+  'onboarding.privacy.point4': `${BRAND.name} tidak mengirim laporan secara otomatis.`,
+  'onboarding.privacy.point5':
+    'Hasil tetap perlu dikonfirmasi melalui kanal resmi yang relevan.',
+
+  'onboarding.final.heading': 'Punya tawaran kerja? Periksa buktinya terlebih dahulu.',
+  'onboarding.final.button': 'Mulai Periksa',
+  'onboarding.final.note':
+    'Jangan unggah KTP, paspor, nomor identitas, atau dokumen yang memuat data pribadi sensitif.',
 
   // ---------------------------------------------------------------- upload
   'upload.title': 'Unggah Tawaran',
@@ -648,6 +696,30 @@ export const idMessages = {
     'Mentransfer sekarang atau menawar harga sama-sama melewati verifikasi. Uang yang sudah masuk ke rekening pribadi hampir mustahil ditarik kembali.',
   'sim.retry': 'Coba respons lain',
   'sim.see_patterns': 'Lihat pembongkaran pola',
+  'sim.short_label': 'Caregiver Taiwan',
+  'sim.pick_scenario': 'Pilih skenario',
+
+  // Practice built from the reported case shown on /app/skenario.
+  'sim.switch.scenario': 'Skenario: tawaran berubah negara dan posisi',
+  'sim.switch.short_label': 'Tawaran berubah',
+  'sim.switch.message':
+    '“Posisi operator pabrik di Taiwan sudah penuh. Bapak saya pindahkan jadi penjaga toko di Thailand, gajinya malah lebih besar. Paspor kunjungan saja dulu, visa kerja diurus setelah sampai. Berangkat minggu ini, biaya awal Rp25 juta.”',
+  'sim.switch.tactic_switch': 'Taktik ganti tawaran',
+  'sim.switch.tactic_document': 'Taktik dokumen tidak sesuai',
+  'sim.switch.tactic_urgency': 'Taktik urgensi',
+  'sim.switch.option_follow': 'Ya sudah, tidak apa-apa. Yang penting saya berangkat.',
+  'sim.switch.option_written':
+    'Mohon kirim perubahan ini secara tertulis: negara, posisi, nama dan nomor izin P3MI, jenis visa kerja, serta kontraknya. Saya belum membayar sebelum dokumen itu ada.',
+  'sim.switch.option_verbal':
+    'Dijelaskan lewat telepon saja cukup kok, saya percaya sama Bapak.',
+  'sim.switch.safe_title': 'Tepat. Anda meminta perubahan itu hitam di atas putih.',
+  'sim.switch.safe_body':
+    'Negara dan posisi yang berubah mengubah seluruh dasar penempatan — termasuk jenis visa yang seharusnya dipakai. Minta perubahan tertulis, nomor izin P3MI, dan kontrak sebelum uang berpindah. Bekerja dengan paspor kunjungan berarti jenis visanya belum sesuai.',
+  'sim.switch.unsafe_title': 'Hati-hati — di sinilah jejaknya hilang.',
+  'sim.switch.unsafe_body':
+    'Menerima perubahan tanpa dokumen, atau puas dengan penjelasan lisan, membuat Anda tidak punya bukti tentang siapa yang memberangkatkan, ke negara mana, dan sebagai apa. Penjelasan lisan tidak bisa dicek ke kanal resmi dan tidak bisa dijadikan pegangan bila tujuan berubah lagi.',
+  'sim.switch.source_note':
+    'Latihan ini disusun dari pola kasus yang diberitakan detikJogja, bukan kutipan percakapan sebenarnya.',
 
   // ---------------------------------------------------------------- patterns
   'pattern.title': 'Pembongkaran Pola',
@@ -671,25 +743,46 @@ export const idMessages = {
     'Ujungnya sering sama: uang ke rekening pribadi sebelum bukti apa pun diberikan.',
   'pattern.closing':
     'Permintaan pembayaran ke rekening pribadi yang belum dapat diverifikasi merupakan indikator risiko.',
-  'pattern.scenario_cta': 'Lihat skenario komposit',
+  'pattern.scenario_cta': 'Lihat kasus yang dilaporkan',
 
-  // ---------------------------------------------------------------- scenario
-  'scenario.title': 'Skenario Komposit',
+  // ---------------------------------------------------------------- reported case
+  'scenario.title': 'Kasus yang Dilaporkan',
   'scenario.notice':
-    'Skenario komposit berdasarkan pola kasus yang dilaporkan. Bukan individu nyata; nama dan detail disamarkan.',
-  'scenario.illustration': 'ilustrasi komposit',
-  'scenario.name': '“Siti” (komposit)',
-  'scenario.subtitle': 'Pola kasus caregiver, Taiwan',
+    'Kasus nyata yang diberitakan detikJogja. Nama dan keterangan dikutip dari pemberitaan tersebut.',
+  'scenario.photo_caption': 'Ilustrasi. Bukan foto narasumber.',
+  'scenario.name': 'Herlambang, 23 tahun',
+  'scenario.subtitle': 'Kulon Progo, Daerah Istimewa Yogyakarta',
+
+  'scenario.timeline': 'Kronologi menurut pemberitaan',
+  'scenario.step1.date': 'Akhir Agustus 2024',
+  'scenario.step1.body':
+    'Mendaftar untuk bekerja sebagai operator pabrik di Taiwan. Tawaran kemudian berubah menjadi penjaga toko di Thailand.',
+  'scenario.step2.date': 'Sebelum berangkat',
+  'scenario.step2.body':
+    'Membayar biaya awal Rp25 juta, lalu diberangkatkan dalam waktu sangat singkat memakai paspor kunjungan — bukan visa kerja.',
+  'scenario.step3.date': 'Sekitar 3 September 2024',
+  'scenario.step3.body':
+    'Tiba bukan di Thailand, melainkan di Kamboja, dan dipaksa bekerja sebagai penipu daring yang menyasar orang Indonesia.',
+  'scenario.step4.date': 'Hingga November 2025',
+  'scenario.step4.body':
+    'Disekap sekitar satu tahun dan mengalami kekerasan. Ia kabur bersama sepuluh orang, dan pulang ke Indonesia pada November 2025.',
+
   'scenario.quote':
-    'Dia tahu nama lengkap dan alamat saya, jadi saya kira ini resmi. Padahal itu hanya cara membuat saya percaya tanpa mengecek.',
+    'Yang pertama itu harus jelas dulu dari PT ataupun lembaganya. Dicari tahu dulu.',
+  'scenario.quote_attribution': 'Herlambang, kepada detikJogja',
+
   'scenario.lessons': 'Yang bisa dipelajari',
   'scenario.lesson_1':
-    'Mengetahui data pribadi Anda bukan tanda resmi — data mudah bocor atau diperjualbelikan.',
+    'Tawaran yang berubah negara atau posisi sebelum berangkat adalah hal yang harus diperjelas secara tertulis, bukan diikuti begitu saja.',
   'scenario.lesson_2':
-    '“Hari ini juga” adalah taktik urgensi — alasan untuk berhenti dan mengecek, bukan untuk buru-buru.',
+    'Berangkat memakai paspor kunjungan untuk bekerja berarti jenis visanya belum sesuai. Tanyakan jenis visa dan dasar hukumnya sebelum membayar.',
   'scenario.lesson_3':
-    'Pembayaran ke rekening pribadi tanpa rincian tertulis berarti berhenti dan verifikasi ke kanal resmi.',
-  'scenario.cta': 'Latih skenario ini',
+    'Biaya besar di muka dengan keberangkatan yang serba cepat menyisakan sedikit waktu untuk memeriksa perusahaan, kontrak, dan tujuan pembayaran.',
+
+  'scenario.source': 'Sumber',
+  'scenario.source_name': 'detikJogja',
+  'scenario.source_link': 'Baca wawancara lengkapnya di detikJogja',
+  'scenario.cta': 'Latih pola dari kasus ini',
 
   // ---------------------------------------------------------------- progress
   'progress.title': 'Kemajuan',

@@ -22,6 +22,8 @@ export const enMessages: Record<keyof IdMessages, string> = {
   'app.language_selected': 'Active language: {language}',
   'app.language_indonesian': 'Indonesian',
   'app.language_english': 'English',
+  'app.loading': 'Loading…',
+  'app.continue_to_app': 'Continue to the app',
   'app.back': 'Back',
   'app.demo_badge': 'Prototype example result',
   'app.demo_badge_short': 'Prototype example',
@@ -320,10 +322,12 @@ export const enMessages: Record<keyof IdMessages, string> = {
   'home.progress.title': 'Verification readiness',
   'home.progress.value': '{done}/{total}',
   'home.progress.body': 'You have practised {done} of {total} core verification steps.',
-  'home.scenario.section': 'Composite scenario',
-  'home.scenario.note': 'Built from reported case patterns — not a real individual.',
-  'home.scenario.title': '“Siti” — caregiver in Taiwan',
-  'home.scenario.quote': '“They knew my name and address, so I assumed it was official…”',
+  'home.scenario.section': 'A reported case',
+  'home.scenario.note':
+    'Reported by detikJogja. Illustration, not a photograph of the person.',
+  'home.scenario.title': 'Herlambang — offered Taiwan, taken to Cambodia',
+  'home.scenario.quote':
+    '“Yang pertama itu harus jelas dulu dari PT ataupun lembaganya.”',
 
   // ---------------------------------------------------------------- landing
   'landing.hero.eyebrow': 'CHECK BEFORE YOU PAY',
@@ -371,6 +375,49 @@ export const enMessages: Record<keyof IdMessages, string> = {
 
   'landing.footer.disclaimer': `${BRAND.name} is a literacy and verification aid, not a replacement for KP2MI/BP2MI, law enforcement, immigration, embassies, or a qualified adviser.`,
   'landing.footer.cta': 'Check an offer now',
+
+  // ---------------------------------------------------------------- onboarding
+  'onboarding.skip': 'Skip',
+  'onboarding.guide_label': 'Guide',
+  'onboarding.guide_intro':
+    'A short guide to what MigLens checks and how to read the result.',
+  'onboarding.return_to_app': 'Return to App',
+
+  'onboarding.intro.eyebrow': 'Evidence-based job offer checking',
+  'onboarding.intro.heading': 'See the evidence behind every offer.',
+  'onboarding.intro.description': `${BRAND.name} helps prospective migrant workers examine job-offer information, identify inconsistencies, and decide on safer next steps.`,
+  'onboarding.intro.primary': 'Start Checking',
+  'onboarding.intro.secondary': 'Learn How It Works',
+  'onboarding.intro.preview_label': 'Example of the Evidence Map',
+
+  'onboarding.checks.heading': 'One offer contains several claims that need evidence.',
+  'onboarding.checks.body':
+    'Finding a company does not automatically prove that the recruiter, vacancy, payment account, contract, or visa is official.',
+
+  'onboarding.how.heading': 'How it works',
+  'onboarding.how.step1.title': 'Add the offer',
+  'onboarding.how.step1.body':
+    'Type the information manually or upload a supported screenshot.',
+  'onboarding.how.step2.title': 'Review the information',
+  'onboarding.how.step2.body': `Correct the text-reading output before ${BRAND.name} evaluates the information you confirm.`,
+  'onboarding.how.step3.title': 'Review the evidence and next actions',
+  'onboarding.how.step3.body':
+    'Examine what matches, differs, remains unknown, or cannot yet be verified.',
+  'onboarding.how.note': `${BRAND.name} provides an Evidence Map and next verification steps—not an absolute "safe" or "fraud" verdict.`,
+
+  'onboarding.privacy.heading': 'Private by design.',
+  'onboarding.privacy.point1': 'No account is required.',
+  'onboarding.privacy.point2':
+    'Images and OCR output are processed on the device in the default flow.',
+  'onboarding.privacy.point3': 'Offer content is not stored as real-user history.',
+  'onboarding.privacy.point4': `${BRAND.name} does not submit reports automatically.`,
+  'onboarding.privacy.point5':
+    'Findings still need confirmation through the relevant official channels.',
+
+  'onboarding.final.heading': 'Received a job offer? Check the evidence first.',
+  'onboarding.final.button': 'Start Checking',
+  'onboarding.final.note':
+    'Do not upload an identity card, passport, identification number, or document containing sensitive personal data.',
 
   // ---------------------------------------------------------------- upload
   'upload.title': 'Upload an offer',
@@ -661,6 +708,30 @@ export const enMessages: Record<keyof IdMessages, string> = {
     'Transferring now and haggling over the price both skip verification. Money that has reached a personal account is almost impossible to recover.',
   'sim.retry': 'Try another response',
   'sim.see_patterns': 'See the pattern breakdown',
+  'sim.short_label': 'Taiwan caregiver',
+  'sim.pick_scenario': 'Choose a scenario',
+
+  // Practice built from the reported case shown on /app/skenario.
+  'sim.switch.scenario': 'Scenario: the offer changes country and role',
+  'sim.switch.short_label': 'The offer changes',
+  'sim.switch.message':
+    '“The factory operator position in Taiwan is full. I am moving you to shop keeper in Thailand — the pay is even better. A visitor passport is enough for now; the work visa will be arranged once you arrive. Departure is this week, initial fee Rp25 million.”',
+  'sim.switch.tactic_switch': 'Offer-switch tactic',
+  'sim.switch.tactic_document': 'Mismatched-document tactic',
+  'sim.switch.tactic_urgency': 'Urgency tactic',
+  'sim.switch.option_follow': 'Fine, never mind. What matters is that I get to go.',
+  'sim.switch.option_written':
+    'Please send this change in writing: the country, the role, the P3MI name and licence number, the work visa type, and the contract. I will not pay before those documents exist.',
+  'sim.switch.option_verbal':
+    'An explanation over the phone is enough, I trust you.',
+  'sim.switch.safe_title': 'Right. You asked for the change in writing.',
+  'sim.switch.safe_body':
+    'A changed country and role change the entire basis of the placement — including which visa should apply. Ask for the change in writing, the P3MI licence number, and the contract before any money moves. Working on a visitor passport means the visa type does not match the job.',
+  'sim.switch.unsafe_title': 'Careful — this is where the trail disappears.',
+  'sim.switch.unsafe_body':
+    'Accepting the change without documents, or settling for a spoken explanation, leaves you with no evidence of who is sending you, to which country, and in what role. A spoken explanation cannot be checked against official channels and gives you nothing to hold on to if the destination changes again.',
+  'sim.switch.source_note':
+    'This practice is built from the pattern in the case reported by detikJogja. It is not a quotation of an actual conversation.',
 
   // ---------------------------------------------------------------- patterns
   'pattern.title': 'Pattern breakdown',
@@ -684,25 +755,46 @@ export const enMessages: Record<keyof IdMessages, string> = {
     'The ending is often the same: money to a personal account before any evidence is given.',
   'pattern.closing':
     'A payment request to a personal account that cannot be verified is a risk indicator.',
-  'pattern.scenario_cta': 'See the composite scenario',
+  'pattern.scenario_cta': 'See the reported case',
 
-  // ---------------------------------------------------------------- scenario
-  'scenario.title': 'Composite scenario',
+  // ---------------------------------------------------------------- reported case
+  'scenario.title': 'A Reported Case',
   'scenario.notice':
-    'A composite scenario based on reported case patterns. Not a real individual; names and details are altered.',
-  'scenario.illustration': 'composite illustration',
-  'scenario.name': '“Siti” (composite)',
-  'scenario.subtitle': 'Caregiver case pattern, Taiwan',
+    'A real case reported by detikJogja. The name and details are quoted from that reporting.',
+  'scenario.photo_caption': 'Illustration. Not a photograph of the person interviewed.',
+  'scenario.name': 'Herlambang, aged 23',
+  'scenario.subtitle': 'Kulon Progo, Special Region of Yogyakarta',
+
+  'scenario.timeline': 'Timeline according to the reporting',
+  'scenario.step1.date': 'Late August 2024',
+  'scenario.step1.body':
+    'Applied to work as a factory operator in Taiwan. The offer later changed to shop keeper in Thailand.',
+  'scenario.step2.date': 'Before departure',
+  'scenario.step2.body':
+    'Paid an initial fee of Rp25 million and was sent abroad very quickly on a visitor passport — not a work visa.',
+  'scenario.step3.date': 'Around 3 September 2024',
+  'scenario.step3.body':
+    'Arrived not in Thailand but in Cambodia, and was forced to work as an online scammer targeting Indonesians.',
+  'scenario.step4.date': 'Until November 2025',
+  'scenario.step4.body':
+    'Held for about a year and subjected to violence. He escaped with ten other people and returned to Indonesia in November 2025.',
+
   'scenario.quote':
-    'They knew my full name and my address, so I thought this was official. It was only a way to make me trust without checking.',
+    'Yang pertama itu harus jelas dulu dari PT ataupun lembaganya. Dicari tahu dulu.',
+  'scenario.quote_attribution': 'Herlambang, speaking to detikJogja',
+
   'scenario.lessons': 'What can be learned',
   'scenario.lesson_1':
-    'Knowing your personal data is not a sign of officialdom — data leaks and is traded.',
+    'An offer that changes country or role before departure is something to have clarified in writing, not simply followed.',
   'scenario.lesson_2':
-    '“Today only” is an urgency tactic — a reason to stop and check, not to hurry.',
+    'Travelling on a visitor passport in order to work means the visa type does not match the job. Ask which visa applies, and on what legal basis, before paying.',
   'scenario.lesson_3':
-    'Payment to a personal account without a written breakdown means stop and verify through official channels.',
-  'scenario.cta': 'Practise this scenario',
+    'A large fee up front combined with a rushed departure leaves little time to check the company, the contract, and where the money is going.',
+
+  'scenario.source': 'Source',
+  'scenario.source_name': 'detikJogja',
+  'scenario.source_link': 'Read the full interview on detikJogja',
+  'scenario.cta': 'Practise the pattern from this case',
 
   // ---------------------------------------------------------------- progress
   'progress.title': 'Progress',
