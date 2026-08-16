@@ -107,6 +107,10 @@
   .animate-delayed-fallback {
     animation: delayedFallback 4s step-end forwards;
   }
+
+  .animate-splash {
+    animation: splashOut 1.5s ease-in forwards;
+  }
 }
 
 @keyframes fadeUp {
@@ -134,6 +138,25 @@
   }
 }
 
+/* Launch splash. Driven entirely by CSS so it appears with the first paint and, more
+   importantly, always retires itself: if it depended on client JavaScript, a blocked
+   script or a failed chunk would leave the overlay covering the application for good.
+   `visibility` and `pointer-events` are dropped at the end so the finished overlay is
+   neither hit-tested nor reachable. */
+@keyframes splashOut {
+  0%,
+  70% {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
 @keyframes toastIn {
   from {
     opacity: 0;
@@ -146,14 +169,21 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* The delayed escape hatch is a functional timer, not decorative motion, so it keeps
-     its delay here; collapsing it would surface the link during a normal fast load. */
-  *:not(.animate-delayed-fallback),
+  /* Two animations are functional timers rather than decorative motion, so they keep a
+     duration here. Collapsing the escape hatch would surface its link during a normal
+     fast load; collapsing the splash would make it a single frame of flicker, which is
+     worse for this reader than a brief, still overlay. */
+  *:not(.animate-delayed-fallback):not(.animate-splash),
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Shorter, and the mark inside it does not travel: the overlay simply fades. */
+  .animate-splash {
+    animation-duration: 0.7s !important;
   }
 }

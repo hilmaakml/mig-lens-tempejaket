@@ -6,6 +6,7 @@ import { OfferProvider } from '@/app/providers/offer-provider';
 import { ToastProvider } from '@/app/providers/toast-provider';
 import { AppShell } from '@/components/layout/app-shell';
 import { ServiceWorkerRegistrar } from '@/components/layout/service-worker-registrar';
+import { SplashScreen } from '@/components/layout/splash-screen';
 import { BRAND, BRAND_LOCALE_TAG } from '@/content/brand';
 import { DEFAULT_LOCALE } from '@/content/locales/locale';
 
@@ -75,6 +76,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id-ID" className={`${plusJakarta.variable} ${ibmPlexMono.variable}`}>
       <body>
+        {/* Outside the providers: it needs neither locale nor offer state, and keeping it
+            first in the body means it paints before anything below it hydrates. */}
+        <SplashScreen />
         <LocaleProvider>
           <OfferProvider>
             <ToastProvider>
